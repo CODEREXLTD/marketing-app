@@ -18,13 +18,13 @@ This repository provides a Dockerized environment for running a Django project w
    $ git clone git@github.com:CODEREXLTD/marketing-app.git
    ```
     ````bash
-    $ cd marketing-app
+    $ cd closez
     ````
 
-1. **CBuild the Docker image and start the containers::**
+1. **Build the Docker image and start the containers::**
 
     ```bash
-    $ docker-compose up -d
+    $ docker-compose up -d --build
     ```
     ```bash
     $ docker-compose exec web python manage.py migrate
