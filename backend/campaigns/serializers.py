@@ -1,9 +1,9 @@
-import logging
 from rest_framework import serializers
 from .models import Campaign, Sequence, SequenceEmailChannel
 from django.db import connection
+from rest_framework.response import Response
+from rest_framework import status
 
-logger = logging.getLogger('django.db.backends')
 
 # Serializer for the SequenceEmailChannel model
 class SequenceEmailChannelSerializer(serializers.ModelSerializer):
@@ -22,8 +22,17 @@ class SequenceSerializer(serializers.ModelSerializer):
 
 # Serializer for the Campaign model
 class CampaignSerializer(serializers.ModelSerializer):
-    sequences = SequenceSerializer(many=True, read_only=True, source='sequence_set')
-
+    sequences = SequenceSerializer( many=True, read_only=True, source='sequence_set' )
     class Meta:
         model = Campaign
         fields = '__all__'
+
+    def create( self, validated_data ):
+        name        = 'YO YO'
+        description = 'YO YO TES'
+        user = self.context['user']
+        print (self.context['user'])
+        breakpoint()
+        task        = Campaign.objects.create(name=name, description=description, user_id=1)
+        return task
+    
