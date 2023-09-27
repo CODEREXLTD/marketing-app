@@ -1,13 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-
+from django.contrib.auth.models import (
+    BaseUserManager, AbstractBaseUser
+)
 
 class UserManager(BaseUserManager):
     def create_user(self, email, firstName, lastName, password=None, confirmPassword=None):
-        """
-        Creates and saves a User with the given email, date of
-        birth and password.
-        """
+       
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -21,7 +19,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, firstName, lastName, password=None, confirmPassword=None):
+    def create_superuser(self, email, firstName='', lastName='', password=None, confirmPassword=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -37,8 +35,6 @@ class UserManager(BaseUserManager):
         return user
 
 # Create your models here.
-
-
 class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name="email address",
@@ -53,11 +49,11 @@ class User(AbstractBaseUser):
         verbose_name="last name",
         max_length=255,
     )
-
+    objects = UserManager()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=False)
-    updated_at = models.DateTimeField(auto_now_add=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = "email"
    
