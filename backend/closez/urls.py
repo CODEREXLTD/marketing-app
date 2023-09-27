@@ -21,5 +21,5 @@ router = routers.DefaultRouter()
 
 
 urlpatterns = [
-    path('api/', include('authentication.urls')),
+    path('api/user/', include('authentication.urls')),
 ]
