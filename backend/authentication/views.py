@@ -12,7 +12,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from authentication.renderers import UserRenderer
 from authentication.serializers import (UserLoginSerializer,
                                         UserRegistrationSerializer,
-                                        UserViewSerializer)
+                                        UserVerifySerializer)
 
 
 #Generate token
@@ -34,12 +34,12 @@ class UserRegistrationView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
-class UserView(APIView):
+class UserVerifyView(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
     def get(self, request, format=None):
-        serializer = UserViewSerializer(request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = UserVerifySerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class UserLoginView(APIView):
