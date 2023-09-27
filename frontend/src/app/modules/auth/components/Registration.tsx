@@ -60,10 +60,9 @@ export function Registration() {
                 values.lastName,
                 values.password,
                 values.confirmPassword
-                )
-                
+                )                
                 saveAuth(auth)
-                const {data: user} = await getUserByToken(auth.api_token)
+                const {data: user} = await getUserByToken(auth?.token)
                 setCurrentUser(user)
             } catch (error) {
                 console.error(error)

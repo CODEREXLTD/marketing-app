@@ -1,4 +1,4 @@
-import {AuthModel} from './_models'
+import { AuthModel } from './_models'
 
 const AUTH_LOCAL_STORAGE_KEY = 'kt-auth-react-v'
 const getAuth = (): AuthModel | undefined => {
@@ -52,8 +52,8 @@ export function setupAxios(axios: any) {
   axios.interceptors.request.use(
     (config: {headers: {Authorization: string}}) => {
       const auth = getAuth()
-      if (auth && auth.api_token) {
-        config.headers.Authorization = `Bearer ${auth.api_token}`
+      if (auth && auth?.token) {
+        config.headers.Authorization = `Bearer ${auth?.token}`
       }
 
       return config
@@ -62,4 +62,5 @@ export function setupAxios(axios: any) {
   )
 }
 
-export {getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY}
+export { getAuth, setAuth, removeAuth, AUTH_LOCAL_STORAGE_KEY }
+
