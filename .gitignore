@@ -9,7 +9,7 @@ build/
 *.db
 
 # Virtual environment
-venv/
+.venv/
 .env/
 
 # Node.js / npm
