@@ -32,3 +32,16 @@ This repository provides a Dockerized environment for running a Django project w
     ```bash
     docker-compose exec web python manage.py createsuperuser
     ```
+
+### How to install package for backend app: ###
+
+1. **Install package**
+    ```bash
+    docker-compose exec web pip install PACKAGE_NAME
+    ```
+
+1. **Update requirements.txt**
+    ```bash
+    docker-compose exec web pip freeze > backend/requirements.txt
+    ```
+
