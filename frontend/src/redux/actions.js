@@ -9,3 +9,15 @@ export const decrement = () => {
     type: 'DECREMENT'
   };
 };
+export const setCampaign = (campaigns) => {
+    return {
+        type : 'SET_CAMPAIGN',
+        payload : campaigns
+    };
+};
+export const addCampaign = (campaigns) => {
+    return {
+        type : 'ADD_CAMPAIGN',
+        payload : campaigns
+    };
+};

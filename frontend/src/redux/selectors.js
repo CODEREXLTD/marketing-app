@@ -1,2 +1,4 @@
 export const selectCounter = state => state.counter;
-// Add more selectors if needed
+export function getAllCampaign(state){
+    return state.campaigns;
+}

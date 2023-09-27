@@ -15,6 +15,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         counter: state.counter - 1
       };
+    case 'SET_CAMPAIGN':
+
+      return {
+        ...state,
+        campaigns: action.payload
+      };
+    case 'ADD_CAMPAIGN':
+
+      return {
+        ...state,
+        campaigns: [...state.campaigns, action.payload]
+      };
     // Add more cases for other actions if needed
     default:
       return state;
