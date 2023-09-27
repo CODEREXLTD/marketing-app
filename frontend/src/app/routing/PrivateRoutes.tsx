@@ -26,6 +26,7 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='campaign' element={<CampaignWrapper />} />
+        <Route path='campaign/:id' element={<CampaignWrapper />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         {/*<Route path='menu-test' element={<MenuTestPage />} />*/}
         {/* Lazy Modules */}
