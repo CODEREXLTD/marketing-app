@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-ORS_ORIGIN_WHITELIST = [
+CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
 
