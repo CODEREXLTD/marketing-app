@@ -31,7 +31,6 @@ class UserRegistrationView(APIView):
             return Response({'token': token, 'msg': 'Registration successfull'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
-
 class UserVerifyView(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
