@@ -36,7 +36,7 @@ class UserRegistrationView(APIView):
 class UserVerifyView(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         serializer = UserVerifySerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
