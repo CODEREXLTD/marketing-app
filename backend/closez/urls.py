@@ -27,5 +27,6 @@ router.register(r'email_channels', campaign_views.SequenceEmailChannelViewSet, '
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('api/user/', include('authentication.urls')),
 ]

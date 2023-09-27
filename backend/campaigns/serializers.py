@@ -30,7 +30,7 @@ class CampaignSerializer(serializers.ModelSerializer):
     def create( self, validated_data ):
         name        = 'YO YO'
         description = 'YO YO TES'
-        user = self.context['user']
+        # user = self.context['user']
         task        = Campaign.objects.create(name=name, description=description, user_id=1)
         return task
     
