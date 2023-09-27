@@ -31,20 +31,20 @@ export function Login() {
     const formik = useFormik({
         initialValues,
         validationSchema: loginSchema,
-        onSubmit: async (values, {setStatus, setSubmitting}) => {
-        setLoading(true)
-        try {
-            const {data: auth} = await login(values.email, values.password)
-            saveAuth(auth)
-            const {data: user} = await getUserByToken(auth.api_token)
-            setCurrentUser(user)
-        } catch (error) {
-            console.error(error)
-            saveAuth(undefined)
-            setStatus('The login details are incorrect')
-            setSubmitting(false)
-            setLoading(false)
-        }
+        onSubmit: async (values, {setStatus, setSubmitting}) => {            
+            setLoading(true)
+            try {
+                const {data: auth} = await login(values.email, values.password)                
+                saveAuth(auth)
+                const {data: user} = await getUserByToken(auth.api_token)
+                setCurrentUser(user)
+            } catch (error) {
+                console.error(error)
+                saveAuth(undefined)
+                setStatus('The login details are incorrect')
+                setSubmitting(false)
+                setLoading(false)
+            }
         },
     })
 
