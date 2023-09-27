@@ -31,8 +31,6 @@ class CampaignSerializer(serializers.ModelSerializer):
         name        = 'YO YO'
         description = 'YO YO TES'
         user = self.context['user']
-        print (self.context['user'])
-        breakpoint()
         task        = Campaign.objects.create(name=name, description=description, user_id=1)
         return task
     
