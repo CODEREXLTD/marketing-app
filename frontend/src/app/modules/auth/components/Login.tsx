@@ -31,20 +31,20 @@ export function Login() {
     const formik = useFormik({
         initialValues,
         validationSchema: loginSchema,
-        onSubmit: async (values, {setStatus, setSubmitting}) => {
-        setLoading(true)
-        try {
-            const {data: auth} = await login(values.email, values.password)
-            saveAuth(auth)
-            const {data: user} = await getUserByToken(auth.api_token)
-            setCurrentUser(user)
-        } catch (error) {
-            console.error(error)
-            saveAuth(undefined)
-            setStatus('The login details are incorrect')
-            setSubmitting(false)
-            setLoading(false)
-        }
+        onSubmit: async (values, {setStatus, setSubmitting}) => {            
+            setLoading(true)
+            try {
+                const {data: auth} = await login(values.email, values.password)                
+                saveAuth(auth)
+                const {data: user} = await getUserByToken(auth.api_token)
+                setCurrentUser(user)
+            } catch (error) {
+                console.error(error)
+                saveAuth(undefined)
+                setStatus('The login details are incorrect')
+                setSubmitting(false)
+                setLoading(false)
+            }
         },
     })
 
@@ -60,6 +60,13 @@ export function Login() {
                 <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
                 <div className='text-gray-500 fw-semibold fs-6'>Your Social Sales Campaigns</div>
             </div>
+            {/* begin::Heading */}
+
+            {formik.status && (
+                <div className='mb-lg-15 alert alert-danger'>
+                    <div className='alert-text font-weight-bold'>{formik.status}</div>
+                </div>
+            )}
 
             {/* begin::Form group */}
             <div className='fv-row mb-8'>

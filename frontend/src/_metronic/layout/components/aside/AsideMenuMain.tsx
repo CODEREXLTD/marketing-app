@@ -14,6 +14,12 @@ export function AsideMenuMain() {
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
+      <AsideMenuItem
+        to='/campaign'
+        icon='color-swatch'
+        title={intl.formatMessage({id: 'MENU.CAMPAIGN'})}
+        fontIcon='bi-app-indicator'
+      />
       {/*<AsideMenuItem to='/builder' icon='switch' title='Layout Builder' fontIcon='bi-layers' />*/}
       {/*<div className='menu-item'>*/}
       {/*  <div className='menu-content pt-8 pb-2'>*/}

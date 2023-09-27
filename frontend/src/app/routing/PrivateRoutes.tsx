@@ -6,6 +6,7 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { WithChildren } from '../../_metronic/helpers'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
+import { CampaignWrapper } from '../pages/campaigns/Campaings'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
 import { MenuTestPage } from '../pages/MenuTestPage'
 
@@ -24,6 +25,7 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
+        <Route path='campaign' element={<CampaignWrapper />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         {/*<Route path='menu-test' element={<MenuTestPage />} />*/}
         {/* Lazy Modules */}
