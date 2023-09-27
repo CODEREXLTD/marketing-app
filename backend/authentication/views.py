@@ -18,3 +18,7 @@ class UserRegistrationView(APIView):
 class UserView(APIView):
     def get(self, request, format=None):
         return Response({'msg': 'Fetch users successfully'}, status=status.HTTP_201_CREATED)
+
+class UserLoginView(APIView):
+    def get(self, request, format=None):
+        return Response({'msg': 'Fetch users successfully'}, status=status.HTTP_201_CREATED)
