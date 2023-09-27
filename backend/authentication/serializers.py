@@ -31,5 +31,5 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserVerifySerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['id', 'email']
+        fields=['id', 'email', 'firstName', 'lastName']
 
