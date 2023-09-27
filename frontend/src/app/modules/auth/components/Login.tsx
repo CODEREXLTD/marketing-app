@@ -60,6 +60,13 @@ export function Login() {
                 <h1 className='text-dark fw-bolder mb-3'>Sign In</h1>
                 <div className='text-gray-500 fw-semibold fs-6'>Your Social Sales Campaigns</div>
             </div>
+            {/* begin::Heading */}
+
+            {formik.status && (
+                <div className='mb-lg-15 alert alert-danger'>
+                    <div className='alert-text font-weight-bold'>{formik.status}</div>
+                </div>
+            )}
 
             {/* begin::Form group */}
             <div className='fv-row mb-8'>
