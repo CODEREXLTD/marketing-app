@@ -10,6 +10,7 @@ const tabs: ReadonlyArray<{link: string; icon: string; tooltip: string}> = [
   //   icon: 'element-11',
   //   tooltip: 'Projects',
   // },
+
   {
     link: 'menu',
     icon: 'briefcase',
