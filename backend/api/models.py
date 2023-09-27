@@ -57,11 +57,10 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=False)
-    updated_at = models.BooleanField(auto_now_add=False)
+    updated_at = models.DateTimeField(auto_now_add=False)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['email']
-
+   
     def __str__(self):
         return self.email
 
