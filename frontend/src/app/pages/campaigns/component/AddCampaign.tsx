@@ -4,8 +4,10 @@ import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import { useDispatch, useSelector } from "react-redux";
 import {addCampaign, setCampaign} from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const AddCampaign: FC = () => {
+     let navigate = useNavigate();
  const dispatch = useDispatch();
   const campaigns = useSelector(getAllCampaign);
   const [name , setName] = useState('')
@@ -37,6 +39,7 @@ const AddCampaign: FC = () => {
         .then(function (response) {
           setLoad(false);
           dispatch( addCampaign(response.data));
+          navigate(`/campaign/${response.data.id}`)
         })
         .catch(function (error) {
           console.log(error);
@@ -72,9 +75,9 @@ const AddCampaign: FC = () => {
                       data-bs-trigger='hover'
                       title='Click to add a user'
                     >
-                    <button type="button" className="btn btn-sm btn-light-primary" onClick={(e) => {handleCreateCampaign(e)}} >{isLoad ? "Creating..." : "Create Campaign"}</button>
+                    {/*<button type="button" className="btn btn-sm btn-light-primary" onClick={(e) => {handleCreateCampaign(e)}} >{isLoad ? "Creating..." : "Create Campaign"}</button>*/}
 
-                    {/*<button className='btn btn-sm btn-light-primary' data-bs-toggle='modal' data-bs-target='#kt_modal_add_campaign'  onClick={(e) => {e.preventDefault();handleCreateCampaign(e);}}>   Create Campaign</button>*/}
+                    <button className='btn btn-sm btn-light-primary' data-bs-toggle='modal' data-bs-target='#kt_modal_add_campaign'  onClick={(e) => {e.preventDefault();handleCreateCampaign(e);}}>   Create Campaign</button>
                   </div>
             </div>
           </div>

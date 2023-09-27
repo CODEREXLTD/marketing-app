@@ -106,9 +106,6 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                 </td>
                 <td>
                   <div className='d-flex align-items-center'>
-                    <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/300-14.jpg')} alt='' />
-                    </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <Link to={`/campaign/${campaign.id}`} className='text-dark fw-bold text-hover-primary fs-6'>
                         {campaign.name}
