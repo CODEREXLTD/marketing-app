@@ -1,9 +1,53 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import { useDispatch, useSelector } from "react-redux";
+import {addCampaign, setCampaign} from '../../../../redux/actions';
+import { getAllCampaign } from '../../../../redux/selectors';
+import axios from "axios";
 const AddCampaign: FC = () => {
+ const dispatch = useDispatch();
+  const campaigns = useSelector(getAllCampaign);
+  const [name , setName] = useState('')
+   const [isLoad, setLoad] = useState(false);
+  const handleOnChange = (value) =>{
+    setName(value)
+  }
+  const handleCreateCampaign = (e) =>{
+    setLoad(true)
+    var data = JSON.stringify({
+      "name": name,
+      "description": "hello",
+      "status": "draft",
+      "isActive": true,
+      "scheduled_at": null,
+      "user": 1
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/campaigns/',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+    if(name !== ''){
+      axios(config)
+        .then(function (response) {
+          setLoad(false);
+          dispatch( addCampaign(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+    setLoad(false)
+
+
+  }
   return (
-    <div className='modal fade' id='kt_modal_add_campaign' aria-hidden='true'>
+    <div className='modal fade' id='kt_modal_add_campaign' aria-hidden="true">
       <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
           <div className='modal-header pb-0 border-0 justify-content-end'>
@@ -15,21 +59,10 @@ const AddCampaign: FC = () => {
           <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
             <div className='text-center mb-13'>
               <h1 className='mb-3'>Add Campaign</h1>
-
-              <div className='text-muted fw-bold fs-5'>
-                If you need more info, please check out
-                <a href='#' className='link-primary fw-bolder'>
-                  {' '}
-                  FAQ Page
-                </a>
-                .
-              </div>
             </div>
-
-            <div className='separator d-flex flex-center mb-8'>
-              <span className='text-uppercase bg-body fs-7 fw-bold text-muted px-3'>or</span>
-            </div>
-            <input type="text" className='form-control form-control-solid mb-8'  placeholder='Type Campaign Name'/>
+          <input
+            type="text" className='form-control form-control-solid mb-8' value={name} onChange={(e) => handleOnChange(e.target.value)} placeholder='Type Campaign Name'
+          />
 
             <div className='d-flex flex-stack'>
                   <div
@@ -39,14 +72,9 @@ const AddCampaign: FC = () => {
                       data-bs-trigger='hover'
                       title='Click to add a user'
                     >
-                    <a
-                        href='#'
-                        className='btn btn-sm btn-light-primary'
-                        data-bs-toggle='modal'
-                        data-bs-target='#kt_modal_add_campaign'
-                      >
-                      Create Campaign
-                    </a>
+                    <button type="button" className="btn btn-sm btn-light-primary" onClick={(e) => {handleCreateCampaign(e)}} >{isLoad ? "Creating..." : "Create Campaign"}</button>
+
+                    {/*<button className='btn btn-sm btn-light-primary' data-bs-toggle='modal' data-bs-target='#kt_modal_add_campaign'  onClick={(e) => {e.preventDefault();handleCreateCampaign(e);}}>   Create Campaign</button>*/}
                   </div>
             </div>
           </div>

@@ -1,13 +1,46 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {AddCampaign} from "./AddCampaign";
 
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setCampaign } from '../../../../redux/actions';
+import { getAllCampaign } from '../../../../redux/selectors';
+import { formatDistanceToNow } from 'date-fns';
+import {Link} from "react-router-dom";
 type Props = {
   className: string
 }
-
 const CampaignTable: React.FC<Props> = ({className}) => {
+
+  const campaigns = useSelector(getAllCampaign);
+  const dispatch = useDispatch();
+  const [isLoad, setLoad] = useState(false);
+
+  const fetchCampaign = async () => {
+    try {
+      setLoad(true);
+      const response = await axios.get("http://127.0.0.1:8000/api/campaigns/");
+      const getData = response.data;
+      dispatch(setCampaign(getData));
+    } catch (error) {
+      // Handle errors here
+    } finally {
+      setLoad(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCampaign();
+  }, []); // Add the empty dependency array
+  const timeDifferance =(time) =>{
+    const date = new Date(time);
+
+    const timeAgo = formatDistanceToNow(date, { addSuffix: true });
+    return timeAgo
+  }
+
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -64,10 +97,11 @@ const CampaignTable: React.FC<Props> = ({className}) => {
             {/* end::Table head */}
             {/* begin::Table body */}
             <tbody>
-              <tr>
+            {campaigns !== undefined && campaigns.length > 0 && campaigns.map(campaign => (
+              <tr key={campaign.id}>
                 <td>
                   <div className='form-check form-check-sm form-check-custom form-check-solid'>
-                    <input className='form-check-input widget-9-check' type='checkbox' value='1' />
+                    <input className='form-check-input widget-9-check' type='checkbox' value={campaign.id} />
                   </div>
                 </td>
                 <td>
@@ -76,21 +110,21 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                       <img src={toAbsoluteUrl('/media/avatars/300-14.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
-                      <a href='#' className='text-dark fw-bold text-hover-primary fs-6'>
-                        Ana Simmons
-                      </a>
+                      <Link to={`/campaign/${campaign.id}`} className='text-dark fw-bold text-hover-primary fs-6'>
+                        {campaign.name}
+                      </Link>
                       <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        30 min ago
+                        {timeDifferance(campaign.created_at)}
                       </span>
                     </div>
                   </div>
                 </td>
                 <td>
                   <a href='#' className='text-dark fw-bold text-hover-primary d-block fs-6'>
-                    Active
+                    {campaign.isActive ? "Active" : "Deactive"}
                   </a>
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                    30 min ago
+                   {timeDifferance(campaign.updated_at)}
                   </span>
                 </td>
                 <td className='text-end'>
@@ -130,6 +164,9 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                   </div>
                 </td>
               </tr>
+
+           ))}
+
             </tbody>
             {/* end::Table body */}
           </table>
