@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from authentication.serializers import UserRegistrationSerializer
 from authentication.serializers import UserLoginSerializer
-from authentication.serializers import UserViewSerializer
+from authentication.serializers import UserVerifySerializer
 from authentication.renderers import UserRenderer
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -32,12 +32,12 @@ class UserRegistrationView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
-class UserView(APIView):
+class UserVerify(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
     def get(self, request, format=None):
-        serializer = UserViewSerializer(request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = UserVerifySerializer(request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class UserLoginView(APIView):

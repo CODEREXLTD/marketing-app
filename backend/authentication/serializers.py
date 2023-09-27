@@ -5,7 +5,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     confirmPassword = serializers.CharField(style={'imput_type': 'password'}, write_only=True)
     class Meta:
         model = User
-        fields=['email','password', 'confirmPassword']
+        fields=['email','password','firstName', 'lastName', 'confirmPassword']
         extra_kwargs = {
             'password': {'write_only':True}
         }
@@ -26,8 +26,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
         model = User
         fields=['email','password']
 
-class UserViewSerializer(serializers.ModelSerializer):
+class UserVerifySerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields=['id', 'email','firtName', 'lastName']
+        fields=['id', 'email']
 
