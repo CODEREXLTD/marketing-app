@@ -1,18 +1,11 @@
 import {
-  FC,
-  useState,
-  useEffect,
-  createContext,
-  useContext,
-  useRef,
-  Dispatch,
-  SetStateAction,
+  createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useRef, useState
 } from 'react'
-import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
-import {AuthModel, UserModel} from './_models'
+import { WithChildren } from '../../../../_metronic/helpers'
+import { LayoutSplashScreen } from '../../../../_metronic/layout/core'
 import * as authHelper from './AuthHelpers'
-import {getUserByToken} from './_requests'
-import {WithChildren} from '../../../../_metronic/helpers'
+import { AuthModel, UserModel } from './_models'
+import { getUserByToken } from './_requests'
 
 type AuthContextProps = {
   auth: AuthModel | undefined
@@ -98,4 +91,5 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }
 
-export {AuthProvider, AuthInit, useAuth}
+export { AuthProvider, AuthInit, useAuth }
+
