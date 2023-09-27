@@ -13,7 +13,6 @@ type Props = {
 }
 
 const SelectedTab: FC<Props> = ({link}) => {
-  console.log(link)
   switch (link) {
     // case 'projects':
     //   return <ProjectsTab />
