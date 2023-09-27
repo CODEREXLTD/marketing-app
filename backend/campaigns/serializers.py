@@ -26,11 +26,23 @@ class CampaignSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
         fields = '__all__'
-
-    def create( self, validated_data ):
+    def create( self, validateData ):
         name        = 'YO YO'
         description = 'YO YO TES'
         # user = self.context['user']
-        task        = Campaign.objects.create(name=name, description=description, user_id=1)
+        task        = Campaign.objects.create(**validateData)
         return task
     
+
+class CampaignCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Campaign
+        fields='__all__'
+        
+    def create(self, validateData):
+        return Campaign.objects.create_campaign(**validateData)
+
+# class CampaignsGetSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Campaign
+#         fields=['name','description']

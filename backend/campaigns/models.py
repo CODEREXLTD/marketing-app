@@ -1,4 +1,19 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+
+
+class CampaignManager(BaseUserManager):
+    def create_campaign(self, name, user_id, description='', status='draft', isActive=False, scheduled_at=''):
+        campaign = self.model(
+            name=name,
+            description=description,
+            status=status,
+            isActive=isActive,
+            scheduled_at=scheduled_at,
+            user_id=user_id,
+        )
+        campaign.save(using=self._db)
+        return campaign
 
 # Campaign model
 class Campaign(models.Model):
