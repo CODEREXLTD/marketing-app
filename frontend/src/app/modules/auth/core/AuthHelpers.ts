@@ -23,6 +23,7 @@ const getAuth = (): AuthModel | undefined => {
 }
 
 const setAuth = (auth: AuthModel) => {
+  
   if (!localStorage) {
     return
   }

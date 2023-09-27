@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAuth } from '../core/Auth'
-import { getUserByToken, login } from '../core/_requests'
+import { login } from '../core/_requests'
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -36,10 +36,11 @@ export function Login() {
             try {
                 const {data: auth} = await login(values.email, values.password)
                 console.log(auth);
-                                
+                
                 saveAuth(auth)
-                const {data: user} = await getUserByToken(auth?.token)
-                setCurrentUser(user)
+                // const {data: user} = await getUserByToken(auth?.token)
+                // @ts-ignore
+                setCurrentUser(auth)
             } catch (error) {
                 console.error(error)
                 saveAuth(undefined)
