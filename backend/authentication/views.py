@@ -32,7 +32,7 @@ class UserRegistrationView(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
-class UserVerify(APIView):
+class UserVerifyView(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
     def get(self, request, format=None):
