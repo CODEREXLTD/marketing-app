@@ -1,15 +1,27 @@
-version: "3.9"
+version: "3"
 
 services:
   web:
-    build: .
-    command: python /code/backend/manage.py runserver 0.0.0.0:8000
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend  # Name of the Dockerfile for backend
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./backend:/app
     ports:
       - 8000:8000
     depends_on:
       - db
+
+  # frontend:
+  #   build:
+  #     context: ./frontend  # Path to the React frontend folder
+  #     dockerfile: Dockerfile.frontend  # Name of the Dockerfile for frontend
+  #   ports:
+  #     - "3000:3000"  # Expose React on port 3000
+  #   volumes:
+  #     - ./frontend:/app  # Mount the frontend folder into the container
+
   db:
     image: postgres:13
     volumes:
@@ -28,5 +40,10 @@ services:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: root
     restart: always
+
+networks:
+  default:
+    name: closez_network  # Update with your network name if needed
+   
 volumes:
   postgres_data:
