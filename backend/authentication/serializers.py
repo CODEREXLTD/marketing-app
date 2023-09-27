@@ -2,10 +2,13 @@ from rest_framework import serializers
 from authentication.models import User
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    confirmPassword = serializers.CharField(write_only=True)
+    confirmPassword = serializers.CharField(style={'imput_type': 'password'}, write_only=True)
     class Meta:
         model = User
         fields=['email', 'firstName', 'lastName','password', 'confirmPassword']
+        extra_kwargs = {
+            'password': {'write_only':True}
+        }
     
     def validate( self, attrs):
         password = attrs.get('password')
