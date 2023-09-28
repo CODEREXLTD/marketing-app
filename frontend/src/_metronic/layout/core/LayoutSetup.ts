@@ -1,3 +1,4 @@
+import { DefaultLayoutConfig } from './DefaultLayoutConfig'
 import {
   IAside,
   IContent,
@@ -8,9 +9,8 @@ import {
   ILayoutCSSVariables,
   ILayoutHTMLAttributes,
   IPageTitle,
-  IToolbar,
+  IToolbar
 } from './LayoutModels'
-import {DefaultLayoutConfig} from './DefaultLayoutConfig'
 
 const LAYOUT_CONFIG_KEY = process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig'
 
@@ -95,6 +95,7 @@ export class LayoutSetup {
   }
 
   private static initHeader(config: IHeader): void {
+    config.width = 'fluid';    
     LayoutSetup.classes.headerContainer.push(
       config.width === 'fluid' ? 'container-fluid' : 'container-xxl'
     )
@@ -127,6 +128,7 @@ export class LayoutSetup {
   }
 
   private static initContent(config: IContent): void {
+    config.width = 'fluid';
     LayoutSetup.classes.contentContainer.push(
       config.width === 'fluid' ? 'container-fluid' : 'container-xxl'
     )
@@ -159,12 +161,13 @@ export class LayoutSetup {
   private static initAsideMenu(config: IAside): void {}
 
   private static initFooter(config: IFooter): void {
+    config.width = 'fluid';
     LayoutSetup.classes.footerContainer.push(
       `container-${config.width === 'fluid' ? 'fluid' : 'xxl'}`
     )
   }
 
-  private static initConfig(config: ILayout): void {
+  private static initConfig(config: ILayout): void {    
     if (config.main?.darkSkinEnabled) {
       document.body.classList.add('dark-skin')
     }
