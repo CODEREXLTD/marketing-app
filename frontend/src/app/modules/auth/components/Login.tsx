@@ -20,8 +20,8 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: '',
+    password: '',
 }
 
 export function Login() {
@@ -34,14 +34,11 @@ export function Login() {
         onSubmit: async (values, {setStatus, setSubmitting}) => {            
             setLoading(true)
             try {
-                const {data: auth} = await login(values.email, values.password)
-                console.log(auth);
-                
+                const {data: auth} = await login(values.email, values.password)                
                 saveAuth(auth)
                 const {data: user} = await getUserByToken(auth?.token)
                 setCurrentUser(user)
             } catch (error) {
-                console.error(error)
                 saveAuth(undefined)
                 setStatus('The login details are incorrect')
                 setSubmitting(false)
@@ -89,7 +86,9 @@ export function Login() {
                 />
                 {formik.touched.email && formik.errors.email && (
                 <div className='fv-plugins-message-container'>
-                    <span role='alert'>{formik.errors.email}</span>
+                    <div className='fv-help-block'>
+                        <span role='alert'>{formik.errors.email}</span>
+                    </div>
                 </div>
                 )}
             </div>
@@ -115,7 +114,7 @@ export function Login() {
                 {formik.touched.password && formik.errors.password && (
                 <div className='fv-plugins-message-container'>
                     <div className='fv-help-block'>
-                    <span role='alert'>{formik.errors.password}</span>
+                        <span role='alert'>{formik.errors.password}</span>
                     </div>
                 </div>
                 )}
@@ -125,9 +124,9 @@ export function Login() {
             {/* begin::Wrapper */}
             <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8'><div />
                 {/* begin::Link */}
-                <Link to='/auth/forgot-password' className='link-primary'>
+                {/* <Link to='/auth/forgot-password' className='link-primary'>
                     Forgot Password ?
-                </Link>
+                </Link> */}
                 {/* end::Link */}
             </div>
             {/* end::Wrapper */}
