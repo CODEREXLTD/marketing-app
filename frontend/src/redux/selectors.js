@@ -5,3 +5,6 @@ export function getAllCampaign(state){
 export function getSteps(state){
     return state.campaignStep;
 }
+export function getStepsSequence(state){
+    return state.sequence;
+}

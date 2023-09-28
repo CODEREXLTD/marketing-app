@@ -27,3 +27,9 @@ export function registerStepType(stepType) {
         stepType,
     };
 }
+export function addSequence(step) {
+    return {
+        type: "ADD_SEQUENCE",
+        payload: step,
+    };
+}

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react'
-import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {KTIcon} from '../../../../_metronic/helpers'
 import {AddCampaign} from "./AddCampaign";
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCampaign } from '../../../../redux/actions';
-import { getAllCampaign,getSteps } from '../../../../redux/selectors';
+import { getAllCampaign } from '../../../../redux/selectors';
 import { formatDistanceToNow } from 'date-fns';
 import {Link} from "react-router-dom";
 type Props = {
@@ -15,7 +15,6 @@ type Props = {
 const CampaignTable: React.FC<Props> = ({className}) => {
 
   const campaigns = useSelector(getAllCampaign);
-  const getStepsData = useSelector(getSteps);
   const dispatch = useDispatch();
   const [isLoad, setLoad] = useState(false);
 
