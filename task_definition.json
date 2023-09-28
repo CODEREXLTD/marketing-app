@@ -2,7 +2,7 @@
     "executionRoleArn": "arn:aws:iam::123456789:role/EcsGaRole",
     "containerDefinitions": [{
       "name": "closez",
-      "image": "dkr.ecr.ap-south-1.amazonaws.com/ci_cd",
+      "image": "public.ecr.aws/f5m4e5a2/closez_backend",
       "memory": "2048",
       "essential": true,
       "portMappings": [{
