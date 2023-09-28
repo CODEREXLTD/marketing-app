@@ -28,7 +28,7 @@ const AddCampaign: FC = () => {
 
     var config = {
       method: 'post',
-      url: 'http://127.0.0.1:8000/api/campaigns/',
+      url: 'http://127.0.0.1:8000/api/campaign/',
       headers: {
         'Content-Type': 'application/json'
       },
