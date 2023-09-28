@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from campaigns.renderers import UserRenderer
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework import status
 import logging
 logger = logging.getLogger(__name__)
@@ -15,6 +16,91 @@ class CampaignViewSet(viewsets.ModelViewSet):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
     permission_classes = [IsAuthenticated]
+    
+    # Inside your CampaignViewSet class
+    @action(detail=False)
+    def all(self, request):
+        # Retrieve all campaigns with their associated sequences and channels
+        campaigns = Campaign.objects.all()
+        serialized_campaigns = []
+
+        for campaign in campaigns:
+            serialized_campaign = CampaignSerializer(campaign).data
+            sequences = campaign.sequence_set.all()
+            serialized_sequences = []
+
+            for sequence in sequences:
+                serialized_sequence = SequenceSerializer(sequence).data
+                try:
+                    channel = SequenceEmailChannel.objects.get(sequence=sequence)
+                    serialized_channel = SequenceEmailChannelSerializer(channel).data
+                    serialized_sequence['channel'] = serialized_channel
+                except SequenceEmailChannel.DoesNotExist:
+                    pass
+
+                serialized_sequences.append(serialized_sequence)
+
+            serialized_campaign['sequences'] = serialized_sequences
+            serialized_campaigns.append(serialized_campaign)
+
+        return Response(serialized_campaigns, status=status.HTTP_200_OK)
+
+    # Inside your CampaignViewSet class
+    @action(detail=False)
+    def get_campaigns_by_user(self, request, user_id=None):
+        # Retrieve all campaigns with their associated sequences and channels
+        campaigns = Campaign.objects.filter(user=user_id)
+        serialized_campaigns = []
+
+        for campaign in campaigns:
+            serialized_campaign = CampaignSerializer(campaign).data
+            sequences = campaign.sequence_set.all()
+            serialized_sequences = []
+
+            for sequence in sequences:
+                serialized_sequence = SequenceSerializer(sequence).data
+                try:
+                    channel = SequenceEmailChannel.objects.get(sequence=sequence)
+                    serialized_channel = SequenceEmailChannelSerializer(channel).data
+                    serialized_sequence['channel'] = serialized_channel
+                except SequenceEmailChannel.DoesNotExist:
+                    pass
+
+                serialized_sequences.append(serialized_sequence)
+
+            serialized_campaign['sequences'] = serialized_sequences
+            serialized_campaigns.append(serialized_campaign)
+
+        return Response(serialized_campaigns, status=status.HTTP_200_OK)
+
+    # Inside your CampaignViewSet class
+    @action(detail=False)
+    def get_specific_campaign_by_user(self, request, user_id=None, pk=None):
+        # Retrieve all campaigns with their associated sequences and channels
+        campaigns = Campaign.objects.filter(id=pk, user=user_id)
+        serialized_campaigns = []
+
+        for campaign in campaigns:
+            serialized_campaign = CampaignSerializer(campaign).data
+            sequences = campaign.sequence_set.all()
+            serialized_sequences = []
+
+            for sequence in sequences:
+                serialized_sequence = SequenceSerializer(sequence).data
+                try:
+                    channel = SequenceEmailChannel.objects.get(sequence=sequence)
+                    serialized_channel = SequenceEmailChannelSerializer(channel).data
+                    serialized_sequence['channel'] = serialized_channel
+                except SequenceEmailChannel.DoesNotExist:
+                    pass
+
+                serialized_sequences.append(serialized_sequence)
+
+            serialized_campaign['sequences'] = serialized_sequences
+            serialized_campaigns.append(serialized_campaign)
+
+        return Response(serialized_campaigns, status=status.HTTP_200_OK)
+
     def create(self, request, format=None):
         # Create a CampaignSerializer instance with request data
         serializer = CampaignSerializer(data=request.data)

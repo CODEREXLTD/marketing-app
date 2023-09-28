@@ -51,7 +51,6 @@ class SequenceSerializer(serializers.ModelSerializer):
         return data
 
 class CampaignSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Campaign
         fields = '__all__'
@@ -70,6 +69,8 @@ class CampaignSerializer(serializers.ModelSerializer):
         instance.user = validateData.get("user", instance.user)
         instance.save()
         return instance
+
+
 class CampaignCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign

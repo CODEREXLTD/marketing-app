@@ -5,10 +5,10 @@ from campaigns.views import (CampaignCreateView,CampaignViewSet)
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register('campaign',CampaignViewSet)
+router.register(r'campaigns',CampaignViewSet)
 
 urlpatterns = [
-    # path('create/', CampaignCreateView.as_view(),name='create'),
     path('', include(router.urls)),
-    # path('all/', CampaignsGetView.as_view(),name='get'),
+    path('campaigns/user/<int:user_id>/', CampaignViewSet.as_view({'get': 'get_campaigns_by_user'}), name='get_campaigns_by_user'),
+    path('campaigns/<int:user_id>/<int:pk>/', CampaignViewSet.as_view({'get': 'get_specific_campaign_by_user'}), name='get_specific_campaign_by_user'),
 ]
