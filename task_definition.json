@@ -1,20 +1,95 @@
 {
-  "executionRoleArn": "arn:aws:iam::502065070033:role/EcsGaRole",
-  "containerDefinitions": [{
-    "name": "closez_backend",
-    "image": "dkr.ecr.ap-south-1.amazonaws.com/closez_backend",
-    "memory": "2048",
-    "essential": true,
-    "portMappings": [{
-      "containerPort": 80,
-      "protocol": "tcp"
-    }]
-  }],
-  "volumes": [],
-  "requiresCompatibilities": ["FARGATE"],
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:502065070033:task-definition/closez:1",
+  "containerDefinitions": [
+      {
+          "name": "closez_backend",
+          "image": "502065070033.dkr.ecr.ap-south-1.amazonaws.com/closez_backend",
+          "cpu": 0,
+          "portMappings": [
+              {
+                  "name": "closez_backend-80-tcp",
+                  "containerPort": 80,
+                  "hostPort": 80,
+                  "protocol": "tcp",
+                  "appProtocol": "http"
+              }
+          ],
+          "essential": true,
+          "environment": [],
+          "environmentFiles": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "ulimits": [],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-create-group": "true",
+                  "awslogs-group": "/ecs/closez",
+                  "awslogs-region": "ap-south-1",
+                  "awslogs-stream-prefix": "ecs"
+              },
+              "secretOptions": []
+          }
+      },
+      {
+          "name": "closez_frontend",
+          "image": "502065070033.dkr.ecr.ap-south-1.amazonaws.com/closez_frontend",
+          "cpu": 0,
+          "portMappings": [],
+          "essential": false,
+          "environment": [],
+          "environmentFiles": [],
+          "mountPoints": [],
+          "volumesFrom": []
+      }
+  ],
+  "family": "closez",
+  "executionRoleArn": "arn:aws:iam::502065070033:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
+  "revision": 1,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+      {
+          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+      },
+      {
+          "name": "ecs.capability.execution-role-awslogs"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.ecr-auth"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+      },
+      {
+          "name": "ecs.capability.execution-role-ecr-pull"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+      },
+      {
+          "name": "ecs.capability.task-eni"
+      },
+      {
+          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+      }
+  ],
   "placementConstraints": [],
-  "family": "application-stack",
+  "compatibilities": [
+      "EC2",
+      "FARGATE"
+  ],
+  "requiresCompatibilities": [
+      "FARGATE"
+  ],
+  "cpu": "1024",
   "memory": "2048",
-  "cpu": "1024"
+  "runtimePlatform": {
+      "cpuArchitecture": "X86_64",
+      "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-09-28T13:24:03.317Z",
+  "registeredBy": "arn:aws:iam::502065070033:user/sadi",
+  "tags": []
 }
