@@ -1,20 +1,20 @@
 {
-    "executionRoleArn": "arn:aws:iam::123456789:role/EcsGaRole",
-    "containerDefinitions": [{
-      "name": "closez",
-      "image": "public.ecr.aws/f5m4e5a2/closez_backend",
-      "memory": "2048",
-      "essential": true,
-      "portMappings": [{
-        "containerPort": 80,
-        "protocol": "tcp"
-      }]
-    }],
-    "volumes": [],
-    "requiresCompatibilities": ["FARGATE"],
-    "networkMode": "awsvpc",
-    "placementConstraints": [],
-    "family": "application-stack",
+  "executionRoleArn": "arn:aws:iam::123456789:role/EcsGaRole",
+  "containerDefinitions": [{
+    "name": "django_app",
+    "image": "dkr.ecr.ap-south-1.amazonaws.com/closez_backend",
     "memory": "2048",
-    "cpu": "1024"
-  }
+    "essential": true,
+    "portMappings": [{
+      "containerPort": 80,
+      "protocol": "tcp"
+    }]
+  }],
+  "volumes": [],
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc",
+  "placementConstraints": [],
+  "family": "application-stack",
+  "memory": "2048",
+  "cpu": "1024"
+}
