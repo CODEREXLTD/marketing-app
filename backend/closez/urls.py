@@ -20,12 +20,14 @@ from campaigns import views as campaign_views
 
 
 router = routers.DefaultRouter()
-router.register(r'campaigns', campaign_views.CampaignViewSet, 'campaigns')
+# router.register(r'campaigns', campaign_views.CampaignViewSet, 'campaigns')
 router.register(r'sequences', campaign_views.SequenceViewSet, 'sequences')
 router.register(r'email_channels', campaign_views.SequenceEmailChannelViewSet, 'email_channels')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('api/', include(router.urls)),
     path('api/user/', include('authentication.urls')),
+    path('api/', include('campaigns.urls')),
 ]

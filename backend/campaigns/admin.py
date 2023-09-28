@@ -18,3 +18,5 @@ class CampaignAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Campaign, CampaignAdmin)
+admin.site.register(Sequence)
+admin.site.register(SequenceEmailChannel)

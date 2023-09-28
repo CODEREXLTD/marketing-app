@@ -21,7 +21,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
   const fetchCampaign = async () => {
     try {
       setLoad(true);
-      const response = await axios.get("http://127.0.0.1:8000/api/campaigns/");
+      const response = await axios.get("http://127.0.0.1:8000/api/campaign/");
       const getData = response.data;
       dispatch(setCampaign(getData));
     } catch (error) {
