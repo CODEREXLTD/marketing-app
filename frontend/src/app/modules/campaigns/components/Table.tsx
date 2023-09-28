@@ -16,7 +16,6 @@ const CampaignTable: React.FC<Props> = ({className}) => {
 
   const campaigns = useSelector(getAllCampaign);
   const getStepsData = useSelector(getSteps);
-  console.log(getStepsData)
   const dispatch = useDispatch();
   const [isLoad, setLoad] = useState(false);
 

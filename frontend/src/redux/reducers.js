@@ -4,8 +4,9 @@ const initialState = {
   counter: 0,
   campaignStep: [
       Email
-  ]
-  // Add more initial state properties if needed
+  ],
+  sequence: []
+
 };
 
 const rootReducer = (state = initialState, action) => {
