@@ -4,7 +4,8 @@ from .models import Campaign, Sequence, SequenceEmailChannel
 from django.db import connection
 from rest_framework.response import Response
 from rest_framework import status
-
+import logging
+logger = logging.getLogger(__name__)
 
 # Serializer for the SequenceEmailChannel model
 class SequenceEmailChannelSerializer(serializers.ModelSerializer):
@@ -15,29 +16,26 @@ class SequenceEmailChannelSerializer(serializers.ModelSerializer):
 
 # Serializer for the Sequence model
 class SequenceSerializer(serializers.ModelSerializer):
-    email_channels = SequenceEmailChannelSerializer(allow_null=True)
-    id = serializers.ImageField(required=False)
+    # email_channels = SequenceEmailChannelSerializer(allow_null=True)
     class Meta:
         model = Sequence
         fields = '__all__'
 
+    def create( self, validateData ):
+        sequence  = Sequence.objects.create(**validateData)
+        return sequence
 
 # Serializer for the Campaign model
 class CampaignSerializer(serializers.ModelSerializer):
-    sequences = SequenceSerializer( many=True, read_only=True, source='sequence_set' )
     class Meta:
         model = Campaign
         fields = '__all__'
     def create( self, validateData ):
-        # sequences = validateData.pop('sequences')
         campaign  = Campaign.objects.create(**validateData)
-        # if sequences:
-        #     for sequence in sequences:
-        #         Sequence.objects.create(**sequence, campaign=campaign)
         return campaign
-    
+        
     def update(self, instance, validateData):
-        # sequences = validateData.pop('sequences')
+        # sequences = validateData.pop('sequences',None)
         instance.name = validateData.get("name", instance.name)
         instance.description = validateData.get("description", instance.name)
         instance.status = validateData.get("status", instance.status)
@@ -47,6 +45,26 @@ class CampaignSerializer(serializers.ModelSerializer):
         instance.updated_at = validateData.get("updated_at", instance.updated_at)
         instance.user = validateData.get("user", instance.user)
         instance.save()
+        # keep_sequences = [];
+        # exisitng_ids = [s.id for s in instance.sequences];
+        # for sequence in sequences:
+        #     if "id" in sequence.key:
+        #         if Sequence.objects.filter(id=sequence["id"]).exists():
+        #             s = Sequence.objects.get(id=sequence["id"])
+        #             s.step_id = sequence.get('step_id', s.step_id)
+        #             s.data = sequence.get('data', s.data)
+        #             s.delay = sequence.get('delay', s.delay)
+        #             s.next_step = sequence.get('next_step', s.next_step)
+        #             s.type = sequence.get('next_step', s.type)
+        #             s.save()
+        #             keep_sequences.append(s.id)
+        #         else:
+        #             s = Sequence.objects.create(**sequence, campaign=instance)
+        #             keep_sequences.append(s.id)
+        
+        # for sequence in instance.sequences:
+        #     if sequence.id not in keep_sequences:
+        #         sequence.delete()
         return instance
 
 
