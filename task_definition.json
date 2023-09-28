@@ -1,7 +1,7 @@
 {
-  "executionRoleArn": "arn:aws:iam::123456789:role/EcsGaRole",
+  "executionRoleArn": "arn:aws:iam::502065070033:role/EcsGaRole",
   "containerDefinitions": [{
-    "name": "django_app",
+    "name": "closez_backend",
     "image": "dkr.ecr.ap-south-1.amazonaws.com/closez_backend",
     "memory": "2048",
     "essential": true,
