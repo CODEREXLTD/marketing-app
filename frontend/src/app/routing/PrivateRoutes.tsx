@@ -6,7 +6,7 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { WithChildren } from '../../_metronic/helpers'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
 import { CampaignWrapper } from '../modules/campaigns/Campaigns'
-import { CampaignDetails } from '../modules/campaigns/component/CampaignDetails'
+import { CampaignDetails } from '../modules/campaigns/components/CampaignDetails'
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
 

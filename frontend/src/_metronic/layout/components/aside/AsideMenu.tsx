@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
-import {useLocation} from 'react-router'
-import {AsideMenuMain} from './AsideMenuMain'
-import {DrawerComponent, ToggleComponent} from '../../../assets/ts/components'
+import React, { useEffect } from 'react'
+import { useLocation } from 'react-router'
+import { DrawerComponent, ToggleComponent } from '../../../assets/ts/components'
+import { AsideMenuMain } from './AsideMenuMain'
 
 type Props = {
   asideMenuCSSClasses: string[]
@@ -39,4 +39,5 @@ const AsideMenu: React.FC<Props> = ({asideMenuCSSClasses}) => {
   )
 }
 
-export {AsideMenu}
+export { AsideMenu }
+

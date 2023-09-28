@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useState} from 'react'
-import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import { FC, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {addCampaign, setCampaign} from '../../../../redux/actions';
-import { getAllCampaign } from '../../../../redux/selectors';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { addCampaign } from '../../../../redux/actions';
+import { getAllCampaign } from '../../../../redux/selectors';
+import { KTIcon } from '../../../../_metronic/helpers';
+import { createCampaign } from '../core/_requests';
 const AddCampaign: FC = () => {
      let navigate = useNavigate();
  const dispatch = useDispatch();
@@ -15,40 +15,36 @@ const AddCampaign: FC = () => {
   const handleOnChange = (value) =>{
     setName(value)
   }
-  const handleCreateCampaign = (e) =>{
-    setLoad(true)
-    var data = JSON.stringify({
-      "name": name,
-      "description": "hello",
-      "status": "draft",
-      "isActive": true,
-      "scheduled_at": null,
-      "user": 1
-    });
 
-    var config = {
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/campaigns/',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: data
-    };
-    if(name !== ''){
-      axios(config)
-        .then(function (response) {
-          setLoad(false);
-          dispatch( addCampaign(response.data));
-          navigate(`/campaign/${response.data.id}`)
-        })
-        .catch(function (error) {
-          console.log(error);
+    /**
+     * Handles the creation of a new campaign by sending a POST request to the server.
+     * This function sets loading state, prepares the payload, sends the request, and
+     * updates the application state accordingly.
+     */
+    const handleCreateCampaign = async () => {
+        setLoad(true)
+        const payload = JSON.stringify({
+            "name": name,
+            "description": "hello",
+            "status": "draft",
+            "isActive": true,
+            "scheduled_at": null,
+            "user": 1
         });
+
+        if (!name) {
+            // Handle the case where 'name' is empty (you can add your own validation logic here)
+            console.error('Name is required.');
+            return;
+        }
+
+        // Send the POST request
+        const response = await createCampaign(payload);
+
+        dispatch( addCampaign(response?.data));
+        navigate(`/campaign/${response?.data?.id}`);
+        setLoad(false);
     }
-    setLoad(false)
-
-
-  }
   return (
     <div className='modal fade' id='kt_modal_add_campaign' aria-hidden="true">
       <div className='modal-dialog mw-650px'>
@@ -75,10 +71,8 @@ const AddCampaign: FC = () => {
                       data-bs-trigger='hover'
                       title='Click to add a user'
                     >
-                    {/*<button type="button" className="btn btn-sm btn-light-primary" onClick={(e) => {handleCreateCampaign(e)}} >{isLoad ? "Creating..." : "Create Campaign"}</button>*/}
-
-                    <button className='btn btn-sm btn-light-primary' data-bs-toggle='modal' data-bs-target='#kt_modal_add_campaign'  onClick={(e) => {e.preventDefault();handleCreateCampaign(e);}}>   Create Campaign</button>
-                  </div>
+                        <button className='btn btn-sm btn-light-primary' data-bs-toggle='modal' data-bs-target='#kt_modal_add_campaign'  onClick={(e) => {e.preventDefault();handleCreateCampaign();}}> Create Campaign</button>
+                    </div>
             </div>
           </div>
         </div>
@@ -87,4 +81,5 @@ const AddCampaign: FC = () => {
   )
 }
 
-export {AddCampaign}
+export { AddCampaign };
+

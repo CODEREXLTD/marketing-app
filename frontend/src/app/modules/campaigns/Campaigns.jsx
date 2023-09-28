@@ -1,9 +1,9 @@
-import {useEffect} from 'react'
-import {useIntl} from 'react-intl'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import { useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import { PageTitle } from '../../../_metronic/layout/core';
 import {
-  CampaignTable,
-} from './component/Table'
+  CampaignTable
+} from './components/Table';
 
 const dashboardBreadCrumbs = [
     {
@@ -52,4 +52,5 @@ const CampaignWrapper = () => {
   )
 }
 
-export {CampaignWrapper}
+export { CampaignWrapper };
+
