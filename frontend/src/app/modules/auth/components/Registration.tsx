@@ -62,8 +62,9 @@ export function Registration() {
                 values.confirmPassword
                 )                
                 saveAuth(auth)
-                const {data: user} = await getUserByToken(auth?.token?.access)
-                console.log(user);
+                console.log(auth);
+                
+                const {data: user} = await getUserByToken(auth?.token)
                 
                 setCurrentUser(user)
             } catch (error) {

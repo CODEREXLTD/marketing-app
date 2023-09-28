@@ -1,6 +1,6 @@
 export interface AuthModel {
-    token: string
-    refreshToken?: string
+  token: string
+  refreshToken?: string
 }
 
 export interface UserAddressModel {

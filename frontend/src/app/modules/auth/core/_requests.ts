@@ -40,16 +40,15 @@ export function requestPassword(email: string) {
   })
 }
 
-export function getUserByToken(token: string) {
-    console.log(`Bearer ${token}`);
-    
-    // Set the Authorization header with the Bearer token
+export function getUserByToken(token: string) {    
+    // Set the Authorization header with the Bearer token    
     const config = {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization':'Bearer ' + String(token)
+        }
     };
     console.log(config);
     
-    return axios.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, { headers: {"Authorization" : `Bearer ${token}`} });
+    return axios.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, config);
 }
