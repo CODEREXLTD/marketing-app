@@ -5,17 +5,20 @@ import { useNavigate } from "react-router-dom";
 import { addCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
 import { KTIcon } from '../../../../_metronic/helpers';
+import { useAuth } from '../../auth';
 import { createCampaign } from '../core/_requests';
 const AddCampaign: FC = () => {
-     let navigate = useNavigate();
- const dispatch = useDispatch();
-  const campaigns = useSelector(getAllCampaign);
-  const [name , setName] = useState('')
-   const [isLoad, setLoad] = useState(false);
-  const handleOnChange = (value) =>{
-    setName(value)
-  }
+    let navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {currentUser} = useAuth();
+    const campaigns = useSelector(getAllCampaign);
+    const [name , setName] = useState('')
+    const [isLoad, setLoad] = useState(false);
 
+    const handleOnChange = (value) =>{
+        setName(value)
+    }
+    
     /**
      * Handles the creation of a new campaign by sending a POST request to the server.
      * This function sets loading state, prepares the payload, sends the request, and
@@ -29,7 +32,7 @@ const AddCampaign: FC = () => {
             "status": "draft",
             "isActive": true,
             "scheduled_at": null,
-            "user": 1
+            "user": currentUser?.id
         });
 
         if (!name) {
@@ -40,7 +43,7 @@ const AddCampaign: FC = () => {
 
         // Send the POST request
         const response = await createCampaign(payload);
-
+        
         dispatch( addCampaign(response?.data));
         navigate(`/campaign/${response?.data?.id}`);
         setLoad(false);
