@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
 import clsx from 'clsx'
-import {useLayout} from '../../core'
-import {KTIcon, toAbsoluteUrl} from '../../../helpers'
-import {AsideTabs} from './AsideTabs'
-import {AsideFooter} from './AsideFooter'
-import {TabsBase} from './Tabs/_TabsBase'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { KTIcon, toAbsoluteUrl } from '../../../helpers'
+import { useLayout } from '../../core'
+import { AsideFooter } from './AsideFooter'
+import { AsideTabs } from './AsideTabs'
+import { TabsBase } from './Tabs/_TabsBase'
 
 const AsideDefault = () => {
   const {config} = useLayout()
@@ -82,4 +82,5 @@ const AsideDefault = () => {
   )
 }
 
-export {AsideDefault}
+export { AsideDefault }
+

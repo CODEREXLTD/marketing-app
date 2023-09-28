@@ -1,5 +1,5 @@
-import {KTIcon, toAbsoluteUrl} from '../../../helpers'
-import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks} from '../../../partials'
+import { toAbsoluteUrl } from '../../../helpers'
+import { HeaderUserMenu } from '../../../partials'
 
 const AsideFooter = () => {
   return (
@@ -8,8 +8,7 @@ const AsideFooter = () => {
       id='kt_aside_footer'
     >
       {/* begin::Quick links */}
-      <div className='d-flex align-items-center mb-2'>
-        {/* begin::Menu wrapper */}
+      {/* <div className='d-flex align-items-center mb-2'>
         <div
           className='btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light'
           data-kt-menu-trigger='click'
@@ -22,14 +21,12 @@ const AsideFooter = () => {
         >
           <KTIcon iconName='element-plus' className='fs-2 text-lg-1' />
         </div>
-        {/* end::Menu wrapper */}
         <QuickLinks backgroundUrl='/media/misc/pattern-1.jpg' />
-      </div>
+      </div> */}
       {/* end::Quick links */}
 
       {/* begin::Activities */}
-      <div className='d-flex align-items-center mb-3'>
-        {/* begin::Drawer toggle */}
+      {/* <div className='d-flex align-items-center mb-3'>
         <div
           className='btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light'
           data-kt-menu-trigger='click'
@@ -43,13 +40,11 @@ const AsideFooter = () => {
         >
           <KTIcon iconName='chart-simple' className='fs-2 text-lg-1' />
         </div>
-        {/* end::drawer toggle */}
-      </div>
+      </div> */}
       {/* end::Activities */}
 
       {/* begin::Notifications */}
-      <div className='d-flex align-items-center mb-2'>
-        {/* begin::Menu wrapper */}
+      {/* <div className='d-flex align-items-center mb-2'>
         <div
           className='btn btn-icon btn-active-color-primary btn-color-gray-400 btn-active-light'
           data-kt-menu-trigger='click'
@@ -62,9 +57,8 @@ const AsideFooter = () => {
         >
           <KTIcon iconName='element-11' className='fs-2 text-lg-1' />
         </div>
-        {/* end::Menu wrapper */}
         <HeaderNotificationsMenu backgrounUrl='/media/misc/pattern-1.jpg' />
-      </div>
+      </div> */}
       {/* end::Notifications */}
 
       {/* begin::User */}
@@ -77,7 +71,7 @@ const AsideFooter = () => {
           data-kt-menu-placement='top-start'
           title='User profile'
         >
-          <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='avatar' />
+          <img src={toAbsoluteUrl('/media/avatars/blank.png')} alt='avatar' />
         </div>
         {/* end::Menu wrapper */}
         <HeaderUserMenu />
@@ -87,4 +81,5 @@ const AsideFooter = () => {
   )
 }
 
-export {AsideFooter}
+export { AsideFooter }
+
