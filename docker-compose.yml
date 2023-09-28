@@ -10,17 +10,28 @@ services:
       - ./backend:/app
     ports:
       - 8000:8000
+    environment:
+      DEBUG: "True"
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+      DJANGO_DB: postgresql
+      POSTGRES_HOST: db
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+    restart: on-failure
     depends_on:
       - db
 
-  # frontend:
-  #   build:
-  #     context: ./frontend  # Path to the React frontend folder
-  #     dockerfile: Dockerfile.frontend  # Name of the Dockerfile for frontend
-  #   ports:
-  #     - "3000:3000"  # Expose React on port 3000
-  #   volumes:
-  #     - ./frontend:/app  # Mount the frontend folder into the container
+  frontend:
+    build:
+      context: ./frontend  
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
 
   db:
     image: postgres:13
@@ -41,9 +52,61 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     restart: always
 
+  redis:
+    image: 'redis:alpine'
+    hostname: redis
+    ports:
+      - "6379:6379"
+
+  
+  celery:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: celery -A closez worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - web
+      - redis
+      - db
+    restart: on-failure
+
+
+  celery_beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    command: celery -A closez beat -l info
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=dbaa1_i7%*3r9-=z-+_mz4r-!qeed@(-a_r(g@k8jo8y3r27%m
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - redis
+    
+  flower:
+    image: mher/flower:latest
+    container_name: flower
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - FLOWER_PORT=8888
+    ports:
+      - '5555:5555'
+    command: celery --broker=redis://redis:6379/0 flower --port=5555
+    depends_on:
+      - celery
+      - redis
+    
+
 networks:
   default:
-    name: closez_network  # Update with your network name if needed
+    name: closez_network
    
 volumes:
   postgres_data:

@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from celery.schedules import crontab
+
+import closez.tasks
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,12 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django_extensions',
     'corsheaders',
     'rest_framework',
     'authentication',
     'campaigns',
     'rest_framework_simplejwt',
+    'django_celery_beat',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -167,3 +171,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     'http://localhost:3000'
 ]
+
+
+# Celery settings
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
+
+CELERY_BEAT_SCHEDULE = {
+    "schedule_campaigns": {
+        "task": "closez.tasks.schedule_campaigns",
+        "schedule": crontab(minute="*/1"),
+    }
+}

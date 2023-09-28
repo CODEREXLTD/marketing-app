@@ -6,6 +6,8 @@ class Campaign(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
         ('completed', 'Completed'),
+        ('scheduled', 'Scheduled'),
+        ('running', 'Running'),
    )
    name         = models.CharField(max_length=100)
    description  = models.TextField()
