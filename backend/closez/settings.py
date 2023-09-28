@@ -14,7 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 from celery.schedules import crontab
 
-import closez.tasks
+# import campaigns.tasks
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -180,7 +180,7 @@ CELERY_RESULT_BACKEND = "redis://redis:6379"
 
 CELERY_BEAT_SCHEDULE = {
     "schedule_campaigns": {
-        "task": "closez.tasks.schedule_campaigns",
+        "task": "campaigns.tasks.schedule_campaigns",
         "schedule": crontab(minute="*/1"),
     }
 }
