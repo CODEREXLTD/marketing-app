@@ -5,11 +5,10 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { WithChildren } from '../../_metronic/helpers'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
+import { CampaignWrapper } from '../modules/campaigns/Campaigns'
+import { CampaignDetails } from '../modules/campaigns/component/CampaignDetails'
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
-import { CampaignWrapper } from '../pages/campaigns/Campaings'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
-import { CampaignDetails } from '../pages/campaigns/component/CampaignDetails'
-import { MenuTestPage } from '../pages/MenuTestPage'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -98,4 +97,5 @@ const SuspensedView: FC<WithChildren> = ({children}) => {
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>
 }
 
-export {PrivateRoutes}
+export { PrivateRoutes }
+

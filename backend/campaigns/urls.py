@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
-
-from campaigns.views import (CampaignCreateView,CampaignViewSet)
 from rest_framework import routers
+
+from campaigns.views import CampaignCreateView, CampaignViewSet
 
 router = routers.DefaultRouter()
 router.register('campaign',CampaignViewSet)
