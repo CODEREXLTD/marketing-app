@@ -11,7 +11,6 @@ const Content: FC<WithChildren> = ({children}) => {
   useEffect(() => {
     DrawerComponent.hideAll()
   }, [location])
-
   return (
     <div id='kt_content_container' className={clsx(classes.contentContainer.join(' '))}>
       {children}

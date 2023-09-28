@@ -1,13 +1,13 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
-import {Step1} from './steps/Step1'
-import {Step2} from './steps/Step2'
-import {Step3} from './steps/Step3'
-import {Step4} from './steps/Step4'
-import {Step5} from './steps/Step5'
-import {KTIcon} from '../../../../../../_metronic/helpers'
-import {StepperComponent} from '../../../../../../_metronic/assets/ts/components'
-import {Form, Formik, FormikValues} from 'formik'
-import {createAccountSchemas, ICreateAccount, inits} from './CreateAccountWizardHelper'
+import { Form, Formik, FormikValues } from 'formik'
+import { FC, useEffect, useRef, useState } from 'react'
+import { StepperComponent } from '../../../../../../_metronic/assets/ts/components'
+import { KTIcon } from '../../../../../../_metronic/helpers'
+import { createAccountSchemas, ICreateAccount, inits } from './CreateAccountWizardHelper'
+import { EmailChannel } from './steps/EmailChannel'
+import { Step1 } from './steps/Step1'
+import { Step2 } from './steps/Step2'
+import { Step4 } from './steps/Step4'
+import { Step5 } from './steps/Step5'
 
 const Horizontal: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -99,7 +99,7 @@ const Horizontal: FC = () => {
                 </div>
 
                 <div data-kt-stepper-element='content'>
-                  <Step3 />
+                  <EmailChannel />
                 </div>
 
                 <div data-kt-stepper-element='content'>
@@ -142,4 +142,5 @@ const Horizontal: FC = () => {
   )
 }
 
-export {Horizontal}
+export { Horizontal }
+
