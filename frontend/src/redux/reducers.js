@@ -1,5 +1,10 @@
+import { step as Email } from '../app/modules/campaigns/channels/email-channel';
+
 const initialState = {
   counter: 0,
+  campaignStep: [
+      Email
+  ]
   // Add more initial state properties if needed
 };
 
@@ -26,14 +31,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         campaigns: [...state.campaigns, action.payload]
-      };
-    case 'REGISTER_STEP_TYPE':
-      return {
-          ...state,
-          stepTypes: {
-              ...state.stepTypes,
-              [action.stepType.key]: action.stepType,
-          },
       };
     // Add more cases for other actions if needed
     default:

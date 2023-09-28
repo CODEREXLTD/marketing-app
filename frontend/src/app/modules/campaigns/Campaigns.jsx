@@ -4,7 +4,6 @@ import { PageTitle } from '../../../_metronic/layout/core';
 import {
   CampaignTable
 } from './components/Table';
-
 const dashboardBreadCrumbs = [
     {
       title: 'Home',
@@ -13,7 +12,6 @@ const dashboardBreadCrumbs = [
       isActive: false,
     },
   ];
-
 const CampaignPage = () => {
   useEffect(() => {
     // We have to show toolbar only for dashboard page

@@ -6,7 +6,7 @@ import {AddCampaign} from "./AddCampaign";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCampaign } from '../../../../redux/actions';
-import { getAllCampaign } from '../../../../redux/selectors';
+import { getAllCampaign,getSteps } from '../../../../redux/selectors';
 import { formatDistanceToNow } from 'date-fns';
 import {Link} from "react-router-dom";
 type Props = {
@@ -15,6 +15,8 @@ type Props = {
 const CampaignTable: React.FC<Props> = ({className}) => {
 
   const campaigns = useSelector(getAllCampaign);
+  const getStepsData = useSelector(getSteps);
+  console.log(getStepsData)
   const dispatch = useDispatch();
   const [isLoad, setLoad] = useState(false);
 

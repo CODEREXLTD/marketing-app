@@ -1,6 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import {setCampaign} from "../../../../redux/actions";
-export const registerStepType = (stepType) => {
+import { useDispatch } from "react-redux";
+import { registerStepType } from '../../../../redux/actions';
+import { step as Email } from './email-channel/index';
+// export const registerStep = (stepType) => {
+//     const dispatch = useDispatch();
+//     dispatch(registerStepType(stepType));
+// };
+
+export const Initialize = () => {
     const dispatch = useDispatch();
-    dispatch(registerStepType(stepType));
-};
+   dispatch(registerStepType(Email));
+}

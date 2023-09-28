@@ -8,8 +8,11 @@ import {KTIcon} from '../../../../_metronic/helpers'
 import {StepperComponent} from '../../../../_metronic/assets/ts/components'
 import {Form, Formik, FormikValues} from 'formik'
 import {createAccountSchemas, ICreateAccount, inits} from './wizards/components/CreateAccountWizardHelper'
-
+// import  { Initialize } from '../channels'
+// import {useSelector} from "react-redux";
+// import {getSteps} from "../../../../redux/selectors";
 const CampaignDetails: FC = () => {
+
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
