@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { PasswordMeterComponent } from '../../../../_metronic/assets/ts/components'
 import { useAuth } from '../core/Auth'
-import { register } from '../core/_requests'
+import { getUserByToken, register } from '../core/_requests'
 
 const initialValues = {
   firstName: '',
@@ -62,10 +62,11 @@ export function Registration() {
                 values.confirmPassword
                 )                
                 saveAuth(auth)
+                console.log(auth);
                 
-                // const {data: user} = await getUserByToken(auth?.token)
+                const {data: user} = await getUserByToken(auth?.token)
                 
-                setCurrentUser(auth)
+                setCurrentUser(user)
             } catch (error) {
                 console.error(error)
                 saveAuth(undefined)

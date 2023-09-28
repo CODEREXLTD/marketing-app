@@ -19,8 +19,8 @@ from authentication.serializers import (UserLoginSerializer,
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
     return {
-        'refresh': str(refresh),
-        'access': str(refresh.access_token),
+        'token': str(refresh.access_token),
+        'refreshToken': str(refresh),
     }
 
 class UserRegistrationView(APIView):
@@ -30,13 +30,13 @@ class UserRegistrationView(APIView):
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             token = get_tokens_for_user(user)
-            return Response({'token': token, 'msg': 'Registration successfull'}, status=status.HTTP_201_CREATED)
+            return Response(token, status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 class UserVerifyView(APIView):
     rednerer_class = [UserRenderer]
     permission_class = [IsAuthenticated]
-    def post(self, request, format=None):
+    def get(self, request, format=None):
         serializer = UserVerifySerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -51,7 +51,7 @@ class UserLoginView(APIView):
             user = authenticate(email=email, password=password)
             if user is not None:
                 token = get_tokens_for_user(user)
-                return Response({'token': token,'msg': 'Login successfully'}, status=status.HTTP_201_CREATED)
+                return Response(token, status=status.HTTP_201_CREATED)
             else:
                 return Response({'error': {'non_field_errors' : ['Email or password is not valid']}}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
