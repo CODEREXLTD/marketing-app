@@ -9,14 +9,24 @@ logger = logging.getLogger(__name__)
 
 # Serializer for the SequenceEmailChannel model
 class SequenceEmailChannelSerializer(serializers.ModelSerializer):
-    id = serializers.ImageField(required=False)
     class Meta:
         model = SequenceEmailChannel
         fields = '__all__'
 
+    def create( self, validateData ):
+        sequenceEmailChannel  = SequenceEmailChannel.objects.create(**validateData)
+        return sequenceEmailChannel
+
+    def update(self, instance, validated_data):
+        # Update the fields of the existing sequenceEmailChannel instance with the new data
+        instance.subject = validated_data.get("subject", instance.subject)
+        instance.preview_text = validated_data.get("preview_text", instance.preview_text)
+        instance.body = validated_data.get("body", instance.body)
+        instance.save()
+        return instance
+
 # Serializer for the Sequence model
 class SequenceSerializer(serializers.ModelSerializer):
-    # email_channels = SequenceEmailChannelSerializer(allow_null=True)
     class Meta:
         model = Sequence
         fields = '__all__'
@@ -25,8 +35,23 @@ class SequenceSerializer(serializers.ModelSerializer):
         sequence  = Sequence.objects.create(**validateData)
         return sequence
 
-# Serializer for the Campaign model
+    def update(self, instance, validated_data):
+        # Update the fields of the existing Sequence instance with the new data
+        instance.step_id = validated_data.get("step_id", instance.step_id)
+        instance.data = validated_data.get("data", instance.data)
+        instance.delay = validated_data.get("delay", instance.delay)
+        instance.next_step = validated_data.get("next_step", instance.next_step)
+        instance.type = validated_data.get("type", instance.type)
+        instance.save()
+        return instance
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['channel'] = SequenceEmailChannelSerializer(instance.sequenceemailchannel).data
+        return data
+
 class CampaignSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Campaign
         fields = '__all__'
@@ -35,7 +60,6 @@ class CampaignSerializer(serializers.ModelSerializer):
         return campaign
         
     def update(self, instance, validateData):
-        # sequences = validateData.pop('sequences',None)
         instance.name = validateData.get("name", instance.name)
         instance.description = validateData.get("description", instance.name)
         instance.status = validateData.get("status", instance.status)
@@ -45,29 +69,7 @@ class CampaignSerializer(serializers.ModelSerializer):
         instance.updated_at = validateData.get("updated_at", instance.updated_at)
         instance.user = validateData.get("user", instance.user)
         instance.save()
-        # keep_sequences = [];
-        # exisitng_ids = [s.id for s in instance.sequences];
-        # for sequence in sequences:
-        #     if "id" in sequence.key:
-        #         if Sequence.objects.filter(id=sequence["id"]).exists():
-        #             s = Sequence.objects.get(id=sequence["id"])
-        #             s.step_id = sequence.get('step_id', s.step_id)
-        #             s.data = sequence.get('data', s.data)
-        #             s.delay = sequence.get('delay', s.delay)
-        #             s.next_step = sequence.get('next_step', s.next_step)
-        #             s.type = sequence.get('next_step', s.type)
-        #             s.save()
-        #             keep_sequences.append(s.id)
-        #         else:
-        #             s = Sequence.objects.create(**sequence, campaign=instance)
-        #             keep_sequences.append(s.id)
-        
-        # for sequence in instance.sequences:
-        #     if sequence.id not in keep_sequences:
-        #         sequence.delete()
         return instance
-
-
 class CampaignCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Campaign
@@ -75,8 +77,3 @@ class CampaignCreateSerializer(serializers.ModelSerializer):
         
     def create(self, validateData):
         return Campaign.objects.create_campaign(**validateData)
-
-# class CampaignsGetSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Campaign
-#         fields=['name','description']
