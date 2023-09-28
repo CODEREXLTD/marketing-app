@@ -21,3 +21,9 @@ export const addCampaign = (campaigns) => {
         payload : campaigns
     };
 };
+export function registerStepType(stepType) {
+    return {
+        type: "REGISTER_STEP_TYPE",
+        stepType,
+    };
+}
