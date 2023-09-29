@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAuth } from '../core/Auth'
@@ -26,7 +26,7 @@ const initialValues = {
 
 export function Login() {
     const [loading, setLoading] = useState(false)
-    const {saveAuth, setCurrentUser} = useAuth()
+    const {auth, saveAuth, setCurrentUser} = useAuth()
 
     const formik = useFormik({
         initialValues,
@@ -46,6 +46,40 @@ export function Login() {
             }
         },
     })
+
+    const refreshToken = async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/user/refresh-token/', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({refresh:auth?.refreshToken})
+        })
+       
+        const data = await response.json()
+        if (response.status === 200) {
+            setAuthTokens(data)
+            setUser(jwtDecode(data.access))
+            localStorage.setItem('authTokens',JSON.stringify(data))
+        } else {
+            logoutUser()
+        }
+
+        if(loading){
+            setLoading(false)
+        }
+    }
+
+    useEffect(()=>{
+        const REFRESH_INTERVAL = 1000 * 60 * 19;
+        const interval = setInterval(()=>{
+            if(auth){
+                refreshToken()
+            }
+        }, REFRESH_INTERVAL)
+        return () => clearInterval(interval)
+
+    },[auth])
 
     return (
         <form

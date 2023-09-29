@@ -11,7 +11,7 @@ const CampaignDetails: FC = () => {
     const stepper = useRef<StepperComponent | null>(null);
     const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
     const [initValues] = useState<ICreateAccount>(inits);
-    const [isSubmitButton, setSubmitButton] = useState(false);
+    const [isSubmitButton, setSubmitButton] = useState(true);
 
     const loadStepper = () => {
         stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);

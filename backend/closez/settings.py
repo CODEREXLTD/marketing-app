@@ -51,8 +51,10 @@ INSTALLED_APPS = [
     'authentication',
     'campaigns',
     'sendEmail',
+    'settings',
     'rest_framework_simplejwt',
     'django_celery_beat',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -156,8 +158,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": False,
-
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 
     "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
@@ -185,19 +187,20 @@ CORS_ALLOWED_ORIGINS = [
 CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_RESULT_BACKEND = "redis://redis:6379"
 
-
 CELERY_BEAT_SCHEDULE = {
     "schedule_campaigns": {
         "task": "campaigns.tasks.schedule_campaigns",
         "schedule": crontab(minute="*/1"),
     }
 }
+
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "sandbox.smtp.mailtrap.io"
 EMAIL_USE_TLS = True 
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "asmnasim6629@gmail.com"
-EMAIL_HOST_PASSWORD = "bdjdunzjfvyfuhpp"
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "29707a1b8fa868"
+EMAIL_HOST_PASSWORD = "2be4a79bb86231"
 
 
 # CORS_ALLOWED_ORIGINS = [
