@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSteps,
@@ -12,6 +12,7 @@ const EmailChannel: FC = () => {
   const getAllStep = useSelector(getSteps);
   const getStepSequence = useSelector(getStepsSequence);
   const selectedStepIndex = useSelector(getStepIndex);
+  const [inserted, setInserted] = useState(false)
   // console.log(getStepSequence)
   const dispatch = useDispatch();
   const onInsert = (step) => {
@@ -35,12 +36,23 @@ const EmailChannel: FC = () => {
       };
     }
     dispatch(addSequence(stepData));
+    setInserted(!inserted)
   };
 
 
   const onRemove = (e, index) => {
     e.preventDefault();
     dispatch(removeSequence(index));
+    if(getStepSequence[index + 1]){
+       let data = getStepSequence[index+1];
+      dispatch(selectStep(data, index));
+    }else{
+      if(getStepSequence[index - 1 ]){
+        let data = getStepSequence[index-1];
+      dispatch(selectStep(data, index));
+      }
+    }
+
   };
 
   /**
@@ -60,10 +72,11 @@ const EmailChannel: FC = () => {
       dispatch(selectStep(lastIndex, getStepSequence.length - 1));
     } else {
       let lastIndex = getStepSequence[0];
-      dispatch(selectStep(lastIndex, 0));
+      if(lastIndex){
+        dispatch(selectStep(lastIndex, 0));
+      }
     }
-  }, [getStepSequence]);
-
+  }, [inserted]);
   return (
     <div className="w-100 email-channels">
       <div className="d-flex flex-column flex-lg-row">
@@ -91,18 +104,21 @@ const EmailChannel: FC = () => {
             <div className="card-body">
               <ul className="steps-wrapper">
                 {getStepSequence.map((step, index) => (
-                  <li className={`single-step ${selectedStepIndex == index ? "active" : ""}`} key={index} onClick={() => handleStep(step,index)}>
-                    <div className="step-card">
-                      <div className="step-name">
-                        <p>{step.title}</p>
-                        <div style={{ flexGrow: 1 }}></div>
-                        <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
-                          <i className="fa fa-trash"></i>
-                        </a>
-                      </div>
-                      <div className="step-body">`Email Subject`</div>
+                    <div key={index} className={`single-step ${selectedStepIndex == index ? "active" : ""}`}>
+                       <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
+                            <i className="fa fa-trash" style={{ color: 'red' }}></i>
+                       </a>
+                      <li  onClick={() => handleStep(step,index)}>
+                        <div className="step-card">
+                            <div className="step-name">
+                              <p>{step.title} {index+1}</p>
+                              <div style={{ flexGrow: 1 }}></div>
+                            </div>
+                            <div className="step-body">`Email Subject`</div>
+                        </div>
+                      </li>
                     </div>
-                  </li>
+
                 ))}
               </ul>
 

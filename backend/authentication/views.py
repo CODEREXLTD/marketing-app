@@ -46,21 +46,8 @@ class UserVerifyView(APIView):
     def post(self, request):
         refresh_token = request.data.get('refresh')
         refresh = RefreshToken(refresh_token)
-        access_token = str(refresh.access_token)
-        # refresh_request = HttpRequest()
-        # refresh_request.method = 'POST'
-        # refresh_request._body = request.body
-        # # Custom view to refresh an access token using a valid refresh token
-        # refresh_view = TokenRefreshView.as_view()
-        # response = refresh_view(refresh_request)
-        
-        # if response.status_code == status.HTTP_200_OK:
-        #     return Response({
-        #         'token': response.data['access'],
-        #         'refreshToken': response.data['refresh']
-        #     })
-        
-        return Response({"token": access_token}, status=status.HTTP_200_OK)
+        access_token = str(refresh.access_token)        
+        return Response({"token": access_token, 'refreshToken': str(refresh)}, status=status.HTTP_200_OK)
     
 
 class UserLoginView(APIView):
