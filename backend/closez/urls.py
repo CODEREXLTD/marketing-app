@@ -29,4 +29,5 @@ urlpatterns = [
     path('api/user/', include('authentication.urls')),
     path('api/', include('campaigns.urls')),
     path('api/', include('sendEmail.urls')),
+    path('api/', include('settings.urls')),
 ]
