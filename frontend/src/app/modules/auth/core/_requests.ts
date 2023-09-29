@@ -3,7 +3,8 @@ import { AuthModel, UserModel } from './_models';
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/user/verify-token/`
+export const GET_USER_BY_ACCESS_TOKEN_URL = `${API_URL}/user/verify-token/`
+export const REFRESH_TOKEN_URL = `${API_URL}/user/refresh-token/`
 export const LOGIN_URL = `${API_URL}/user/login/`
 export const REGISTER_URL = `${API_URL}/user/register/`
 export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
@@ -86,5 +87,23 @@ export function getUserByToken(token: string): Promise<any> {
         }
     };
     
-    return axios.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL, config);
+    return axios.get<UserModel>(GET_USER_BY_ACCESS_TOKEN_URL, config);
+}
+
+/**
+ * Refreshes an authentication token by sending a POST request to the refresh token endpoint.
+ *
+ * @param {string} token - The authentication token to be refreshed.
+ *
+ * @returns {Promise<any>} A Promise that resolves with the refreshed token or relevant data
+ *                        when the request is successful, or rejects with an error if the request fails.
+ */
+export function refreshAuthToken(token: string): Promise<any> {    
+    const config = {
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    };
+    
+    return axios.post(REFRESH_TOKEN_URL, token , config);
 }

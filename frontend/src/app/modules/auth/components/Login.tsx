@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAuth } from '../core/Auth'
-import { getUserByToken, login } from '../core/_requests'
+import { getUserByToken, login, refreshAuthToken } from '../core/_requests'
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -48,23 +48,10 @@ export function Login() {
     })
 
     const refreshToken = async () => {
-        const response = await fetch('http://127.0.0.1:8000/api/user/refresh-token/', {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({refresh:auth?.refreshToken})
-        })
-       
-        const data = await response.json()
-        if (response.status === 200) {
-            setAuthTokens(data)
-            setUser(jwtDecode(data.access))
-            localStorage.setItem('authTokens',JSON.stringify(data))
-        } else {
-            logoutUser()
-        }
-
+        const data = await refreshAuthToken(JSON.stringify({refresh:auth?.refreshToken}));  
+        saveAuth(data)
+        const {data: user} = await getUserByToken(data?.token)
+        setCurrentUser(user)
         if(loading){
             setLoading(false)
         }
@@ -79,6 +66,7 @@ export function Login() {
         }, REFRESH_INTERVAL)
         return () => clearInterval(interval)
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[auth])
 
     return (
