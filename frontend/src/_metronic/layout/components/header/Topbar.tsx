@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
-import {KTIcon} from '../../../helpers'
-import {ThemeModeSwitcher} from '../../../partials'
+import { FC } from 'react'
+import { KTIcon } from '../../../helpers'
 
 const Topbar: FC = () => (
   <div className='d-flex flex-shrink-0'>
@@ -33,26 +32,8 @@ const Topbar: FC = () => (
       </a>
     </div>
     {/* end::Create app */}
-
-    {/* begin::Theme mode */}
-    <div className='d-flex align-items-center  ms-3'>
-      <ThemeModeSwitcher toggleBtnClass=' flex-center bg-body btn-color-gray-600 btn-active-color-primary h-40px' />
-    </div>
-    {/* end::Theme mode */}
-
-    {/* CHAT */}
-    <div className='d-flex align-items-center ms-3'>
-      {/* begin::Menu wrapper */}
-      <div
-        className='btn btn-icon btn-primary w-40px h-40px pulse pulse-white'
-        id='kt_drawer_chat_toggle'
-      >
-        <KTIcon iconName='message-text-2' className='fs-2' />
-        <span className='pulse-ring' />
-      </div>
-      {/* end::Menu wrapper */}
-    </div>
   </div>
 )
 
-export {Topbar}
+export { Topbar }
+

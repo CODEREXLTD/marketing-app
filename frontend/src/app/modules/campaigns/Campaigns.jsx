@@ -1,10 +1,9 @@
-import {useEffect} from 'react'
-import {useIntl} from 'react-intl'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import { useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import { PageTitle } from '../../../_metronic/layout/core';
 import {
-  CampaignTable,
-} from './component/Table'
-
+  CampaignTable
+} from './components/Table';
 const dashboardBreadCrumbs = [
     {
       title: 'Home',
@@ -13,7 +12,6 @@ const dashboardBreadCrumbs = [
       isActive: false,
     },
   ];
-
 const CampaignPage = () => {
   useEffect(() => {
     // We have to show toolbar only for dashboard page
@@ -52,4 +50,5 @@ const CampaignWrapper = () => {
   )
 }
 
-export {CampaignWrapper}
+export { CampaignWrapper };
+

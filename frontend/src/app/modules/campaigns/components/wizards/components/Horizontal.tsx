@@ -1,15 +1,15 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
-import {Step1} from './wizards/components/steps/Step1'
-import {Step2} from './wizards/components/steps/Step2'
-import {Step3} from './wizards/components/steps/Step3'
-import {Step4} from './wizards/components/steps/Step4'
-import {Step5} from './wizards/components/steps/Step5'
-import {KTIcon} from '../../../../_metronic/helpers'
-import {StepperComponent} from '../../../../_metronic/assets/ts/components'
-import {Form, Formik, FormikValues} from 'formik'
-import {createAccountSchemas, ICreateAccount, inits} from './wizards/components/CreateAccountWizardHelper'
+import { Form, Formik, FormikValues } from 'formik'
+import { FC, useEffect, useRef, useState } from 'react'
+import { StepperComponent } from '../../../../../../_metronic/assets/ts/components'
+import { KTIcon } from '../../../../../../_metronic/helpers'
+import { createAccountSchemas, ICreateAccount, inits } from './CreateAccountWizardHelper'
+import { EmailChannel } from './steps/EmailChannel'
+import { Step1 } from './steps/Step1'
+import { Step2 } from './steps/Step2'
+import { Step4 } from './steps/Step4'
+import { Step5 } from './steps/Step5'
 
-const CampaignDetails: FC = () => {
+const Horizontal: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
@@ -99,7 +99,7 @@ const CampaignDetails: FC = () => {
                 </div>
 
                 <div data-kt-stepper-element='content'>
-                  <Step3 />
+                  <EmailChannel />
                 </div>
 
                 <div data-kt-stepper-element='content'>
@@ -142,4 +142,5 @@ const CampaignDetails: FC = () => {
   )
 }
 
-export {CampaignDetails}
+export { Horizontal }
+

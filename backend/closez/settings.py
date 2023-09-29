@@ -10,12 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
-from celery.schedules import crontab
 
 from dotenv import load_dotenv
-import os
+
+from celery.schedules import crontab
 
 load_dotenv()
 
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'campaigns',
+    'sendEmail',
     'rest_framework_simplejwt',
     'django_celery_beat',
 ]
@@ -169,7 +171,6 @@ SIMPLE_JWT = {
 
     "JTI_CLAIM": "jti",
 }
-
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     'http://localhost:3000'
@@ -187,3 +188,18 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(minute="*/1"),
     }
 }
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True 
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "asmnasim6629@gmail.com"
+EMAIL_HOST_PASSWORD = "bdjdunzjfvyfuhpp"
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:8000",
+#     'http://localhost:3000'
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
+
+
