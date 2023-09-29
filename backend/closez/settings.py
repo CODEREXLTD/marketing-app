@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+from celery.schedules import crontab
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +50,7 @@ INSTALLED_APPS = [
     'authentication',
     'campaigns',
     'rest_framework_simplejwt',
+    'django_celery_beat',
 ]
 
 AUTH_USER_MODEL = 'authentication.User'
@@ -86,11 +94,11 @@ WSGI_APPLICATION = 'closez.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
+        "NAME": os.environ.get('DB_NAME'),
+        "USER": os.environ.get('DB_USER'),
+        "PASSWORD": os.environ.get('DB_PASS'),
+        "HOST": os.environ.get('HOST'),
+        "PORT": 5432,
     }
 }
 
@@ -161,9 +169,20 @@ SIMPLE_JWT = {
 
     "JTI_CLAIM": "jti",
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8000",
+    'http://localhost:3000'
+]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://127.0.0.1:8000",
-#     'http://localhost:3000'
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+
+# Celery settings
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
+
+CELERY_BEAT_SCHEDULE = {
+    "schedule_campaigns": {
+        "task": "campaigns.tasks.schedule_campaigns",
+        "schedule": crontab(minute="*/1"),
+    }
+}

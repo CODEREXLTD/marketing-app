@@ -1,28 +1,14 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
 
-class CampaignManager(BaseUserManager):
-    def create_campaign(self, name, user_id, description='', status='draft', isActive=False, scheduled_at=''):
-        campaign = self.model(
-            name=name,
-            description=description,
-            status=status,
-            isActive=isActive,
-            scheduled_at=scheduled_at,
-            user_id=user_id,
-        )
-        campaign.save(using=self._db)
-        return campaign
-
 # Campaign model
-
-
 class Campaign(models.Model):
     STATUS_CHOICES = (
         ('draft', 'Draft'),
         ('published', 'Published'),
         ('completed', 'Completed'),
+        ('scheduled', 'Scheduled'),
+        ('running', 'Running'),
     )
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -36,12 +22,9 @@ class Campaign(models.Model):
     scheduled_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def _str_(self):
         return self.name
-
-    @property
-    def Sequence(self):
-        return self.sequence_set.all()
 
 
 # Sequence model
