@@ -15,6 +15,14 @@ export const setCampaign = (campaigns) => {
         payload : campaigns
     };
 };
+
+export const setSingleCampaign = (campaign) => {
+    return {
+        type : 'SET_SINGLE_CAMPAIGN',
+        payload : campaign
+    };
+};
+
 export const addCampaign = (campaigns) => {
     return {
         type : 'ADD_CAMPAIGN',

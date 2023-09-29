@@ -1,8 +1,14 @@
 
 import { Form, Formik, FormikValues } from 'formik';
 import { FC, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setSingleCampaign } from '../../../../redux/actions';
+import { getCampaign, getStepsSequence } from '../../../../redux/selectors';
 import { StepperComponent } from '../../../../_metronic/assets/ts/components';
 import { KTIcon } from '../../../../_metronic/helpers';
+import { useAuth } from '../../auth';
+import { fetchCampaign, saveCampaignSequence } from '../core/_requests';
 import { createAccountSchemas, ICreateAccount, inits } from './wizards/components/CreateAccountWizardHelper';
 import { EmailChannel } from './wizards/components/steps/EmailChannel';
 
@@ -12,7 +18,12 @@ const CampaignDetails: FC = () => {
     const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
     const [initValues] = useState<ICreateAccount>(inits);
     const [isSubmitButton, setSubmitButton] = useState(true);
-
+    const getStepSequence = useSelector(getStepsSequence);
+    const campaign = useSelector(getCampaign);
+    const { auth } = useAuth();
+    const { id } = useParams();
+    const dispatch = useDispatch();    
+    
     const loadStepper = () => {
         stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
     };
@@ -30,7 +41,7 @@ const CampaignDetails: FC = () => {
     const prevStep = () => {
         if (!stepper.current) {
             return;
-        }
+        }        
 
         const currentStepIndex = stepper.current.currentStepIndex;
         if (currentStepIndex > 1) {
@@ -38,18 +49,20 @@ const CampaignDetails: FC = () => {
         }
     };
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
-    if (!stepper.current) {
-      return;
-    }
+    const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+        if (!stepper.current) {
+            return;
+        }
 
-    if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
-      goToStep(stepper.current.currentStepIndex + 1);
-    } else {
-      goToStep(1);
-      actions.resetForm();
-    }
-  };
+        const response = saveCampaignSequence( getStepSequence, campaign, auth?.token );
+
+        if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
+            goToStep(stepper.current.currentStepIndex + 1);
+        } else {
+            goToStep(1);
+            actions.resetForm();
+        }
+    };
 
   useEffect(() => {
     if (!stepperRef.current) {
@@ -58,6 +71,17 @@ const CampaignDetails: FC = () => {
 
     loadStepper();
   }, [stepperRef]);
+
+  useEffect( () => {
+    // declare the data fetching function
+    const fetchData = async () => {
+        const response = await fetchCampaign(id);  
+        dispatch(setSingleCampaign(response));      
+    }
+    // call the function
+    fetchData()
+  }, [id])
+  
 
   return (
     <div className="card">

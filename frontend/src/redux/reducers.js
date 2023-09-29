@@ -20,10 +20,15 @@ const rootReducer = (state = initialState, action) => {
         counter: state.counter - 1,
       };
     case "SET_CAMPAIGN":
-      return {
-        ...state,
-        campaigns: action.payload,
-      };
+        return {
+            ...state,
+            campaigns: action.payload,
+        };
+    case "SET_SINGLE_CAMPAIGN":
+        return {
+            ...state,
+            campaign: action.payload,
+        };
     case "ADD_CAMPAIGN":
       return {
         ...state,
@@ -61,7 +66,6 @@ const rootReducer = (state = initialState, action) => {
       case 'UPDATE_EMAIL_STEP':
          let inputData = action.data;
          let iname = inputData.target.name;
-         console.log(iname)
           let selectedStep = action.selectedStep;
           let selectedStepIndex = action.index; // Assuming action.index holds the correct index
           let allSeqStep = [...state.sequence]; // Create a shallow copy of the sequence array

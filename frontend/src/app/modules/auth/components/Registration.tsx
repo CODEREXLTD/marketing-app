@@ -91,7 +91,7 @@ export function Registration() {
         return () => clearInterval(interval)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[auth])
+    },[])
 
     useEffect(() => {
         PasswordMeterComponent.bootstrap()

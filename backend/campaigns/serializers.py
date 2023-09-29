@@ -1,10 +1,12 @@
-from typing_extensions import Required
-from rest_framework import serializers
-from .models import Campaign, Sequence, SequenceEmailChannel
-from django.db import connection
-from rest_framework.response import Response
-from rest_framework import status
 import logging
+
+from django.db import connection
+from rest_framework import serializers, status
+from rest_framework.response import Response
+from typing_extensions import Required
+
+from .models import Campaign, Sequence, SequenceEmailChannel
+
 logger = logging.getLogger(__name__)
 
 # Serializer for the SequenceEmailChannel model

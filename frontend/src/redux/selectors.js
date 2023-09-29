@@ -2,6 +2,11 @@ export const selectCounter = state => state.counter;
 export function getAllCampaign(state){
     return state.campaigns;
 }
+
+export function getCampaign(state){
+    return state.campaign;
+}
+
 export function getSteps(state){
     return state.campaignStep;
 }

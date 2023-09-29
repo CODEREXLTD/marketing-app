@@ -1,47 +1,45 @@
-import React, { FC, useCallback, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getSteps,
-  getStepsSequence,
-  getStepIndex
-} from "../../../../../../../redux/selectors";
 import { addSequence, removeSequence, selectStep } from "../../../../../../../redux/actions";
+import {
+    getStepIndex, getSteps,
+    getStepsSequence
+} from "../../../../../../../redux/selectors";
 import { StepContent } from "../../../../channels/content";
 
 const EmailChannel: FC = () => {
-  const getAllStep = useSelector(getSteps);
-  const getStepSequence = useSelector(getStepsSequence);
-  const selectedStepIndex = useSelector(getStepIndex);
-  // console.log(getStepSequence)
-  const dispatch = useDispatch();
-  const onInsert = (step) => {
-    let stepData = {
-      step_id: (Math.random() + 1).toString(36).substring(7),
-      key: step.key,
-      type: step.type,
-      title: step.title,
-      channel: {},
-      next_step: "",
+    const getAllStep = useSelector(getSteps);
+    const getStepSequence = useSelector(getStepsSequence);        
+    const selectedStepIndex = useSelector(getStepIndex);
+    const dispatch = useDispatch();
+    const onInsert = (step) => {
+        let stepData = {
+            step_id: (Math.random() + 1).toString(36).substring(7),
+            key: step.key,
+            type: step.type,
+            title: step.title,
+            channel: {},
+            next_step: "",
+        };
+
+        if (step.key === "email") {
+            stepData = {
+                ...stepData,
+                channel: {
+                    subject: "",
+                    sender_email: "",
+                    body: "",
+                    preview_text:"This is temporary text. We HAVE TO CHANGE it before go PRODUCTION.",
+                },
+            };
+        }
+        dispatch(addSequence(stepData));
     };
 
-    if (step.key === "email") {
-      stepData = {
-        ...stepData,
-        channel: {
-          subject: "",
-          sender_email: "",
-          body: "",
-        },
-      };
-    }
-    dispatch(addSequence(stepData));
-  };
-
-
-  const onRemove = (e, index) => {
-    e.preventDefault();
-    dispatch(removeSequence(index));
-  };
+    const onRemove = (e, index) => {
+        e.preventDefault();
+        dispatch(removeSequence(index));
+    };
 
   /**
    * Active the current step
