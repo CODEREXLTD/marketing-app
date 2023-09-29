@@ -31,17 +31,12 @@ class EmailViewSet(viewsets.ModelViewSet):
             from_email,
             recipient_list
         )
-        smtpSettings = SmtpSettings.objects.filter(user=user_id).first()
-        if smtpSettings:
-            serializer = SmtpSettingsSerializer(smtpSettings)
-            try:
-                send_mass_mail( (formatted_data,) )
-                return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
-            except:
-                return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            send_mass_mail( (formatted_data,) )
+            return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
 
-        return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
-        
     @action(detail=False)
     def send_email(self, request):
         user_id = request.data.get('user_id', '')
