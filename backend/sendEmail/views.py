@@ -43,7 +43,7 @@ class EmailViewSet(viewsets.ModelViewSet):
                     use_tls=True,
                 )
 
-                send_mass_mail( (formatted_data,), False, connection)
+                send_mass_mail( (formatted_data,), False, None)
                 return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
             except:
                 return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
@@ -65,6 +65,7 @@ class EmailViewSet(viewsets.ModelViewSet):
                     password=smtpSettings.host_password,
                     use_tls=True,
                 )
+                logger.error(connection)
                 send_mail( subject, message, from_email, [recipient_list], False, None)
                 return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
             except:
