@@ -107,7 +107,7 @@ const EmailChannel: FC = () => {
                 {getStepSequence.map((step, index) => (
                     <div key={index} className={`single-step ${selectedStepIndex == index ? "active" : ""}`}>
                        <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
-                            <i className="fa fa-trash" style={{ color: 'red' }}></i>
+                            <i className="fa fa-trash" style={{ color: 'red' ,marginTop:'15px'}}></i>
                        </a>
                       <div  onClick={() => handleStep(step,index)}>
                         <div className="step-card">
