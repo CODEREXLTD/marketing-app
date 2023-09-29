@@ -1,39 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react'
-import {KTIcon, toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {AddCampaign} from "./AddCampaign";
+import React, { useEffect, useState } from 'react';
+import { KTIcon } from '../../../../_metronic/helpers';
+import { AddCampaign } from "./AddCampaign";
 
-import axios from "axios";
+import { formatDistanceToNow } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { setCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
-import { formatDistanceToNow } from 'date-fns';
-import {Link} from "react-router-dom";
-type Props = {
-  className: string
-}
+import { fetchAllCampaigns } from '../core/_requests';
+type Props = { className: string }
 const CampaignTable: React.FC<Props> = ({className}) => {
+    const campaigns = useSelector(getAllCampaign);
+    const dispatch = useDispatch();
+    const [isLoad, setLoad] = useState(false);
 
-  const campaigns = useSelector(getAllCampaign);
-  const dispatch = useDispatch();
-  const [isLoad, setLoad] = useState(false);
+    const fetchCampaign = async () => {
+        try {
+            setLoad(true);
+            const getData = await fetchAllCampaigns();
+            dispatch(setCampaign(getData));
+        } catch (error) {
+            // Handle errors here
+        } finally {
+            setLoad(false);
+        }
+    };
 
-  const fetchCampaign = async () => {
-    try {
-      setLoad(true);
-      const response = await axios.get("http://127.0.0.1:8000/api/campaign/");
-      const getData = response.data;
-      dispatch(setCampaign(getData));
-    } catch (error) {
-      // Handle errors here
-    } finally {
-      setLoad(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCampaign();
-  }, []); // Add the empty dependency array
+    useEffect(() => {
+        fetchCampaign();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    
   const timeDifferance =(time) =>{
     const date = new Date(time);
 
@@ -177,4 +175,5 @@ const CampaignTable: React.FC<Props> = ({className}) => {
   )
 }
 
-export {CampaignTable}
+export { CampaignTable };
+
