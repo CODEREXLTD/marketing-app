@@ -17,7 +17,9 @@ export function getStepType(state, key){
     const emailChannel = state.campaignStep.find(channel => channel.key === key);
     return emailChannel ?? undefined;
 }
-
 export function getSelectedStepType(state){
     return getStepType(state, state.selectedStep?.key);
+}
+export function getStepIndex(state, key){
+    return state.selectedStepIndex;
 }
