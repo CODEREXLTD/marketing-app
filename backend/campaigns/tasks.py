@@ -16,10 +16,6 @@ logger = logging.getLogger(__name__)
 @shared_task
 def schedule_campaigns():
     current_datetime = timezone.now()
-    campaigns = Campaign.objects.filter(
-        scheduled_at__lte=current_datetime,
-    )
-
     campaigns = Campaign.objects.filter(scheduled_at__lte=current_datetime,status='running',isActive=True)
     serialized_campaigns = []
     for campaign in campaigns:
@@ -48,7 +44,6 @@ def schedule_campaigns():
                 email_channel_data = sequence['channel']
                 from_email = settings.EMAIL_HOST_USER
                 recipient_list = ['nasim@coderex.co','shahin@coderex.co','sadi@coderex.co','tohin@coderex.co']
-                logger.error(email_channel_data)
                 formatted_data = (
                     email_channel_data['subject'],
                     email_channel_data['body'],
