@@ -37,7 +37,6 @@ class EmailViewSet(viewsets.ModelViewSet):
         except:
             return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
 
-    
     @action(detail=False)
     def send_email(self, request):
         user_id = request.data.get('user_id', '')

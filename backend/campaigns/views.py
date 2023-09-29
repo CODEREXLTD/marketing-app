@@ -193,7 +193,6 @@ class CampaignViewSet(viewsets.ModelViewSet):
                     # If no sequence_id is provided, create a new sequence
                     sequence_data['campaign'] = campaign.id  # Associate with the campaign
                     sequence_serializer = SequenceSerializer(data=sequence_data)
-                    logger.error(sequence_serializer)
 
                 if sequence_serializer.is_valid():
                     sequence_serializer.save()
@@ -257,7 +256,6 @@ class CampaignViewSet(viewsets.ModelViewSet):
         campaign.delete()
 
         return Response({"message": "Campaign deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
-
     
 
 class SequenceViewSet(viewsets.ModelViewSet):
