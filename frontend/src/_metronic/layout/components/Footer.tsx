@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
 import clsx from 'clsx'
-import {useLayout} from '../core'
+import { FC } from 'react'
+import { useLayout } from '../core'
 
 const Footer: FC = () => {
   const {classes} = useLayout()
@@ -14,11 +14,11 @@ const Footer: FC = () => {
         <div className='text-dark order-2 order-md-1'>
           <span className='text-gray-400 fw-bold me-1'>Created by</span>
           <a
-            href='Keenthemes.com'
+            href='https://www.coderex.co/'
             target='_blank'
             className='text-muted text-hover-primary fw-bold me-2 fs-6'
           >
-            Keenthemes
+            Code Rex
           </a>
         </div>
         {/*end::Copyright*/}
@@ -26,19 +26,19 @@ const Footer: FC = () => {
         {/*begin::Menu*/}
         <ul className='menu menu-gray-600 menu-hover-primary fw-bold order-1'>
           <li className='menu-item'>
-            <a href='https://keenthemes.com/metronic' target='_blank' className='menu-link px-2'>
+            <a href='#' target='_blank' className='menu-link px-2'>
               About
             </a>
           </li>
 
           <li className='menu-item'>
-            <a href='https://keenthemes.com/metronic' target='_blank' className='menu-link px-2'>
+            <a href='#' target='_blank' className='menu-link px-2'>
               Support
             </a>
           </li>
 
           <li className='menu-item'>
-            <a href='https://keenthemes.com/metronic' target='_blank' className='menu-link px-2'>
+            <a href='#' target='_blank' className='menu-link px-2'>
               Purchase
             </a>
           </li>
@@ -50,4 +50,5 @@ const Footer: FC = () => {
   )
 }
 
-export {Footer}
+export { Footer }
+

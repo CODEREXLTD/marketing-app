@@ -1,5 +1,5 @@
 import {
-  createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useRef, useState
+    createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useRef, useState
 } from 'react'
 import { WithChildren } from '../../../../_metronic/helpers'
 import { LayoutSplashScreen } from '../../../../_metronic/layout/core'
@@ -54,41 +54,40 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
 }
 
 const AuthInit: FC<WithChildren> = ({children}) => {
-  const {auth, logout, setCurrentUser} = useAuth()
-  const didRequest = useRef(false)
-  const [showSplashScreen, setShowSplashScreen] = useState(true)
-  // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
-  useEffect(() => {    
-    const requestUser = async (apiToken: string) => {
-      try {
-        if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
-          if (data) {
-            setCurrentUser(data)
-          }
+    const {auth, logout, setCurrentUser} = useAuth()
+    const didRequest = useRef(false)
+    const [showSplashScreen, setShowSplashScreen] = useState(true)
+    // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
+    useEffect(() => {    
+        const requestUser = async (apiToken: string) => {
+            try {
+                    if (!didRequest.current) {
+                        const {data} = await getUserByToken(apiToken)
+                    if (data) {
+                        setCurrentUser(data)
+                    }
+                }
+            } catch (error) {
+                if (!didRequest.current) {
+                    logout()
+                }
+            } finally {
+                setShowSplashScreen(false)
+            }
+
+            return () => (didRequest.current = true)
         }
-      } catch (error) {
-        console.error(error)
-        if (!didRequest.current) {
-          logout()
+        
+        if (auth && auth?.token) {
+            requestUser(auth?.token)
+        } else {
+            logout()
+            setShowSplashScreen(false)
         }
-      } finally {
-        setShowSplashScreen(false)
-      }
+        // eslint-disable-next-line
+    }, [])
 
-      return () => (didRequest.current = true)
-    }
-
-    if (auth && auth?.token) {
-      requestUser(auth?.token)
-    } else {
-      logout()
-      setShowSplashScreen(false)
-    }
-    // eslint-disable-next-line
-  }, [])
-
-  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
+    return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }
 
 export { AuthProvider, AuthInit, useAuth }

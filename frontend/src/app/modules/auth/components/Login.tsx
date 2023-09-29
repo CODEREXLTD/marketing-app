@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAuth } from '../core/Auth'
@@ -20,13 +20,13 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-    email: 'admin@demo.com',
-    password: 'demo',
+    email: '',
+    password: '',
 }
 
 export function Login() {
     const [loading, setLoading] = useState(false)
-    const {saveAuth, setCurrentUser} = useAuth()
+    const {auth, saveAuth, setCurrentUser} = useAuth()
 
     const formik = useFormik({
         initialValues,
@@ -35,13 +35,10 @@ export function Login() {
             setLoading(true)
             try {
                 const {data: auth} = await login(values.email, values.password)
-                console.log(auth);
-                
                 saveAuth(auth)
                 const {data: user} = await getUserByToken(auth?.token)
                 setCurrentUser(user)
             } catch (error) {
-                console.error(error)
                 saveAuth(undefined)
                 setStatus('The login details are incorrect')
                 setSubmitting(false)
@@ -49,6 +46,40 @@ export function Login() {
             }
         },
     })
+
+    const refreshToken = async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/user/refresh-token/', {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({refresh:auth?.refreshToken})
+        })
+       
+        const data = await response.json()
+        if (response.status === 200) {
+            setAuthTokens(data)
+            setUser(jwtDecode(data.access))
+            localStorage.setItem('authTokens',JSON.stringify(data))
+        } else {
+            logoutUser()
+        }
+
+        if(loading){
+            setLoading(false)
+        }
+    }
+
+    useEffect(()=>{
+        const REFRESH_INTERVAL = 1000 * 60 * 19;
+        const interval = setInterval(()=>{
+            if(auth){
+                refreshToken()
+            }
+        }, REFRESH_INTERVAL)
+        return () => clearInterval(interval)
+
+    },[auth])
 
     return (
         <form
@@ -89,7 +120,9 @@ export function Login() {
                 />
                 {formik.touched.email && formik.errors.email && (
                 <div className='fv-plugins-message-container'>
-                    <span role='alert'>{formik.errors.email}</span>
+                    <div className='fv-help-block'>
+                        <span role='alert'>{formik.errors.email}</span>
+                    </div>
                 </div>
                 )}
             </div>
@@ -115,7 +148,7 @@ export function Login() {
                 {formik.touched.password && formik.errors.password && (
                 <div className='fv-plugins-message-container'>
                     <div className='fv-help-block'>
-                    <span role='alert'>{formik.errors.password}</span>
+                        <span role='alert'>{formik.errors.password}</span>
                     </div>
                 </div>
                 )}
@@ -125,9 +158,9 @@ export function Login() {
             {/* begin::Wrapper */}
             <div className='d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8'><div />
                 {/* begin::Link */}
-                <Link to='/auth/forgot-password' className='link-primary'>
+                {/* <Link to='/auth/forgot-password' className='link-primary'>
                     Forgot Password ?
-                </Link>
+                </Link> */}
                 {/* end::Link */}
             </div>
             {/* end::Wrapper */}

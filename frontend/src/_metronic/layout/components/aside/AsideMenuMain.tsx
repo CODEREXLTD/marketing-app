@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
-import {useIntl} from 'react-intl'
-import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
-import {AsideMenuItem} from './AsideMenuItem'
+import { useIntl } from 'react-intl'
+import { AsideMenuItem } from './AsideMenuItem'
 
 export function AsideMenuMain() {
   const intl = useIntl()
@@ -12,6 +11,12 @@ export function AsideMenuMain() {
         to='/dashboard'
         icon='color-swatch'
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
+        fontIcon='bi-app-indicator'
+      />
+      <AsideMenuItem
+        to='/campaign'
+        icon='color-swatch'
+        title={intl.formatMessage({id: 'MENU.CAMPAIGN'})}
         fontIcon='bi-app-indicator'
       />
       {/*<AsideMenuItem to='/builder' icon='switch' title='Layout Builder' fontIcon='bi-layers' />*/}

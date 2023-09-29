@@ -1,14 +1,20 @@
-from django.shortcuts import render
-from rest_framework import viewsets
-from .models import Campaign, Sequence, SequenceEmailChannel
-from campaigns.serializers import CampaignSerializer, SequenceSerializer, SequenceEmailChannelSerializer, CampaignCreateSerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from campaigns.renderers import UserRenderer
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import status
 import logging
+
+from django.shortcuts import render
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from campaigns.renderers import UserRenderer
+from campaigns.serializers import (CampaignCreateSerializer,
+                                   CampaignSerializer,
+                                   SequenceEmailChannelSerializer,
+                                   SequenceSerializer)
+
+from .models import Campaign, Sequence, SequenceEmailChannel
+
 logger = logging.getLogger(__name__)
 # Create your views here.
 
@@ -147,7 +153,10 @@ class CampaignViewSet(viewsets.ModelViewSet):
                 "status": serializer.data["status"],
                 "isActive": serializer.data["isActive"],
                 "scheduled_at": serializer.data["scheduled_at"],
-                "user": serializer.data["user"]
+                "user": serializer.data["user"],
+                "id": campaign.id,
+                "created_at": campaign.created_at,
+                "updated_at": campaign.updated_at,
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

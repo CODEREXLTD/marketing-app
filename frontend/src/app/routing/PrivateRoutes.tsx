@@ -5,9 +5,10 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { WithChildren } from '../../_metronic/helpers'
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
+import { CampaignWrapper } from '../modules/campaigns/Campaigns'
+import { CampaignDetails } from '../modules/campaigns/components/CampaignDetails'
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
-import { MenuTestPage } from '../pages/MenuTestPage'
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -24,6 +25,8 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
+        <Route path='campaign' element={<CampaignWrapper />} />
+        <Route path='campaign/:id' element={<CampaignDetails />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         {/*<Route path='menu-test' element={<MenuTestPage />} />*/}
         {/* Lazy Modules */}
@@ -94,4 +97,5 @@ const SuspensedView: FC<WithChildren> = ({children}) => {
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>
 }
 
-export {PrivateRoutes}
+export { PrivateRoutes }
+
