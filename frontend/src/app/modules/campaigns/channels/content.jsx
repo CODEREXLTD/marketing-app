@@ -5,9 +5,8 @@ export function StepContent() {
 
     const selectedStep = useSelector(getSelectedStep);
     const selectedStepType = useSelector(getSelectedStepType);
-
-        if (!selectedStep) {
-        return <div className="no-step-selected message"><p>No step selected.</p></div>
+    if (!selectedStep) {
+    return <div className="no-step-selected message"><p>No step selected.</p></div>
     }
 
     if (!selectedStepType) {

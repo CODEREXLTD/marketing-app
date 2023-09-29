@@ -3,8 +3,11 @@ import { step as Linkedin } from "../app/modules/campaigns/channels/linkedin";
 
 const initialState = {
   counter: 0,
-  campaignStep: [Email, Linkedin],
-  sequence: [],
+  campaignStep: [
+      Email,
+      // Linkedin
+  ],
+  sequence: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,9 +49,21 @@ const rootReducer = (state = initialState, action) => {
       };
     case "REMOVE_SEQUENCE":    
       const index  = action.payload;
+      let allSequence =  [...state.sequence];
+      var previousStep = allSequence[index-1]
+      var nextStep = allSequence[index+1]
+        if(previousStep && nextStep){
+            previousStep.next_step = nextStep.step_id
+            allSequence[parseInt(index) - 1].next_step = allSequence[parseInt(index) + 1].step_id;
+        }
+        if(!nextStep){
+            allSequence[parseInt(index) - 1].next_step = ''
+        }
+        allSequence.splice(index, 1);
       return {
         ...state,
-        sequence: state.sequence.filter((_, i) => i !== index),
+        // sequence: state.sequence.filter((_, i) => i !== index),
+        sequence: allSequence,
       };
     case "SET_SELECTED_STEP":
       return {
@@ -56,26 +71,18 @@ const rootReducer = (state = initialState, action) => {
         selectedStep: action.value,
         selectedStepIndex: action.index,
       };
-
-      case 'SET_SELECTED_STEP':
-        return {
-            ...state,
-            selectedStep: action.value,
-            selectedStepIndex: action.index,
-        };
       case 'UPDATE_EMAIL_STEP':
          let inputData = action.data;
          let iname = inputData.target.name;
           let selectedStep = action.selectedStep;
-          let selectedStepIndex = action.index; // Assuming action.index holds the correct index
+          let selectedStepIndex = action.selectedStepIndex; // Assuming action.index holds the correct index
           let allSeqStep = [...state.sequence]; // Create a shallow copy of the sequence array
-
           if (selectedStep && selectedStep.channel ) {
               selectedStep.channel[iname] = inputData.target.value; // Assuming inputData.subject holds the value you want to set
           }
-
-          allSeqStep[selectedStepIndex] = selectedStep;
-
+          if( selectedStepIndex !== undefined){
+              allSeqStep[selectedStepIndex] = selectedStep;
+          }
           return {
               ...state,
               selectedStep: selectedStep,
