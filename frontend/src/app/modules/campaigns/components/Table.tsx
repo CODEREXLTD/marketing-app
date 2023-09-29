@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
-import { fetchAllCampaigns } from '../core/_requests';
+import { deleteCampaign, fetchAllCampaigns } from '../core/_requests';
 type Props = { className: string }
 const CampaignTable: React.FC<Props> = ({className}) => {
     const campaigns = useSelector(getAllCampaign);
@@ -26,6 +26,13 @@ const CampaignTable: React.FC<Props> = ({className}) => {
             setLoad(false);
         }
     };
+
+    const handleCampaignDelete = async (campaignId: any) => {
+        const response = await deleteCampaign( campaignId );
+        setLoad(true);
+        const getData = await fetchAllCampaigns();
+        dispatch(setCampaign(getData));
+    }
 
     useEffect(() => {
         fetchCampaign();
@@ -150,10 +157,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                     >
                       <KTIcon iconName='pencil' className='fs-3' />
                     </a>
-                    <a
-                      href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                    <a className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm' onClick={() => handleCampaignDelete(campaign?.id)}>
                       <KTIcon iconName='trash' className='fs-3' />
                     </a>
                   </div>

@@ -1,9 +1,9 @@
 import axios from "axios";
+import { ID } from "../../../../_metronic/helpers";
 
 const API_URL = process.env.REACT_APP_API_URL
 
-export const CAMPAIGN_CREATE_URL = `${API_URL}/campaigns/`
-export const CAMPAIGNS_FETCH_URL = `${API_URL}/campaigns/`
+export const CAMPAIGN_URL = `${API_URL}/campaigns/`;
 
 /**
  * Creates a new campaign by sending a POST request to the specified endpoint with the provided payload.
@@ -14,7 +14,7 @@ export const CAMPAIGNS_FETCH_URL = `${API_URL}/campaigns/`
  *                    or rejects with an error if the request fails.
  */
 export async function createCampaign( payload: any ): Promise<any> {  
-    return await axios.post(CAMPAIGN_CREATE_URL, payload, {
+    return await axios.post(CAMPAIGN_URL, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -28,11 +28,15 @@ export async function createCampaign( payload: any ): Promise<any> {
  *                        or rejects with an error if the request fails.
  */
 export async function fetchAllCampaigns(): Promise<any> {  
-    const response = await axios.get(CAMPAIGNS_FETCH_URL, {
+    const response = await axios.get(CAMPAIGN_URL, {
         headers: {
             'Content-Type': 'application/json',
         },
     });
 
     return response?.data;
+}
+
+export async function deleteCampaign( campaignID: ID ): Promise<any> {  
+    return await axios.delete(`${CAMPAIGN_URL}${campaignID}`);
 }
