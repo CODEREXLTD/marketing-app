@@ -14,7 +14,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     const campaigns = useSelector(getAllCampaign);
     const dispatch = useDispatch();
     const [isLoad, setLoad] = useState(false);
-
+    
     const fetchCampaign = async () => {
         try {
             setLoad(true);
@@ -39,7 +39,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-  const timeDifferance =(time) =>{
+  const timeDifference =(time) =>{
     const date = new Date(time);
 
     const timeAgo = formatDistanceToNow(date, { addSuffix: true });
@@ -116,7 +116,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                         {campaign.name}
                       </Link>
                       <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        {timeDifferance(campaign.created_at)}
+                        {timeDifference(campaign.created_at)}
                       </span>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                     {campaign.isActive ? "Active" : "Deactive"}
                   </a>
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                   {timeDifferance(campaign.updated_at)}
+                   {timeDifference(campaign.updated_at)}
                   </span>
                 </td>
                 <td className='text-end'>
