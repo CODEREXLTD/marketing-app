@@ -1,5 +1,4 @@
 import { step as Email } from "../app/modules/campaigns/channels/email-channel";
-import { step as Linkedin } from "../app/modules/campaigns/channels/linkedin";
 
 const initialState = {
   counter: 0,
@@ -7,7 +6,7 @@ const initialState = {
       Email,
       // Linkedin
   ],
-  sequence: []
+  sequence: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -27,6 +26,22 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             campaigns: action.payload,
         };
+    
+    case "SET_SEQUENCE":
+    const selectStep = action.payload
+    if(selectStep !== undefined){
+        return {
+            ...state,
+            sequence: action.payload,
+            selectedStep:  selectStep[0],
+            selectedStepIndex: 0,
+        };   
+    }
+    return {
+        ...state,
+        sequence: action.payload,
+    }; 
+   
     case "SET_SINGLE_CAMPAIGN":
         return {
             ...state,

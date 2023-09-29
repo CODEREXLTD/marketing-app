@@ -1,57 +1,59 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSequence, removeSequence, selectStep } from "../../../../../../../redux/actions";
+import { addSequence, removeSequence, selectStep, setSequence } from "../../../../../../../redux/actions";
 import {
+    getCampaign,
     getStepIndex, getSteps,
     getStepsSequence
 } from "../../../../../../../redux/selectors";
 import { StepContent } from "../../../../channels/content";
 
 const EmailChannel: FC = () => {
-  const getAllStep = useSelector(getSteps);
-  const getStepSequence = useSelector(getStepsSequence);
-  const selectedStepIndex = useSelector(getStepIndex);
-  const [inserted, setInserted] = useState(false)
-  // console.log(getStepSequence)
-  const dispatch = useDispatch();
-  const onInsert = (step) => {
-    let stepData = {
-      step_id: (Math.random() + 1).toString(36).substring(7),
-      key: step.key,
-      type: step.type,
-      title: step.title,
-      channel: {},
-      next_step: "",
+    const getAllStep = useSelector(getSteps);
+    const getStepSequence = useSelector(getStepsSequence);
+    const selectedStepIndex = useSelector(getStepIndex);
+    const campaign = useSelector(getCampaign);
+    
+    const [inserted, setInserted] = useState(false)
+    const dispatch = useDispatch();
+    const onInsert = (step) => {
+        let stepData = {
+            step_id: (Math.random() + 1).toString(36).substring(7),
+            key: step.key,
+            type: step.type,
+            title: step.title,
+            channel: {},
+            next_step: "",
+        };
+
+        if (step.key === "email") {
+            stepData = {
+                ...stepData,
+                channel: {
+                    subject: "",
+                    sender_email: "",
+                    body: "",
+                    preview_text: "This is TEMPORARY preview test. We HAVE TO CHANGE this before production."
+                },
+            };
+        }
+        dispatch(addSequence(stepData));
+        setInserted(!inserted)
     };
 
-    if (step.key === "email") {
-      stepData = {
-        ...stepData,
-        channel: {
-          subject: "",
-          sender_email: "",
-          body: "",
-        },
-      };
-    }
-    dispatch(addSequence(stepData));
-    setInserted(!inserted)
-  };
-
-  const onRemove = (e, index) => {
-    e.preventDefault();
-    dispatch(removeSequence(index));
-    if(getStepSequence[index + 1]){
-       let data = getStepSequence[index+1];
-      dispatch(selectStep(data, index));
-    }else{
-      if(getStepSequence[index - 1 ]){
-        let data = getStepSequence[index-1];
-      dispatch(selectStep(data, index));
-      }
-    }
-
-  };
+    const onRemove = (e, index) => {
+        e.preventDefault();
+        dispatch(removeSequence(index));
+        if(getStepSequence[index + 1]){
+            let data = getStepSequence[index+1];
+            dispatch(selectStep(data, index));
+        }else{
+            if(getStepSequence[index - 1 ]){
+                let data = getStepSequence[index-1];
+                dispatch(selectStep(data, index));
+            }
+        }
+    };
 
   /**
    * Active the current step
@@ -75,6 +77,11 @@ const EmailChannel: FC = () => {
       }
     }
   }, [inserted]);
+
+    useEffect(() => {
+        dispatch(setSequence(campaign?.sequences))
+    }, [campaign])
+  
 
   return (
     <div className="w-100 email-channels">
@@ -102,7 +109,7 @@ const EmailChannel: FC = () => {
           >
             <div className="card-body">
               <ul className="steps-wrapper">
-                {getStepSequence.map((step, index) => (
+                {getStepSequence?.map((step, index) => (
                     <div key={index} className={`single-step ${selectedStepIndex == index ? "active" : ""}`}>
                        <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
                             <i className="fa fa-trash" style={{ color: 'red' }}></i>
