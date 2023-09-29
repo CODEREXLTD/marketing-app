@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'campaigns',
+    'sendEmail',
     'rest_framework_simplejwt',
 ]
 
@@ -162,8 +163,18 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 }
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True 
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "asmnasim6629@gmail.com"
+EMAIL_HOST_PASSWORD = "bdjdunzjfvyfuhpp"
+
+
 # CORS_ALLOWED_ORIGINS = [
 #     "http://127.0.0.1:8000",
 #     'http://localhost:3000'
 # ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+
