@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'authentication',
     'campaigns',
     'sendEmail',
+    'settings',
     'rest_framework_simplejwt',
 ]
 
@@ -163,12 +164,13 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 }
 
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = "sandbox.smtp.mailtrap.io"
 EMAIL_USE_TLS = True 
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "asmnasim6629@gmail.com"
-EMAIL_HOST_PASSWORD = "bdjdunzjfvyfuhpp"
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "29707a1b8fa868"
+EMAIL_HOST_PASSWORD = "2be4a79bb86231"
 
 
 # CORS_ALLOWED_ORIGINS = [
