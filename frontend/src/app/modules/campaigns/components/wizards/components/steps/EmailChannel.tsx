@@ -22,6 +22,7 @@ const EmailChannel: FC = () => {
             key: step.key,
             type: step.type,
             title: step.title,
+            delay: step.delay,
             channel: {},
             next_step: "",
         };

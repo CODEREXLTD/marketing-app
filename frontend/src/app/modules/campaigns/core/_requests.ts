@@ -27,8 +27,8 @@ export async function createCampaign( payload: any ): Promise<any> {
  * @returns {Promise<any>} A Promise that resolves with the campaign data when the request is successful,
  *                        or rejects with an error if the request fails.
  */
-export async function fetchAllCampaigns(): Promise<any> {  
-    const response = await axios.get(CAMPAIGN_URL, {
+export async function fetchAllCampaigns( userID ): Promise<any> {              
+    const response = await axios.get(`${CAMPAIGN_URL}user/${userID}/`, {
         headers: {
             'Content-Type': 'application/json',
         },
@@ -89,7 +89,7 @@ export async function saveCampaignSequence( getStepSequence: object, { id, name,
  * @returns {Promise<any>} A Promise that resolves with the campaign details when the request is successful,
  *                        or rejects with an error if the request fails.
  */
-export async function fetchCampaign( campaignID: any, userID: any ): Promise<any> {  
+export async function fetchCampaign( campaignID: any, userID: any ): Promise<any> {      
     const response = await axios.get(`${CAMPAIGN_URL}${userID}/${campaignID}`, {
         headers: {
             'Content-Type': 'application/json',

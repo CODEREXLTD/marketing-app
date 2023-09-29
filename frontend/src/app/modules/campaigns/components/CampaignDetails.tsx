@@ -73,7 +73,7 @@ const CampaignDetails: FC = () => {
     loadStepper();
   }, [stepperRef]);
 
-  useEffect( () => {
+  useEffect( () => {    
     // declare the data fetching function
     const fetchData = async () => {
         const response = await fetchCampaign(id, currentUser?.id);                           

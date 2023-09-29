@@ -8,17 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
+import { useAuth } from '../../auth';
 import { deleteCampaign, fetchAllCampaigns } from '../core/_requests';
 type Props = { className: string }
 const CampaignTable: React.FC<Props> = ({className}) => {
     const campaigns = useSelector(getAllCampaign);
     const dispatch = useDispatch();
     const [isLoad, setLoad] = useState(false);
-    
+    const {currentUser} = useAuth();
+
     const fetchCampaign = async () => {
         try {
             setLoad(true);
-            const getData = await fetchAllCampaigns();
+            const getData = await fetchAllCampaigns(currentUser?.id);
             dispatch(setCampaign(getData));
         } catch (error) {
             // Handle errors here
@@ -30,7 +32,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     const handleCampaignDelete = async (campaignId: any) => {
         const response = await deleteCampaign( campaignId );
         setLoad(true);
-        const getData = await fetchAllCampaigns();
+        const getData = await fetchAllCampaigns(currentUser?.id);
         dispatch(setCampaign(getData));
     }
 
