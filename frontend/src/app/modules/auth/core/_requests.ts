@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { AuthModel, UserModel } from './_models';
+import axios from "axios";
+import { AuthModel, UserModel } from "./_models";
 
-const API_URL = process.env.REACT_APP_API_URL
+const API_URL = process.env.REACT_APP_API_URL;
 
-export const GET_USER_BY_ACCESS_TOKEN_URL = `${API_URL}/user/verify-token/`
-export const REFRESH_TOKEN_URL = `${API_URL}/user/refresh-token/`
-export const LOGIN_URL = `${API_URL}/user/login/`
-export const REGISTER_URL = `${API_URL}/user/register/`
-export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
+export const GET_USER_BY_ACCESS_TOKEN_URL = `${API_URL}/user/verify-token/`;
+export const REFRESH_TOKEN_URL = `${API_URL}/user/refresh-token/`;
+export const LOGIN_URL = `${API_URL}/user/login/`;
+export const REGISTER_URL = `${API_URL}/user/register/`;
+export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`;
 
 /**
  * Logs a user in by sending a POST request to the login endpoint.
@@ -20,10 +20,10 @@ export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
  *                               an error if the login fails.
  */
 export function login(email: string, password: string): Promise<any> {
-    return axios.post<AuthModel>(LOGIN_URL, {
-        email,
-        password,
-    })
+  return axios.post<AuthModel>(LOGIN_URL, {
+    email,
+    password,
+  });
 }
 
 /**
@@ -39,19 +39,19 @@ export function login(email: string, password: string): Promise<any> {
  *                    or rejects with an error if the registration fails.
  */
 export function register(
-    email: string,
-    firstName: string,
-    lastName: string,
-    password: string,
-    confirmPassword: string
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  confirmPassword: string
 ): Promise<any> {
-    return axios.post(REGISTER_URL, {
-        email,
-        firstName: firstName,
-        lastName: lastName,
-        password,
-        confirmPassword,
-    })
+  return axios.post(REGISTER_URL, {
+    email,
+    firstName: firstName,
+    lastName: lastName,
+    password,
+    confirmPassword,
+  });
 }
 
 /**
@@ -64,9 +64,9 @@ export function register(
  *                                         rejects with an error if the request fails.
  */
 export function requestPassword(email: string): Promise<any> {
-    return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
-        email,
-    })
+  return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
+    email,
+  });
 }
 
 /**
@@ -78,16 +78,16 @@ export function requestPassword(email: string): Promise<any> {
  *                              when the request is successful, or rejects
  *                              with an error if the request fails.
  */
-export function getUserByToken(token: string): Promise<any> {    
-    // Set the Authorization header with the Bearer token. 
-    const config = {
-        headers:{
-            'Content-Type': 'application/json',
-            'Authorization':'Bearer ' + String(token)
-        }
-    };
-    
-    return axios.get<UserModel>(GET_USER_BY_ACCESS_TOKEN_URL, config);
+export function getUserByToken(token: string): Promise<any> {
+  // Set the Authorization header with the Bearer token.
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + String(token),
+    },
+  };
+
+  return axios.get<UserModel>(GET_USER_BY_ACCESS_TOKEN_URL, config);
 }
 
 /**
@@ -98,12 +98,12 @@ export function getUserByToken(token: string): Promise<any> {
  * @returns {Promise<any>} A Promise that resolves with the refreshed token or relevant data
  *                        when the request is successful, or rejects with an error if the request fails.
  */
-export function refreshAuthToken(token: string): Promise<any> {    
-    const config = {
-        headers:{
-            'Content-Type': 'application/json',
-        }
-    };
-    
-    return axios.post(REFRESH_TOKEN_URL, token , config);
+export function refreshAuthToken(token: string): Promise<any> {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  return axios.post(REFRESH_TOKEN_URL, token, config);
 }

@@ -18,7 +18,7 @@
     }
 
     // Aside secondary enabled and aside minimized modes disabled mode
-    .aside-secondary-enabled:not([data-kt-aside-minimize='on']) & {
+    .aside-secondary-enabled:not([data-kt-aside-minimize="on"]) & {
       border-right-color: var(--#{$prefix}border-color);
     }
   }
@@ -29,7 +29,8 @@
 
     // Workspace
     .aside-workspace {
-      width: get($aside-config, width, desktop) - get($aside-config, primary-width, desktop);
+      width: get($aside-config, width, desktop) -
+        get($aside-config, primary-width, desktop);
       flex-shrink: 0;
     }
   }
@@ -49,7 +50,8 @@
     .aside-secondary {
       // Workspace
       .aside-workspace {
-        width: get($aside-config, width, desktop) - get($aside-config, primary-width, desktop);
+        width: get($aside-config, width, desktop) -
+          get($aside-config, primary-width, desktop);
         flex-shrink: 0;
       }
     }
@@ -84,13 +86,13 @@
     }
 
     // Minimized aside mode
-    [data-kt-aside-minimize='on'] & {
+    [data-kt-aside-minimize="on"] & {
       width: get($aside-config, primary-width, desktop);
       transition: width get($aside-config, transition-speed) ease;
     }
   }
 
-  [dir='rtl'] {
+  [dir="rtl"] {
     .aside-toggle {
       .svg-icon {
         transform: rotateZ(180deg);

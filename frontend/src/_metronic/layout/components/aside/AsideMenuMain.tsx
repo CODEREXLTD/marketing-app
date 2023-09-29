@@ -1,23 +1,23 @@
 /* eslint-disable react/jsx-no-target-blank */
-import { useIntl } from 'react-intl'
-import { AsideMenuItem } from './AsideMenuItem'
+import { useIntl } from "react-intl";
+import { AsideMenuItem } from "./AsideMenuItem";
 
 export function AsideMenuMain() {
-  const intl = useIntl()
+  const intl = useIntl();
 
   return (
     <>
       <AsideMenuItem
-        to='/dashboard'
-        icon='color-swatch'
-        title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
-        fontIcon='bi-app-indicator'
+        to="/dashboard"
+        icon="color-swatch"
+        title={intl.formatMessage({ id: "MENU.DASHBOARD" })}
+        fontIcon="bi-app-indicator"
       />
       <AsideMenuItem
-        to='/campaign'
-        icon='color-swatch'
-        title={intl.formatMessage({id: 'MENU.CAMPAIGN'})}
-        fontIcon='bi-app-indicator'
+        to="/campaign"
+        icon="color-swatch"
+        title={intl.formatMessage({ id: "MENU.CAMPAIGN" })}
+        fontIcon="bi-app-indicator"
       />
       {/*<AsideMenuItem to='/builder' icon='switch' title='Layout Builder' fontIcon='bi-layers' />*/}
       {/*<div className='menu-item'>*/}
@@ -99,7 +99,6 @@ export function AsideMenuMain() {
       {/*  title='User management'*/}
       {/*  fontIcon='bi-layers'*/}
       {/*/>*/}
-
     </>
-  )
+  );
 }

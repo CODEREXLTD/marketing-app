@@ -82,7 +82,7 @@ table.dataTable > thead {
       display: inline-block !important;
       width: 0.75rem;
       height: 0.75rem;
-      content: ' ' !important;
+      content: " " !important;
       //top: 50%;
       bottom: auto;
       right: auto !important;
@@ -152,14 +152,14 @@ table.dataTable.dtr-column.collapsed > tbody > tr > th.dtr-control {
     box-shadow: none;
     mask-size: 85%;
     -webkit-mask-size: 85%;
-    content: '.';
+    content: ".";
 
     :root &,
-    [data-bs-theme='light'] & {
+    [data-bs-theme="light"] & {
       @include svg-bg-icon(expand, $gray-600);
     }
 
-    [data-bs-theme='dark'] & {
+    [data-bs-theme="dark"] & {
       @include svg-bg-icon(expand, $gray-600-dark);
     }
   }
@@ -172,10 +172,22 @@ table.dataTable.dtr-column.collapsed > tbody > tr > th.dtr-control {
   }
 }
 
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before,
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before,
-table.dataTable.dtr-column.collapsed > tbody > tr.parent > td.dtr-control:before,
-table.dataTable.dtr-column.collapsed > tbody > tr.parent > th.dtr-control:before {
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr.parent
+  > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed
+  > tbody
+  > tr.parent
+  > th.dtr-control:before,
+table.dataTable.dtr-column.collapsed
+  > tbody
+  > tr.parent
+  > td.dtr-control:before,
+table.dataTable.dtr-column.collapsed
+  > tbody
+  > tr.parent
+  > th.dtr-control:before {
   @include svg-bg-icon(collapse, $primary);
 }
 
@@ -198,7 +210,7 @@ table.dataTable > tbody > tr.selected > * {
   box-shadow: inset 0 0 0 9999px var(--#{$prefix}primary);
   color: var(--#{$prefix}primary-inverse);
 
-  a:not([class='btn']) {
+  a:not([class="btn"]) {
     color: var(--#{$prefix}primary-light);
     font-weight: $font-weight-semibold;
     text-decoration: underline;

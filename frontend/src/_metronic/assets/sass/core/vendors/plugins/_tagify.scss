@@ -57,7 +57,7 @@ $tagify-input-padding-y-lg: $input-padding-y-lg - $tagify-tag-padding-y-lg;
       height: 0.6rem;
       margin: 0 0.5rem 0 0;
       border-radius: 0;
-      content: ' ';
+      content: " ";
       @include svg-bg-icon(close, var(--#{$prefix}gray-500));
 
       &:after {

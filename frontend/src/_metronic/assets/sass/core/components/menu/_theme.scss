@@ -20,28 +20,52 @@
   .menu-title-#{$name} {
     .menu-item {
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(var(--#{$prefix}text-#{$name}), null, null, null, null);
+      @include menu-link-default-state(
+        var(--#{$prefix}text-#{$name}),
+        null,
+        null,
+        null,
+        null
+      );
     }
   }
 
   .menu-icon-#{$name} {
     .menu-item {
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, var(--#{$prefix}text-#{$name}), null, null, null);
+      @include menu-link-default-state(
+        null,
+        var(--#{$prefix}text-#{$name}),
+        null,
+        null,
+        null
+      );
     }
   }
 
   .menu-bullet-#{$name} {
     .menu-item {
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, null, var(--#{$prefix}text-#{$name}), null, null);
+      @include menu-link-default-state(
+        null,
+        null,
+        var(--#{$prefix}text-#{$name}),
+        null,
+        null
+      );
     }
   }
 
   .menu-arrow-#{$name} {
     .menu-item {
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(null, null, null, var(--#{$prefix}text-#{$name}), null);
+      @include menu-link-default-state(
+        null,
+        null,
+        null,
+        var(--#{$prefix}text-#{$name}),
+        null
+      );
     }
   }
 }
@@ -487,34 +511,82 @@
 // Primary title color states
 .menu-hover-title-primary {
   .menu-item {
-    @include menu-link-hover-state(var(--#{$prefix}primary), null, null, null, null);
+    @include menu-link-hover-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-here-title-primary {
   .menu-item {
-    @include menu-link-here-state(var(--#{$prefix}primary), null, null, null, null);
+    @include menu-link-here-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-show-title-primary {
   .menu-item {
-    @include menu-link-show-state(var(--#{$prefix}primary), null, null, null, null);
+    @include menu-link-show-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-active-title-primary {
   .menu-item {
-    @include menu-link-active-state(var(--#{$prefix}primary), null, null, null, null);
+    @include menu-link-active-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-state-title-primary {
   .menu-item {
-    @include menu-link-hover-state(var(--#{$prefix}primary), null, null, null, null);
-    @include menu-link-here-state(var(--#{$prefix}primary), null, null, null, null);
-    @include menu-link-show-state(var(--#{$prefix}primary), null, null, null, null);
-    @include menu-link-active-state(var(--#{$prefix}primary), null, null, null, null);
+    @include menu-link-hover-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
+    @include menu-link-here-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
+    @include menu-link-show-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
+    @include menu-link-active-state(
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null,
+      null
+    );
   }
 }
 
@@ -522,38 +594,86 @@
 .menu-hover-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, var(--#{$prefix}primary), null, null, null);
+    @include menu-link-hover-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-here-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, var(--#{$prefix}primary), null, null, null);
+    @include menu-link-here-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-show-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, var(--#{$prefix}primary), null, null, null);
+    @include menu-link-show-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-active-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, var(--#{$prefix}primary), null, null, null);
+    @include menu-link-active-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
   }
 }
 
 .menu-state-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, var(--#{$prefix}primary), null, null, null);
-    @include menu-link-here-state(null, var(--#{$prefix}primary), null, null, null);
-    @include menu-link-show-state(null, var(--#{$prefix}primary), null, null, null);
-    @include menu-link-active-state(null, var(--#{$prefix}primary), null, null, null);
+    @include menu-link-hover-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
+    @include menu-link-here-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
+    @include menu-link-show-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
+    @include menu-link-active-state(
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null,
+      null
+    );
   }
 }
 
@@ -561,38 +681,86 @@
 .menu-hover-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, var(--#{$prefix}primary), null, null);
+    @include menu-link-hover-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
   }
 }
 
 .menu-show-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, null, var(--#{$prefix}primary), null, null);
+    @include menu-link-show-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
   }
 }
 
 .menu-here-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, null, var(--#{$prefix}primary), null, null);
+    @include menu-link-here-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
   }
 }
 
 .menu-active-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, null, var(--#{$prefix}primary), null, null);
+    @include menu-link-active-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
   }
 }
 
 .menu-state-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, var(--#{$prefix}primary), null, null);
-    @include menu-link-here-state(null, null, var(--#{$prefix}primary), null, null);
-    @include menu-link-show-state(null, null, var(--#{$prefix}primary), null, null);
-    @include menu-link-active-state(null, null, var(--#{$prefix}primary), null, null);
+    @include menu-link-hover-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
+    @include menu-link-here-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
+    @include menu-link-show-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
+    @include menu-link-active-state(
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null,
+      null
+    );
   }
 }
 
@@ -600,37 +768,85 @@
 .menu-hover-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, null, var(--#{$prefix}primary), null);
+    @include menu-link-hover-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
   }
 }
 
 .menu-here-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, null, null, var(--#{$prefix}primary), null);
+    @include menu-link-here-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
   }
 }
 
 .menu-show-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, null, null, var(--#{$prefix}primary), null);
+    @include menu-link-show-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
   }
 }
 
 .menu-active-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, null, null, var(--#{$prefix}primary), null);
+    @include menu-link-active-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
   }
 }
 
 .menu-state-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, null, var(--#{$prefix}primary), null);
-    @include menu-link-here-state(null, null, null, var(--#{$prefix}primary), null);
-    @include menu-link-show-state(null, null, null, var(--#{$prefix}primary), null);
-    @include menu-link-active-state(null, null, null, var(--#{$prefix}primary), null);
+    @include menu-link-hover-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
+    @include menu-link-here-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
+    @include menu-link-show-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
+    @include menu-link-active-state(
+      null,
+      null,
+      null,
+      var(--#{$prefix}primary),
+      null
+    );
   }
 }
