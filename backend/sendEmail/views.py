@@ -65,7 +65,7 @@ class EmailViewSet(viewsets.ModelViewSet):
                     password=smtpSettings.host_password,
                     use_tls=True,
                 )
-                send_mail( subject, message, from_email, [recipient_list], False, connection)
+                send_mail( subject, message, from_email, [recipient_list], False, None)
                 return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
             except:
                 return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
