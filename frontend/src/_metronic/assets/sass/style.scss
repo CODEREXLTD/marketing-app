@@ -37,16 +37,16 @@
             padding-left: 0;
             .single-step {
                 list-style: none;
-                margin-top: 1rem;
+                margin-bottom: 1rem;
                 background: #F3F6F9;
+                border-radius: 8px;
+                border: 2px solid transparent;
 
                 &.active {
                     border: 2px solid rgb(0, 107, 255);
                 }
 
                 .step-card {
-                    border-radius: 8px;
-                    border: 2px solid transparent;
                     background: #F3F6F9;
                     padding-top: 1rem;
         
@@ -56,7 +56,6 @@
                     min-width: 0;
                     word-wrap: break-word;
                     background-clip: border-box;
-                    border: 1px solid rgba(0,0,0,.125);
                     border-radius: 0.25rem;
         
                     .step-name {
@@ -70,6 +69,10 @@
                         padding: 0 1rem;
                         margin-bottom: 1rem;
                     }
+
+                }
+                .step-delete{
+                  padding: 20px;
                 }
             }
         }

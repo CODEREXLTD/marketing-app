@@ -77,6 +77,7 @@ const EmailChannel: FC = () => {
       }
     }
   }, [inserted]);
+
   return (
     <div className="w-100 email-channels">
       <div className="d-flex flex-column flex-lg-row">
@@ -108,15 +109,15 @@ const EmailChannel: FC = () => {
                        <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
                             <i className="fa fa-trash" style={{ color: 'red' }}></i>
                        </a>
-                      <li  onClick={() => handleStep(step,index)}>
+                      <div  onClick={() => handleStep(step,index)}>
                         <div className="step-card">
                             <div className="step-name">
-                              <p>{step.title} {index+1}</p>
+                              <p>{step.title}</p>
                               <div style={{ flexGrow: 1 }}></div>
                             </div>
-                            <div className="step-body">`Email Subject`</div>
+                            <div className="step-body">{ step.channel.subject !== '' ? step.channel.subject : '<Empty Subject>' }</div>
                         </div>
-                      </li>
+                      </div>
                     </div>
 
                 ))}

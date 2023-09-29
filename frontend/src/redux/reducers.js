@@ -44,9 +44,21 @@ const rootReducer = (state = initialState, action) => {
       };
     case "REMOVE_SEQUENCE":    
       const index  = action.payload;
+      let allSequence =  [...state.sequence];
+      var previousStep = allSequence[index-1]
+      var nextStep = allSequence[index+1]
+        if(previousStep && nextStep){
+            previousStep.next_step = nextStep.step_id
+            allSequence[parseInt(index) - 1].next_step = allSequence[parseInt(index) + 1].step_id;
+        }
+        if(!nextStep){
+            allSequence[parseInt(index) - 1].next_step = ''
+        }
+        allSequence.splice(index, 1);
       return {
         ...state,
-        sequence: state.sequence.filter((_, i) => i !== index),
+        // sequence: state.sequence.filter((_, i) => i !== index),
+        sequence: allSequence,
       };
     case "SET_SELECTED_STEP":
       return {
