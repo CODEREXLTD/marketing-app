@@ -44,6 +44,10 @@ const EmailChannel: FC = () => {
       dispatch(selectStep(lastIndex, 0));
     }
     },[getStepSequence])
+
+    const handlestep =(step, key) =>{
+        dispatch(selectStep(step, key));
+    }
   return (
     <div className='w-100'>
         <div className="d-flex flex-column flex-lg-row">
@@ -52,7 +56,7 @@ const EmailChannel: FC = () => {
                     <div className="card-body">
                         {getStepSequence.map((step, index) => (
                             <div key={index} className="menu menu-column menu-rounded menu-state-bg menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary mb-10">
-                            <div className="menu-item mb-3">
+                            <div className="menu-item mb-3" onClick={() => handlestep(step,index)}>
                                 <span className="menu-link active">
                                     <span className="menu-icon">
                                         <i className="ki-outline ki-sms fs-2 me-3"></i>
