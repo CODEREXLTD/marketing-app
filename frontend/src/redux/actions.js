@@ -50,3 +50,11 @@ export function updateEmailContent(selectedStep,data,selectedStepIndex) {
         data
     };
 }
+export function updateEmailContentBody(selectedStep,data,selectedStepIndex) {
+    return {
+        type: "UPDATE_EMAIL_BODY_STEP",
+        selectedStep,
+        selectedStepIndex,
+        data
+    };
+}

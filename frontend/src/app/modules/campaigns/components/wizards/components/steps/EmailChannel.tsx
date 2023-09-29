@@ -48,6 +48,8 @@ const EmailChannel: FC = () => {
     const handlestep =(step, key) =>{
         dispatch(selectStep(step, key));
     }
+    console.log(getStepSequence)
+
   return (
     <div className='w-100'>
         <div className="d-flex flex-column flex-lg-row">

@@ -6,138 +6,6 @@ import {getSelectedStep, getSelectedStepType, getStepIndex} from "../../../../..
 import {updateEmailContent} from "../../../../../redux/actions";
 
 export default function Edit(){
-        useEffect(() => {
-                // Class definition
-            var KTAppInboxCompose = function () {
-            // Private functions
-            // Init reply form
-            const initForm = () => {
-                // Set variables
-                const form = document.querySelector('#kt_inbox_compose_form');
-                // Handle CC and BCC
-                // Handle submit form
-                handleSubmit(form);
-
-                // Init quill editor
-                initQuill(form);
-
-                // Init dropzone
-                initDropzone(form);
-            }
-
-            // Handle submit form
-            const handleSubmit = (el) => {
-                const submitButton = el.querySelector('[data-kt-inbox-form="send"]');
-
-                // Handle button click event
-                submitButton.addEventListener("click", function () {
-                    // Activate indicator
-                    submitButton.setAttribute("data-kt-indicator", "on");
-
-                    // Disable indicator after 3 seconds
-                    setTimeout(function () {
-                        submitButton.removeAttribute("data-kt-indicator");
-                    }, 3000);
-                });
-            }
-
-            // Init quill editor
-            const initQuill = (el) => {
-                var quill = new Quill('#kt_inbox_form_editor', {
-                    modules: {
-                        toolbar: [
-                            [{
-                                header: [1, 2, false]
-                            }],
-                            ['bold', 'italic', 'underline'],
-                            ['image', 'code-block']
-                        ]
-                    },
-                    placeholder: 'Type your text here...',
-                    theme: 'snow' // or 'bubble'
-                });
-
-                // Customize editor
-                const toolbar = el.querySelector('.ql-toolbar');
-
-                if (toolbar) {
-                    const classes = ['px-5', 'border-top-0', 'border-start-0', 'border-end-0'];
-                    toolbar.classList.add(...classes);
-                }
-            }
-
-            // Init dropzone
-            const initDropzone = (el) => {
-                // set the dropzone container id
-                const id = '[data-kt-inbox-form="dropzone"]';
-                const dropzone = el.querySelector(id);
-                const uploadButton = el.querySelector('[data-kt-inbox-form="dropzone_upload"]');
-
-                // set the preview element template
-                var previewNode = dropzone.querySelector(".dropzone-item");
-                previewNode.id = "";
-                var previewTemplate = previewNode.parentNode.innerHTML;
-                previewNode.parentNode.removeChild(previewNode);
-
-                var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
-                    url: "https://preview.keenthemes.com/api/dropzone/void.php", // Set the url for your upload script location
-                    parallelUploads: 20,
-                    maxFilesize: 1, // Max filesize in MB
-                    previewTemplate: previewTemplate,
-                    previewsContainer: id + " .dropzone-items", // Define the container to display the previews
-                    clickable: uploadButton // Define the element that should be used as click trigger to select files.
-                });
-
-
-                myDropzone.on("addedfile", function (file) {
-                    // Hookup the start button
-                    const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
-                    dropzoneItems.forEach(dropzoneItem => {
-                        dropzoneItem.style.display = '';
-                    });
-                });
-
-                // Update the total progress bar
-                myDropzone.on("totaluploadprogress", function (progress) {
-                    const progressBars = dropzone.querySelectorAll('.progress-bar');
-                    progressBars.forEach(progressBar => {
-                        progressBar.style.width = progress + "%";
-                    });
-                });
-
-                myDropzone.on("sending", function (file) {
-                    // Show the total progress bar when upload starts
-                    const progressBars = dropzone.querySelectorAll('.progress-bar');
-                    progressBars.forEach(progressBar => {
-                        progressBar.style.opacity = "1";
-                    });
-                });
-
-                // Hide the total progress bar when nothing"s uploading anymore
-                myDropzone.on("complete", function (progress) {
-                    const progressBars = dropzone.querySelectorAll('.dz-complete');
-
-                    setTimeout(function () {
-                        progressBars.forEach(progressBar => {
-                            progressBar.querySelector('.progress-bar').style.opacity = "0";
-                            progressBar.querySelector('.progress').style.opacity = "0";
-                        });
-                    }, 300);
-                });
-            }
-
-
-            // Public methods
-            return {
-                init: function () {
-                    initForm();
-                }
-            };
-        }();
-
-        // On document ready
-        KTAppInboxCompose.init();
-        }, []);
          const dispatch = useDispatch();
         const selectedStep = useSelector(getSelectedStep);
         const selectedStepType = useSelector(getSelectedStepType);
@@ -164,30 +32,16 @@ export default function Edit(){
                                 <div className="border-bottom">
                                     <input className="form-control form-control-transparent border-0 px-8 min-h-45px" name="subject" value={selectedStep?.channel.subject} onChange={(e) => inputChangeHandle(e)} placeholder="Subject" />
                                 </div>
-                                <div id="kt_inbox_form_editor" className="bg-transparent border-0 h-350px px-3"></div>
-                                <div className="dropzone dropzone-queue px-8 py-4" id="kt_inbox_reply_attachments" data-kt-inbox-form="dropzone">
-                                    <div className="dropzone-items">
-                                        <div className="dropzone-item" style={{display:'none'}}>
-                                            <div className="dropzone-file">
-                                                <div className="dropzone-filename" title="some_image_file_name.jpg">
-                                                    <span data-dz-name="">some_image_file_name.jpg</span>
-                                                    <strong>(
-                                                    <span data-dz-size="">340kb</span>)</strong>
-                                                </div>
-                                                <div className="dropzone-error" data-dz-errormessage=""></div>
-                                            </div>
-                                            <div className="dropzone-progress">
-                                                <div className="progress bg-gray-300">
-                                                    <div className="progress-bar bg-primary" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0} data-dz-uploadprogress={''}></div>
-                                                </div>
-                                            </div>
-                                            <div className="dropzone-toolbar">
-                                                <span className="dropzone-delete" data-dz-remove="">
-                                                    <i className="ki-outline ki-cross fs-2"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div id="kt_inbox_form_editor" className="bg-transparent border-0 h-350px px-3">
+                                    <textarea
+                                    className="form-control form-control-transparent border-0 px-8 min-h-45px"
+                                    name="body"
+                                    onChange={(e) => inputChangeHandle(e)}
+                                    value={selectedStep?.channel.body}
+                                    placeholder="Write text here"
+                                    rows={4}
+                                    cols={40}
+                                  />
                                 </div>
                             </div>
                             <div className="d-flex flex-stack flex-wrap gap-2 py-5 ps-8 pe-5 border-top">
