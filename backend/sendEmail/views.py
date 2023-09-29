@@ -31,11 +31,13 @@ class EmailViewSet(viewsets.ModelViewSet):
             from_email,
             recipient_list
         )
-        try:
-            send_mass_mail( (formatted_data,) )
-            return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
-        except:
-            return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
+        smtpSettings = SmtpSettings.objects.get(user=user_id)
+        if smtpSettings:
+            try:
+                send_mass_mail( (formatted_data,), False, smtpSettings.host_user,smtpSettings.host_password,None )
+                return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
+            except:
+                return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False)
     def send_email(self, request):
@@ -44,16 +46,13 @@ class EmailViewSet(viewsets.ModelViewSet):
         message = request.data.get('message', '')
         recipient_list = request.data.get('recipient_list', '')
         from_email = settings.EMAIL_HOST_USER
-        try:
-            send_mail( subject, message, from_email, [recipient_list] )
-            return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
-        except:
-            return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
+        smtpSettings = SmtpSettings.objects.get(user=user_id)
+        if smtpSettings:
+            try:
+                send_mail( subject, message, from_email, [recipient_list], False, smtpSettings.host_user,smtpSettings.host_password,None )
+                return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
+            except:
+                return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
     
     def get_smtp_settings(user_id):
-        smtpSettings = SmtpSettings.objects.filter(user=user_id).first()
-        if smtpSettings:
-            serializer = SmtpSettingsSerializer(smtpSettings)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response({"error": "SMTP settings not found for the user"}, status=status.HTTP_404_NOT_FOUND)
+        smtpSettings = SmtpSettings.objects.get(user=user_id)
