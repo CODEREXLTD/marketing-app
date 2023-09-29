@@ -1,143 +1,153 @@
 import React, {useEffect} from "react";
 import Dropzone from 'dropzone';
 import Quill from 'quill';
+import {useDispatch, useSelector} from "react-redux";
+import {getSelectedStep, getSelectedStepType, getStepIndex} from "../../../../../redux/selectors";
+import {updateEmailContent} from "../../../../../redux/actions";
 
 export default function Edit(){
         useEffect(() => {
-        // Class definition
-    var KTAppInboxCompose = function () {
-    // Private functions
-    // Init reply form
-    const initForm = () => {
-        // Set variables
-        const form = document.querySelector('#kt_inbox_compose_form');
-        // Handle CC and BCC
+                // Class definition
+            var KTAppInboxCompose = function () {
+            // Private functions
+            // Init reply form
+            const initForm = () => {
+                // Set variables
+                const form = document.querySelector('#kt_inbox_compose_form');
+                // Handle CC and BCC
+                // Handle submit form
+                handleSubmit(form);
 
-        // Handle submit form
-        handleSubmit(form);
+                // Init quill editor
+                initQuill(form);
 
-        // Init quill editor
-        initQuill(form);
+                // Init dropzone
+                initDropzone(form);
+            }
 
-        // Init dropzone
-        initDropzone(form);
-    }
+            // Handle submit form
+            const handleSubmit = (el) => {
+                const submitButton = el.querySelector('[data-kt-inbox-form="send"]');
 
-    // Handle submit form
-    const handleSubmit = (el) => {
-        const submitButton = el.querySelector('[data-kt-inbox-form="send"]');
+                // Handle button click event
+                submitButton.addEventListener("click", function () {
+                    // Activate indicator
+                    submitButton.setAttribute("data-kt-indicator", "on");
 
-        // Handle button click event
-        submitButton.addEventListener("click", function () {
-            // Activate indicator
-            submitButton.setAttribute("data-kt-indicator", "on");
-
-            // Disable indicator after 3 seconds
-            setTimeout(function () {
-                submitButton.removeAttribute("data-kt-indicator");
-            }, 3000);
-        });
-    }
-
-    // Init quill editor
-    const initQuill = (el) => {
-        var quill = new Quill('#kt_inbox_form_editor', {
-            modules: {
-                toolbar: [
-                    [{
-                        header: [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
-                ]
-            },
-            placeholder: 'Type your text here...',
-            theme: 'snow' // or 'bubble'
-        });
-
-        // Customize editor
-        const toolbar = el.querySelector('.ql-toolbar');
-
-        if (toolbar) {
-            const classes = ['px-5', 'border-top-0', 'border-start-0', 'border-end-0'];
-            toolbar.classList.add(...classes);
-        }
-    }
-
-    // Init dropzone
-    const initDropzone = (el) => {
-        // set the dropzone container id
-        const id = '[data-kt-inbox-form="dropzone"]';
-        const dropzone = el.querySelector(id);
-        const uploadButton = el.querySelector('[data-kt-inbox-form="dropzone_upload"]');
-
-        // set the preview element template
-        var previewNode = dropzone.querySelector(".dropzone-item");
-        previewNode.id = "";
-        var previewTemplate = previewNode.parentNode.innerHTML;
-        previewNode.parentNode.removeChild(previewNode);
-
-        var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
-            url: "https://preview.keenthemes.com/api/dropzone/void.php", // Set the url for your upload script location
-            parallelUploads: 20,
-            maxFilesize: 1, // Max filesize in MB
-            previewTemplate: previewTemplate,
-            previewsContainer: id + " .dropzone-items", // Define the container to display the previews
-            clickable: uploadButton // Define the element that should be used as click trigger to select files.
-        });
-
-
-        myDropzone.on("addedfile", function (file) {
-            // Hookup the start button
-            const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
-            dropzoneItems.forEach(dropzoneItem => {
-                dropzoneItem.style.display = '';
-            });
-        });
-
-        // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function (progress) {
-            const progressBars = dropzone.querySelectorAll('.progress-bar');
-            progressBars.forEach(progressBar => {
-                progressBar.style.width = progress + "%";
-            });
-        });
-
-        myDropzone.on("sending", function (file) {
-            // Show the total progress bar when upload starts
-            const progressBars = dropzone.querySelectorAll('.progress-bar');
-            progressBars.forEach(progressBar => {
-                progressBar.style.opacity = "1";
-            });
-        });
-
-        // Hide the total progress bar when nothing"s uploading anymore
-        myDropzone.on("complete", function (progress) {
-            const progressBars = dropzone.querySelectorAll('.dz-complete');
-
-            setTimeout(function () {
-                progressBars.forEach(progressBar => {
-                    progressBar.querySelector('.progress-bar').style.opacity = "0";
-                    progressBar.querySelector('.progress').style.opacity = "0";
+                    // Disable indicator after 3 seconds
+                    setTimeout(function () {
+                        submitButton.removeAttribute("data-kt-indicator");
+                    }, 3000);
                 });
-            }, 300);
-        });
-    }
+            }
+
+            // Init quill editor
+            const initQuill = (el) => {
+                var quill = new Quill('#kt_inbox_form_editor', {
+                    modules: {
+                        toolbar: [
+                            [{
+                                header: [1, 2, false]
+                            }],
+                            ['bold', 'italic', 'underline'],
+                            ['image', 'code-block']
+                        ]
+                    },
+                    placeholder: 'Type your text here...',
+                    theme: 'snow' // or 'bubble'
+                });
+
+                // Customize editor
+                const toolbar = el.querySelector('.ql-toolbar');
+
+                if (toolbar) {
+                    const classes = ['px-5', 'border-top-0', 'border-start-0', 'border-end-0'];
+                    toolbar.classList.add(...classes);
+                }
+            }
+
+            // Init dropzone
+            const initDropzone = (el) => {
+                // set the dropzone container id
+                const id = '[data-kt-inbox-form="dropzone"]';
+                const dropzone = el.querySelector(id);
+                const uploadButton = el.querySelector('[data-kt-inbox-form="dropzone_upload"]');
+
+                // set the preview element template
+                var previewNode = dropzone.querySelector(".dropzone-item");
+                previewNode.id = "";
+                var previewTemplate = previewNode.parentNode.innerHTML;
+                previewNode.parentNode.removeChild(previewNode);
+
+                var myDropzone = new Dropzone(id, { // Make the whole body a dropzone
+                    url: "https://preview.keenthemes.com/api/dropzone/void.php", // Set the url for your upload script location
+                    parallelUploads: 20,
+                    maxFilesize: 1, // Max filesize in MB
+                    previewTemplate: previewTemplate,
+                    previewsContainer: id + " .dropzone-items", // Define the container to display the previews
+                    clickable: uploadButton // Define the element that should be used as click trigger to select files.
+                });
 
 
-    // Public methods
-    return {
-        init: function () {
-            initForm();
+                myDropzone.on("addedfile", function (file) {
+                    // Hookup the start button
+                    const dropzoneItems = dropzone.querySelectorAll('.dropzone-item');
+                    dropzoneItems.forEach(dropzoneItem => {
+                        dropzoneItem.style.display = '';
+                    });
+                });
+
+                // Update the total progress bar
+                myDropzone.on("totaluploadprogress", function (progress) {
+                    const progressBars = dropzone.querySelectorAll('.progress-bar');
+                    progressBars.forEach(progressBar => {
+                        progressBar.style.width = progress + "%";
+                    });
+                });
+
+                myDropzone.on("sending", function (file) {
+                    // Show the total progress bar when upload starts
+                    const progressBars = dropzone.querySelectorAll('.progress-bar');
+                    progressBars.forEach(progressBar => {
+                        progressBar.style.opacity = "1";
+                    });
+                });
+
+                // Hide the total progress bar when nothing"s uploading anymore
+                myDropzone.on("complete", function (progress) {
+                    const progressBars = dropzone.querySelectorAll('.dz-complete');
+
+                    setTimeout(function () {
+                        progressBars.forEach(progressBar => {
+                            progressBar.querySelector('.progress-bar').style.opacity = "0";
+                            progressBar.querySelector('.progress').style.opacity = "0";
+                        });
+                    }, 300);
+                });
+            }
+
+
+            // Public methods
+            return {
+                init: function () {
+                    initForm();
+                }
+            };
+        }();
+
+        // On document ready
+        KTAppInboxCompose.init();
+        }, []);
+         const dispatch = useDispatch();
+        const selectedStep = useSelector(getSelectedStep);
+        const selectedStepType = useSelector(getSelectedStepType);
+        const selectedStepIndex = useSelector(getStepIndex);
+        const inputChangeHandle = (data) =>{
+            if (selectedStep && selectedStep.channel) {
+                 dispatch(updateEmailContent(selectedStep,data,selectedStepIndex));
+            }
         }
-    };
-}();
-
-// On document ready
-KTAppInboxCompose.init();
-
-
-      }, []);
+        // console.log(selectedStep)
       return (
           <>
               <div className="flex-lg-row-fluid ms-lg-7 ms-xl-10">
@@ -152,7 +162,7 @@ KTAppInboxCompose.init();
                         <div id="kt_inbox_compose_form">
                             <div className="d-block">
                                 <div className="border-bottom">
-                                    <input className="form-control form-control-transparent border-0 px-8 min-h-45px" name="compose_subject" placeholder="Subject" />
+                                    <input className="form-control form-control-transparent border-0 px-8 min-h-45px" name="subject" value={selectedStep?.channel.subject} onChange={(e) => inputChangeHandle(e)} placeholder="Subject" />
                                 </div>
                                 <div id="kt_inbox_form_editor" className="bg-transparent border-0 h-350px px-3"></div>
                                 <div className="dropzone dropzone-queue px-8 py-4" id="kt_inbox_reply_attachments" data-kt-inbox-form="dropzone">

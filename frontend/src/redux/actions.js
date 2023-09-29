@@ -34,10 +34,26 @@ export function addSequence(step) {
     };
 }
 
+export function removeSequence(index) {
+    return {
+        type: "REMOVE_SEQUENCE",
+        payload: index,
+    };
+}
+
 export function selectStep(value,index) {
     return {
         type: "SET_SELECTED_STEP",
         value,
         index
+    };
+}
+
+export function updateEmailContent(selectedStep,data,selectedStepIndex) {
+    return {
+        type: "UPDATE_EMAIL_STEP",
+        selectedStep,
+        selectedStepIndex,
+        data
     };
 }
