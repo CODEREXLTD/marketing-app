@@ -45,6 +45,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         sequence: [...state.sequence, action.payload]
       };
+      case 'SET_SELECTED_STEP':
+        return {
+            ...state,
+            selectedStep: action.value,
+            selectedStepIndex: action.index,
+        };
     // Add more cases for other actions if needed
     default:
       return state;

@@ -33,3 +33,11 @@ export function addSequence(step) {
         payload: step,
     };
 }
+
+export function selectStep(value,index) {
+    return {
+        type: "SET_SELECTED_STEP",
+        value,
+        index
+    };
+}
