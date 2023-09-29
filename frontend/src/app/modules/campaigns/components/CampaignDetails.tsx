@@ -5,10 +5,6 @@ import { StepperComponent } from '../../../../_metronic/assets/ts/components';
 import { KTIcon } from '../../../../_metronic/helpers';
 import { createAccountSchemas, ICreateAccount, inits } from './wizards/components/CreateAccountWizardHelper';
 import { EmailChannel } from './wizards/components/steps/EmailChannel';
-import { Step1 } from './wizards/components/steps/Step1';
-import { Step2 } from './wizards/components/steps/Step2';
-import { Step4 } from './wizards/components/steps/Step4';
-import { Step5 } from './wizards/components/steps/Step5';
 
 const CampaignDetails: FC = () => {
     const stepperRef = useRef<HTMLDivElement | null>(null);
@@ -68,48 +64,17 @@ const CampaignDetails: FC = () => {
       <div className="card-body">
         <div ref={stepperRef} className="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper">
           <div className="stepper-nav mb-5">
-            {/* <div className="stepper-item current" data-kt-stepper-element="nav" onClick={() => goToStep(1)}>
-              <h3 className="stepper-title">Analytics</h3>
-            </div> */}
-
-            <div className="stepper-item current" data-kt-stepper-element="nav" onClick={() => goToStep(1)}>
-              <h3 className="stepper-title">Leads</h3>
-            </div>
-
-            <div className="stepper-item" data-kt-stepper-element="nav" onClick={() => goToStep(2)}>
+            <div className="stepper-item" data-kt-stepper-element="nav" onClick={() => goToStep(1)}>
               <h3 className="stepper-title">Sequences</h3>
-            </div>
-
-            <div className="stepper-item" data-kt-stepper-element="nav" onClick={() => goToStep(3)}>
-              <h3 className="stepper-title">Schedule</h3>
-            </div>
-
-            <div className="stepper-item" data-kt-stepper-element="nav" onClick={() => goToStep(4)}>
-              <h3 className="stepper-title">Options</h3>
             </div>
           </div>
 
           <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
             {() => (
               <Form className="mx-auto w-100 pt-15 pb-10" id="kt_create_account_form">
-                {/* <div className="current" data-kt-stepper-element="content">
-                  <Step1 />
-                </div> */}
-
-                <div data-kt-stepper-element="content">
-                  <Step2 />
-                </div>
-
-                <div data-kt-stepper-element="content">
+                
+                <div className='current' data-kt-stepper-element="content">
                   <EmailChannel />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <Step4 />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <Step5 />
                 </div>
 
                 <div className="d-flex flex-stack pt-15">
@@ -139,9 +104,9 @@ const CampaignDetails: FC = () => {
             )}
           </Formik>
         </div>
-      </div>
-    </div>
-  );
+        </div>
+        </div>
+    );
 };
 
 export { CampaignDetails };

@@ -48,3 +48,12 @@ export function selectStep(value,index) {
         index
     };
 }
+
+export function updateEmailContent(selectedStep,data,selectedStepIndex) {
+    return {
+        type: "UPDATE_EMAIL_STEP",
+        selectedStep,
+        selectedStepIndex,
+        data
+    };
+}

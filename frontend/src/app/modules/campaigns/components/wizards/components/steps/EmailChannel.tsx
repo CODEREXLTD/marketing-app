@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getSteps,
   getStepsSequence,
+  getStepIndex
 } from "../../../../../../../redux/selectors";
 import { addSequence, removeSequence, selectStep } from "../../../../../../../redux/actions";
 import { StepContent } from "../../../../channels/content";
@@ -10,6 +11,7 @@ import { StepContent } from "../../../../channels/content";
 const EmailChannel: FC = () => {
   const getAllStep = useSelector(getSteps);
   const getStepSequence = useSelector(getStepsSequence);
+  const selectedStepIndex = useSelector(getStepIndex);
   // console.log(getStepSequence)
   const dispatch = useDispatch();
   const onInsert = (step) => {
@@ -32,7 +34,6 @@ const EmailChannel: FC = () => {
         },
       };
     }
-
     dispatch(addSequence(stepData));
   };
 
@@ -41,6 +42,17 @@ const EmailChannel: FC = () => {
     e.preventDefault();
     dispatch(removeSequence(index));
   };
+
+  /**
+   * Active the current step
+   * 
+   * 
+   * @param step 
+   * @param key 
+   */
+  const handleStep =(step, key) =>{
+      dispatch(selectStep(step, key));
+  }
 
   useEffect(() => {
     if (getStepSequence.length > 0) {
@@ -51,6 +63,7 @@ const EmailChannel: FC = () => {
       dispatch(selectStep(lastIndex, 0));
     }
   }, [getStepSequence]);
+
   return (
     <div className="w-100 email-channels">
       <div className="d-flex flex-column flex-lg-row">
@@ -78,7 +91,7 @@ const EmailChannel: FC = () => {
             <div className="card-body">
               <ul className="steps-wrapper">
                 {getStepSequence.map((step, index) => (
-                  <li className="single-step" key={index}>
+                  <li className={`single-step ${selectedStepIndex == index ? "active" : ""}`} key={index} onClick={() => handleStep(step,index)}>
                     <div className="step-card">
                       <div className="step-name">
                         <p>{step.title}</p>
