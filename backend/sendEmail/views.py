@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework import status
 from django.core.mail import send_mass_mail
 from django.core.mail import send_mail
+from django.core.mail import get_connection
 from django.conf import settings
 from settings.models import SmtpSettings
 from settings.serializers import SmtpSettingsSerializer
@@ -34,7 +35,15 @@ class EmailViewSet(viewsets.ModelViewSet):
         smtpSettings = SmtpSettings.objects.get(user=user_id)
         if smtpSettings:
             try:
-                send_mass_mail( (formatted_data,), False, smtpSettings.host_user,smtpSettings.host_password,None )
+                connection = get_connection(
+                    host=smtpSettings.host,
+                    port=smtpSettings.port,
+                    username=smtpSettings.host_user,
+                    password=smtpSettings.host_password,
+                    use_tls=True,
+                )
+
+                send_mass_mail( (formatted_data,), False, connection)
                 return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
             except:
                 return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
@@ -49,7 +58,14 @@ class EmailViewSet(viewsets.ModelViewSet):
         smtpSettings = SmtpSettings.objects.get(user=user_id)
         if smtpSettings:
             try:
-                send_mail( subject, message, from_email, [recipient_list], False, smtpSettings.host_user,smtpSettings.host_password,None )
+                connection = get_connection(
+                    host=smtpSettings.host,
+                    port=smtpSettings.port,
+                    username=smtpSettings.host_user,
+                    password=smtpSettings.host_password,
+                    use_tls=True,
+                )
+                send_mail( subject, message, from_email, [recipient_list], False, connection)
                 return Response({"message": "Sent successfully"}, status=status.HTTP_200_OK)
             except:
                 return Response({"message": "Sending fail"}, status=status.HTTP_400_BAD_REQUEST)
