@@ -42,8 +42,7 @@ const AddCampaign: FC = () => {
         }
 
         // Send the POST request
-        const response = await createCampaign(payload);
-        
+        const response = await createCampaign(payload);        
         dispatch( addCampaign(response?.data));
         navigate(`/campaign/${response?.data?.id}`);
         setLoad(false);

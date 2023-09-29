@@ -1,40 +1,45 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react'
-import {KTIcon} from '../../../../_metronic/helpers'
-import {AddCampaign} from "./AddCampaign";
+import React, { useEffect, useState } from 'react';
+import { KTIcon } from '../../../../_metronic/helpers';
+import { AddCampaign } from "./AddCampaign";
 
-import axios from "axios";
+import { formatDistanceToNow } from 'date-fns';
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { setCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
-import { formatDistanceToNow } from 'date-fns';
-import {Link} from "react-router-dom";
-type Props = {
-  className: string
-}
+import { deleteCampaign, fetchAllCampaigns } from '../core/_requests';
+type Props = { className: string }
 const CampaignTable: React.FC<Props> = ({className}) => {
+    const campaigns = useSelector(getAllCampaign);
+    const dispatch = useDispatch();
+    const [isLoad, setLoad] = useState(false);
+    
+    const fetchCampaign = async () => {
+        try {
+            setLoad(true);
+            const getData = await fetchAllCampaigns();
+            dispatch(setCampaign(getData));
+        } catch (error) {
+            // Handle errors here
+        } finally {
+            setLoad(false);
+        }
+    };
 
-  const campaigns = useSelector(getAllCampaign);
-  const dispatch = useDispatch();
-  const [isLoad, setLoad] = useState(false);
-
-  const fetchCampaign = async () => {
-    try {
-      setLoad(true);
-      const response = await axios.get("http://127.0.0.1:8000/api/campaign/");
-      const getData = response.data;
-      dispatch(setCampaign(getData));
-    } catch (error) {
-      // Handle errors here
-    } finally {
-      setLoad(false);
+    const handleCampaignDelete = async (campaignId: any) => {
+        const response = await deleteCampaign( campaignId );
+        setLoad(true);
+        const getData = await fetchAllCampaigns();
+        dispatch(setCampaign(getData));
     }
-  };
 
-  useEffect(() => {
-    fetchCampaign();
-  }, []); // Add the empty dependency array
-  const timeDifferance =(time) =>{
+    useEffect(() => {
+        fetchCampaign();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    
+  const timeDifference =(time) =>{
     const date = new Date(time);
 
     const timeAgo = formatDistanceToNow(date, { addSuffix: true });
@@ -111,7 +116,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                         {campaign.name}
                       </Link>
                       <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                        {timeDifferance(campaign.created_at)}
+                        {timeDifference(campaign.created_at)}
                       </span>
                     </div>
                   </div>
@@ -121,7 +126,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                     {campaign.isActive ? "Active" : "Deactive"}
                   </a>
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
-                   {timeDifferance(campaign.updated_at)}
+                   {timeDifference(campaign.updated_at)}
                   </span>
                 </td>
                 <td className='text-end'>
@@ -152,10 +157,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                     >
                       <KTIcon iconName='pencil' className='fs-3' />
                     </a>
-                    <a
-                      href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                    <a className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm' onClick={() => handleCampaignDelete(campaign?.id)}>
                       <KTIcon iconName='trash' className='fs-3' />
                     </a>
                   </div>
@@ -177,4 +179,5 @@ const CampaignTable: React.FC<Props> = ({className}) => {
   )
 }
 
-export {CampaignTable}
+export { CampaignTable };
+

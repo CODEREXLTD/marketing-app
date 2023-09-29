@@ -4,40 +4,61 @@ from .models import Campaign, Sequence, SequenceEmailChannel
 from django.db import connection
 from rest_framework.response import Response
 from rest_framework import status
-
+import logging
+logger = logging.getLogger(__name__)
 
 # Serializer for the SequenceEmailChannel model
 class SequenceEmailChannelSerializer(serializers.ModelSerializer):
-    id = serializers.ImageField(required=False)
     class Meta:
         model = SequenceEmailChannel
         fields = '__all__'
 
+    def create( self, validateData ):
+        sequenceEmailChannel  = SequenceEmailChannel.objects.create(**validateData)
+        return sequenceEmailChannel
+
+    def update(self, instance, validated_data):
+        # Update the fields of the existing sequenceEmailChannel instance with the new data
+        instance.subject = validated_data.get("subject", instance.subject)
+        instance.preview_text = validated_data.get("preview_text", instance.preview_text)
+        instance.body = validated_data.get("body", instance.body)
+        instance.save()
+        return instance
+
 # Serializer for the Sequence model
 class SequenceSerializer(serializers.ModelSerializer):
-    email_channels = SequenceEmailChannelSerializer(allow_null=True)
-    id = serializers.ImageField(required=False)
     class Meta:
         model = Sequence
         fields = '__all__'
 
+    def create( self, validateData ):
+        sequence  = Sequence.objects.create(**validateData)
+        return sequence
 
-# Serializer for the Campaign model
+    def update(self, instance, validated_data):
+        # Update the fields of the existing Sequence instance with the new data
+        instance.step_id = validated_data.get("step_id", instance.step_id)
+        instance.data = validated_data.get("data", instance.data)
+        instance.delay = validated_data.get("delay", instance.delay)
+        instance.next_step = validated_data.get("next_step", instance.next_step)
+        instance.type = validated_data.get("type", instance.type)
+        instance.save()
+        return instance
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['channel'] = SequenceEmailChannelSerializer(instance.sequenceemailchannel).data
+        return data
+
 class CampaignSerializer(serializers.ModelSerializer):
-    sequences = SequenceSerializer( many=True, read_only=True, source='sequence_set' )
     class Meta:
         model = Campaign
         fields = '__all__'
     def create( self, validateData ):
-        # sequences = validateData.pop('sequences')
         campaign  = Campaign.objects.create(**validateData)
-        # if sequences:
-        #     for sequence in sequences:
-        #         Sequence.objects.create(**sequence, campaign=campaign)
         return campaign
-    
+        
     def update(self, instance, validateData):
-        # sequences = validateData.pop('sequences')
         instance.name = validateData.get("name", instance.name)
         instance.description = validateData.get("description", instance.name)
         instance.status = validateData.get("status", instance.status)
@@ -57,8 +78,3 @@ class CampaignCreateSerializer(serializers.ModelSerializer):
         
     def create(self, validateData):
         return Campaign.objects.create_campaign(**validateData)
-
-# class CampaignsGetSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Campaign
-#         fields=['name','description']
