@@ -20,7 +20,9 @@ const CampaignDetails: FC = () => {
     const [isSubmitButton, setSubmitButton] = useState(true);
     const getStepSequence = useSelector(getStepsSequence);
     const campaign = useSelector(getCampaign);
-    const { auth } = useAuth();
+    console.log(campaign);
+    
+    const { auth, currentUser } = useAuth();
     const { id } = useParams();
     const dispatch = useDispatch();    
     
@@ -75,7 +77,7 @@ const CampaignDetails: FC = () => {
   useEffect( () => {
     // declare the data fetching function
     const fetchData = async () => {
-        const response = await fetchCampaign(id);  
+        const response = await fetchCampaign(id, currentUser?.id);               
         dispatch(setSingleCampaign(response));      
     }
     // call the function

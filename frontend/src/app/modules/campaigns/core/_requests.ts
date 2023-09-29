@@ -84,12 +84,13 @@ export async function saveCampaignSequence( getStepSequence: object, { id, name,
  * Fetches details of a specific campaign by sending a GET request to the campaign's endpoint.
  *
  * @param {any} campaignID - The unique identifier of the campaign to be fetched.
+ * @param {any} userID - The unique identifier of the campaign to be fetched.
  *
  * @returns {Promise<any>} A Promise that resolves with the campaign details when the request is successful,
  *                        or rejects with an error if the request fails.
  */
-export async function fetchCampaign( campaignID: any ): Promise<any> {  
-    const response = await axios.get(`${CAMPAIGN_URL}${campaignID}`, {
+export async function fetchCampaign( campaignID: any, userID: any ): Promise<any> {  
+    const response = await axios.get(`${CAMPAIGN_URL}${userID}/${campaignID}`, {
         headers: {
             'Content-Type': 'application/json',
         },
