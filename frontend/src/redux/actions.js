@@ -34,6 +34,13 @@ export function addSequence(step) {
     };
 }
 
+export function removeSequence(index) {
+    return {
+        type: "REMOVE_SEQUENCE",
+        payload: index,
+    };
+}
+
 export function selectStep(value,index) {
     return {
         type: "SET_SELECTED_STEP",

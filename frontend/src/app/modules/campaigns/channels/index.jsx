@@ -8,5 +8,5 @@ import { step as Email } from './email-channel/index';
 
 export const Initialize = () => {
     const dispatch = useDispatch();
-   dispatch(registerStepType(Email));
+    dispatch(registerStepType(Email));
 }

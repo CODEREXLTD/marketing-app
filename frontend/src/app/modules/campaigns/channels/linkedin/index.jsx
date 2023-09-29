@@ -4,7 +4,7 @@ import  Edit  from './edit';
 export const step = {
   key: 'linkedin',
   type: 'linkedin_channel',
-  title: 'Add linkedin',
+  title: 'Linkedin',
   delay: 1,
   foreground: '#7F54B3',
   background: '#f7edf7',

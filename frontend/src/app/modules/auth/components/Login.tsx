@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAuth } from '../core/Auth'
-import { getUserByToken, login } from '../core/_requests'
+import { getUserByToken, login, refreshAuthToken } from '../core/_requests'
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -26,7 +26,7 @@ const initialValues = {
 
 export function Login() {
     const [loading, setLoading] = useState(false)
-    const {saveAuth, setCurrentUser} = useAuth()
+    const {auth, saveAuth, setCurrentUser} = useAuth()
 
     const formik = useFormik({
         initialValues,
@@ -46,6 +46,28 @@ export function Login() {
             }
         },
     })
+
+    const refreshToken = async () => {
+        const data = await refreshAuthToken(JSON.stringify({refresh:auth?.refreshToken}));  
+        saveAuth(data)
+        const {data: user} = await getUserByToken(data?.token)
+        setCurrentUser(user)
+        if(loading){
+            setLoading(false)
+        }
+    }
+
+    useEffect(()=>{
+        const REFRESH_INTERVAL = 1000 * 60 * 19;
+        const interval = setInterval(()=>{
+            if(auth){
+                refreshToken()
+            }
+        }, REFRESH_INTERVAL)
+        return () => clearInterval(interval)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[auth])
 
     return (
         <form

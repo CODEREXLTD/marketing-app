@@ -48,7 +48,7 @@ export default function Edit(){
                                 <div className="d-flex align-items-center me-3">
                                     <div className="btn-group me-4">
                                         <span className="btn btn-primary fs-bold px-6" data-kt-inbox-form="send">
-                                            <span className="indicator-label">Send</span>
+                                            <span className="indicator-label">Send Test Email</span>
                                             <span className="indicator-progress">Please wait...
                                             <span className="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </span>
