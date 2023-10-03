@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('status', models.CharField(choices=[('draft', 'Draft'), ('published', 'Published'), ('completed', 'Completed')], default='draft', max_length=20)),
                 ('isActive', models.BooleanField(default=False)),
-                ('scheduled_at', models.DateTimeField(blank=True, null=True)),
+                ('scheduled_at', models.DateTimeField(auto_now_add=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

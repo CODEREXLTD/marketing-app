@@ -40,7 +40,7 @@ def schedule_campaigns():
     for serialized_campaign in serialized_campaigns:
         
         for sequence in serialized_campaign['sequences']:
-            if 'email' == sequence['type']:
+            if 'email_channel' == sequence['type']:
                 email_channel_data = sequence['channel']
                 from_email = settings.EMAIL_HOST_USER
                 recipient_list = ['nasim@coderex.co','shahin@coderex.co','sadi@coderex.co','tohin@coderex.co']
