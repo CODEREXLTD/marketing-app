@@ -132,18 +132,6 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                 </td>
                 <td>
                   <div className='d-flex justify-content-end flex-shrink-0'>
-                    <a
-                      href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
-                      <KTIcon iconName='switch' className='fs-3' />
-                    </a>
-                    <a
-                      href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
-                      <KTIcon iconName='pencil' className='fs-3' />
-                    </a>
                     <a className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm' onClick={() => handleCampaignDelete(campaign?.id)}>
                       <KTIcon iconName='trash' className='fs-3' />
                     </a>
