@@ -19,7 +19,7 @@ class Campaign(models.Model):
     )
     isActive = models.BooleanField(default=False)
     user = models.ForeignKey('authentication.User', on_delete=models.CASCADE)
-    scheduled_at = models.DateTimeField(null=True, blank=True)
+    scheduled_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
