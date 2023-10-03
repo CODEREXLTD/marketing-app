@@ -61,13 +61,13 @@ $kanban-spacer-x: 1.25rem;
         background: var(--#{$prefix}body-bg);
 
         @each $name, $color in $theme-colors {
-          &[data-class='#{$name}'] {
+          &[data-class="#{$name}"] {
             background-color: var(--#{$prefix}#{$name});
             color: var(--#{$prefix}#{$name}-inverse);
             box-shadow: none;
           }
 
-          &[data-class='light-#{$name}'] {
+          &[data-class="light-#{$name}"] {
             background-color: var(--#{$prefix}#{$name}-light);
             color: var(--#{$prefix}#{$name});
             box-shadow: none;

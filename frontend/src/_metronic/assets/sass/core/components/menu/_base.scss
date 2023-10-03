@@ -97,7 +97,7 @@
       &:after {
         display: block;
         width: 100%;
-        content: ' ';
+        content: " ";
         will-change: transform;
         background-size: 100% 100%;
         @include svg-bg-icon(arrow-start, var(--#{$prefix}text-muted));
@@ -142,7 +142,7 @@
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
     @if $infix and $direction == down {
-      $infix: $infix + '-' + $direction;
+      $infix: $infix + "-" + $direction;
     }
 
     @include media-breakpoint-direction($direction, $breakpoint) {
@@ -180,8 +180,14 @@
           // Animation
           @if ($menu-dropdown-animation == true) {
             // Move up
-            animation: menu-sub-dropdown-animation-fade-in #{$menu-dropdown-animation-speed} ease 1,
-              menu-sub-dropdown-animation-move-up #{$menu-dropdown-animation-speed} ease 1;
+            animation: menu-sub-dropdown-animation-fade-in
+                #{$menu-dropdown-animation-speed}
+                ease
+                1,
+              menu-sub-dropdown-animation-move-up
+                #{$menu-dropdown-animation-speed}
+                ease
+                1;
           }
         }
       }

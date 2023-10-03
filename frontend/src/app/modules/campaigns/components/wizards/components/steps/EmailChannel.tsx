@@ -1,18 +1,22 @@
-import React, {FC, useCallback, useEffect, useState} from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSteps,
   getStepsSequence,
-  getStepIndex
+  getStepIndex,
 } from "../../../../../../../redux/selectors";
-import { addSequence, removeSequence, selectStep } from "../../../../../../../redux/actions";
+import {
+  addSequence,
+  removeSequence,
+  selectStep,
+} from "../../../../../../../redux/actions";
 import { StepContent } from "../../../../channels/content";
 
 const EmailChannel: FC = () => {
   const getAllStep = useSelector(getSteps);
   const getStepSequence = useSelector(getStepsSequence);
   const selectedStepIndex = useSelector(getStepIndex);
-  const [inserted, setInserted] = useState(false)
+  const [inserted, setInserted] = useState(false);
   // console.log(getStepSequence)
   const dispatch = useDispatch();
   const onInsert = (step) => {
@@ -36,35 +40,33 @@ const EmailChannel: FC = () => {
       };
     }
     dispatch(addSequence(stepData));
-    setInserted(!inserted)
+    setInserted(!inserted);
   };
-
 
   const onRemove = (e, index) => {
     e.preventDefault();
     dispatch(removeSequence(index));
-    if(getStepSequence[index + 1]){
-       let data = getStepSequence[index+1];
+    if (getStepSequence[index + 1]) {
+      let data = getStepSequence[index + 1];
       dispatch(selectStep(data, index));
-    }else{
-      if(getStepSequence[index - 1 ]){
-        let data = getStepSequence[index-1];
-      dispatch(selectStep(data, index));
+    } else {
+      if (getStepSequence[index - 1]) {
+        let data = getStepSequence[index - 1];
+        dispatch(selectStep(data, index));
       }
     }
-
   };
 
   /**
    * Active the current step
-   * 
-   * 
-   * @param step 
-   * @param key 
+   *
+   *
+   * @param step
+   * @param key
    */
-  const handleStep =(step, key) =>{
-      dispatch(selectStep(step, key));
-  }
+  const handleStep = (step, key) => {
+    dispatch(selectStep(step, key));
+  };
 
   useEffect(() => {
     if (getStepSequence.length > 0) {
@@ -72,7 +74,7 @@ const EmailChannel: FC = () => {
       dispatch(selectStep(lastIndex, getStepSequence.length - 1));
     } else {
       let lastIndex = getStepSequence[0];
-      if(lastIndex){
+      if (lastIndex) {
         dispatch(selectStep(lastIndex, 0));
       }
     }
@@ -104,21 +106,31 @@ const EmailChannel: FC = () => {
             <div className="card-body">
               <ul className="steps-wrapper">
                 {getStepSequence.map((step, index) => (
-                    <div key={index} className={`single-step ${selectedStepIndex == index ? "active" : ""}`}>
-                       <a href="#" className="step-delete" onClick={(e) => onRemove(e, index)}>
-                            <i className="fa fa-trash" style={{ color: 'red' }}></i>
-                       </a>
-                      <li  onClick={() => handleStep(step,index)}>
-                        <div className="step-card">
-                            <div className="step-name">
-                              <p>{step.title} {index+1}</p>
-                              <div style={{ flexGrow: 1 }}></div>
-                            </div>
-                            <div className="step-body">`Email Subject`</div>
+                  <div
+                    key={index}
+                    className={`single-step ${
+                      selectedStepIndex == index ? "active" : ""
+                    }`}
+                  >
+                    <a
+                      href="#"
+                      className="step-delete"
+                      onClick={(e) => onRemove(e, index)}
+                    >
+                      <i className="fa fa-trash" style={{ color: "red" }}></i>
+                    </a>
+                    <li onClick={() => handleStep(step, index)}>
+                      <div className="step-card">
+                        <div className="step-name">
+                          <p>
+                            {step.title} {index + 1}
+                          </p>
+                          <div style={{ flexGrow: 1 }}></div>
                         </div>
-                      </li>
-                    </div>
-
+                        <div className="step-body">`Email Subject`</div>
+                      </div>
+                    </li>
+                  </div>
                 ))}
               </ul>
 

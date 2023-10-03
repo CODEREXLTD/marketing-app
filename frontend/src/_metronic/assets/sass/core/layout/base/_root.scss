@@ -8,22 +8,46 @@
   @include property(--#{$prefix}app-blank-bg-color, $app-blank-bg-color);
 
   // Header base
-  @include property(--#{$prefix}app-header-base-bg-color, $app-header-base-bg-color);
-  @include property(--#{$prefix}app-header-base-box-shadow, $app-header-base-box-shadow);
-  @include property(--#{$prefix}app-header-base-border-bottom, $app-header-base-border-bottom);
+  @include property(
+    --#{$prefix}app-header-base-bg-color,
+    $app-header-base-bg-color
+  );
+  @include property(
+    --#{$prefix}app-header-base-box-shadow,
+    $app-header-base-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-header-base-border-bottom,
+    $app-header-base-border-bottom
+  );
 
   // Header minimize
-  @include property(--#{$prefix}app-header-minimize-bg-color, $app-header-minimize-bg-color);
-  @include property(--#{$prefix}app-header-minimize-box-shadow, $app-header-minimize-box-shadow);
+  @include property(
+    --#{$prefix}app-header-minimize-bg-color,
+    $app-header-minimize-bg-color
+  );
+  @include property(
+    --#{$prefix}app-header-minimize-box-shadow,
+    $app-header-minimize-box-shadow
+  );
   @include property(
     --#{$prefix}app-header-minimize-border-bottom,
     $app-header-minimize-border-bottom
   );
 
   // Header sticky
-  @include property(--#{$prefix}app-header-sticky-bg-color, $app-header-sticky-bg-color);
-  @include property(--#{$prefix}app-header-sticky-box-shadow, $app-header-sticky-box-shadow);
-  @include property(--#{$prefix}app-header-sticky-border-bottom, $app-header-sticky-border-bottom);
+  @include property(
+    --#{$prefix}app-header-sticky-bg-color,
+    $app-header-sticky-bg-color
+  );
+  @include property(
+    --#{$prefix}app-header-sticky-box-shadow,
+    $app-header-sticky-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-header-sticky-border-bottom,
+    $app-header-sticky-border-bottom
+  );
 
   // Header primary
   @include property(
@@ -182,50 +206,113 @@
   );
 
   // Toolbar base
-  @include property(--#{$prefix}app-toolbar-base-bg-color, $app-toolbar-base-bg-color);
-  @include property(--#{$prefix}app-toolbar-base-box-shadow, $app-toolbar-base-box-shadow);
-  @include property(--#{$prefix}app-toolbar-base-border-top, $app-toolbar-base-border-top);
-  @include property(--#{$prefix}app-toolbar-base-border-bottom, $app-toolbar-base-border-bottom);
+  @include property(
+    --#{$prefix}app-toolbar-base-bg-color,
+    $app-toolbar-base-bg-color
+  );
+  @include property(
+    --#{$prefix}app-toolbar-base-box-shadow,
+    $app-toolbar-base-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-toolbar-base-border-top,
+    $app-toolbar-base-border-top
+  );
+  @include property(
+    --#{$prefix}app-toolbar-base-border-bottom,
+    $app-toolbar-base-border-bottom
+  );
 
   // Toolbar minimize
-  @include property(--#{$prefix}app-toolbar-minimize-bg-color, $app-toolbar-minimize-bg-color);
-  @include property(--#{$prefix}app-toolbar-minimize-box-shadow, $app-toolbar-minimize-box-shadow);
-  @include property(--#{$prefix}app-toolbar-minimize-border-top, $app-toolbar-minimize-border-top);
+  @include property(
+    --#{$prefix}app-toolbar-minimize-bg-color,
+    $app-toolbar-minimize-bg-color
+  );
+  @include property(
+    --#{$prefix}app-toolbar-minimize-box-shadow,
+    $app-toolbar-minimize-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-toolbar-minimize-border-top,
+    $app-toolbar-minimize-border-top
+  );
   @include property(
     --#{$prefix}app-toolbar-minimize-border-bottom,
     $app-toolbar-minimize-border-bottom
   );
 
   // Toolbar sticky
-  @include property(--#{$prefix}app-toolbar-sticky-bg-color, $app-toolbar-sticky-bg-color);
-  @include property(--#{$prefix}app-toolbar-sticky-box-shadow, $app-toolbar-sticky-box-shadow);
-  @include property(--#{$prefix}app-toolbar-sticky-border-top, $app-toolbar-sticky-border-top);
+  @include property(
+    --#{$prefix}app-toolbar-sticky-bg-color,
+    $app-toolbar-sticky-bg-color
+  );
+  @include property(
+    --#{$prefix}app-toolbar-sticky-box-shadow,
+    $app-toolbar-sticky-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-toolbar-sticky-border-top,
+    $app-toolbar-sticky-border-top
+  );
   @include property(
     --#{$prefix}app-toolbar-sticky-border-bottom,
     $app-toolbar-sticky-border-bottom
   );
 
   // Sidebar base
-  @include property(--#{$prefix}app-sidebar-base-bg-color, $app-sidebar-base-bg-color);
-  @include property(--#{$prefix}app-sidebar-base-box-shadow, $app-sidebar-base-box-shadow);
-  @include property(--#{$prefix}app-sidebar-base-border-start, $app-sidebar-base-border-start);
-  @include property(--#{$prefix}app-sidebar-base-border-end, $app-sidebar-base-border-end);
+  @include property(
+    --#{$prefix}app-sidebar-base-bg-color,
+    $app-sidebar-base-bg-color
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-box-shadow,
+    $app-sidebar-base-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-border-start,
+    $app-sidebar-base-border-start
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-border-end,
+    $app-sidebar-base-border-end
+  );
 
   // Hero
   @include property(--#{$prefix}app-hero-bg-color, $app-hero-bg-color);
   @include property(--#{$prefix}app-hero-box-shadow, $app-hero-box-shadow);
   @include property(--#{$prefix}app-hero-border-top, $app-hero-border-top);
-  @include property(--#{$prefix}app-hero-border-bottom, $app-hero-border-bottom);
+  @include property(
+    --#{$prefix}app-hero-border-bottom,
+    $app-hero-border-bottom
+  );
 
   // Sidebar sticky
-  @include property(--#{$prefix}app-sidebar-sticky-bg-color, $app-sidebar-sticky-bg-color);
-  @include property(--#{$prefix}app-sidebar-sticky-box-shadow, $app-sidebar-sticky-box-shadow);
-  @include property(--#{$prefix}app-sidebar-sticky-border-start, $app-sidebar-sticky-border-start);
-  @include property(--#{$prefix}app-sidebar-sticky-border-end, $app-sidebar-sticky-border-end);
+  @include property(
+    --#{$prefix}app-sidebar-sticky-bg-color,
+    $app-sidebar-sticky-bg-color
+  );
+  @include property(
+    --#{$prefix}app-sidebar-sticky-box-shadow,
+    $app-sidebar-sticky-box-shadow
+  );
+  @include property(
+    --#{$prefix}app-sidebar-sticky-border-start,
+    $app-sidebar-sticky-border-start
+  );
+  @include property(
+    --#{$prefix}app-sidebar-sticky-border-end,
+    $app-sidebar-sticky-border-end
+  );
 
   // Sidebar minimize
-  @include property(--#{$prefix}app-sidebar-minimize-bg-color, $app-sidebar-minimize-bg-color);
-  @include property(--#{$prefix}app-sidebar-minimize-box-shadow, $app-sidebar-minimize-box-shadow);
+  @include property(
+    --#{$prefix}app-sidebar-minimize-bg-color,
+    $app-sidebar-minimize-bg-color
+  );
+  @include property(
+    --#{$prefix}app-sidebar-minimize-box-shadow,
+    $app-sidebar-minimize-box-shadow
+  );
   @include property(
     --#{$prefix}app-sidebar-minimize-hover-box-shadow,
     $app-sidebar-minimize-hover-box-shadow
@@ -234,7 +321,10 @@
     --#{$prefix}app-sidebar-minimize-border-start,
     $app-sidebar-minimize-border-start
   );
-  @include property(--#{$prefix}app-sidebar-minimize-border-end, $app-sidebar-minimize-border-end);
+  @include property(
+    --#{$prefix}app-sidebar-minimize-border-end,
+    $app-sidebar-minimize-border-end
+  );
 
   // Sidebar primary
   @include property(
@@ -317,7 +407,10 @@
   );
 
   // Sidebar panel base
-  @include property(--#{$prefix}app-sidebar-panel-base-bg-color, $app-sidebar-panel-base-bg-color);
+  @include property(
+    --#{$prefix}app-sidebar-panel-base-bg-color,
+    $app-sidebar-panel-base-bg-color
+  );
   @include property(
     --#{$prefix}app-sidebar-panel-base-box-shadow,
     $app-sidebar-panel-base-box-shadow
@@ -372,16 +465,34 @@
   );
 
   // Aside base
-  @include property(--#{$prefix}app-aside-base-bg-color, $app-aside-base-bg-color);
-  @include property(--#{$prefix}app-aside-base-box-shadow, $app-aside-base-box-shadow);
+  @include property(
+    --#{$prefix}app-aside-base-bg-color,
+    $app-aside-base-bg-color
+  );
+  @include property(
+    --#{$prefix}app-aside-base-box-shadow,
+    $app-aside-base-box-shadow
+  );
 
   // Aside sticky
-  @include property(--#{$prefix}app-aside-sticky-bg-color, $app-aside-sticky-bg-color);
-  @include property(--#{$prefix}app-aside-sticky-box-shadow, $app-aside-sticky-box-shadow);
+  @include property(
+    --#{$prefix}app-aside-sticky-bg-color,
+    $app-aside-sticky-bg-color
+  );
+  @include property(
+    --#{$prefix}app-aside-sticky-box-shadow,
+    $app-aside-sticky-box-shadow
+  );
 
   // Aside minimize
-  @include property(--#{$prefix}app-aside-minimize-bg-color, $app-aside-minimize-bg-color);
-  @include property(--#{$prefix}app-aside-minimize-box-shadow, $app-aside-minimize-box-shadow);
+  @include property(
+    --#{$prefix}app-aside-minimize-bg-color,
+    $app-aside-minimize-bg-color
+  );
+  @include property(
+    --#{$prefix}app-aside-minimize-box-shadow,
+    $app-aside-minimize-box-shadow
+  );
   @include property(
     --#{$prefix}app-aside-minimize-hover-box-shadow,
     $app-aside-minimize-hover-box-shadow
@@ -405,12 +516,24 @@
   @include property(--#{$prefix}app-blank-bg-color, $app-blank-bg-color-dark);
 
   // Header base
-  @include property(--#{$prefix}app-header-base-bg-color, $app-header-base-bg-color-dark);
-  @include property(--#{$prefix}app-header-base-box-shadow, $app-header-base-box-shadow-dark);
-  @include property(--#{$prefix}app-header-base-border-bottom, $app-header-base-border-bottom-dark);
+  @include property(
+    --#{$prefix}app-header-base-bg-color,
+    $app-header-base-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-header-base-box-shadow,
+    $app-header-base-box-shadow-dark
+  );
+  @include property(
+    --#{$prefix}app-header-base-border-bottom,
+    $app-header-base-border-bottom-dark
+  );
 
   // Header minimize
-  @include property(--#{$prefix}app-header-minimize-bg-color, $app-header-minimize-bg-color-dark);
+  @include property(
+    --#{$prefix}app-header-minimize-bg-color,
+    $app-header-minimize-bg-color-dark
+  );
   @include property(
     --#{$prefix}app-header-minimize-box-shadow,
     $app-header-minimize-box-shadow-dark
@@ -421,8 +544,14 @@
   );
 
   // Header sticky
-  @include property(--#{$prefix}app-header-sticky-bg-color, $app-header-sticky-bg-color-dark);
-  @include property(--#{$prefix}app-header-sticky-box-shadow, $app-header-sticky-box-shadow-dark);
+  @include property(
+    --#{$prefix}app-header-sticky-bg-color,
+    $app-header-sticky-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-header-sticky-box-shadow,
+    $app-header-sticky-box-shadow-dark
+  );
   @include property(
     --#{$prefix}app-header-sticky-border-bottom,
     $app-header-sticky-border-bottom-dark
@@ -585,16 +714,28 @@
   );
 
   // Toolbar base
-  @include property(--#{$prefix}app-toolbar-base-bg-color, $app-toolbar-base-bg-color-dark);
-  @include property(--#{$prefix}app-toolbar-base-box-shadow, $app-toolbar-base-box-shadow-dark);
-  @include property(--#{$prefix}app-toolbar-base-border-top, $app-toolbar-base-border-top-dark);
+  @include property(
+    --#{$prefix}app-toolbar-base-bg-color,
+    $app-toolbar-base-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-toolbar-base-box-shadow,
+    $app-toolbar-base-box-shadow-dark
+  );
+  @include property(
+    --#{$prefix}app-toolbar-base-border-top,
+    $app-toolbar-base-border-top-dark
+  );
   @include property(
     --#{$prefix}app-toolbar-base-border-bottom,
     $app-toolbar-base-border-bottom-dark
   );
 
   // Toolbar minimize
-  @include property(--#{$prefix}app-toolbar-minimize-bg-color, $app-toolbar-minimize-bg-color-dark);
+  @include property(
+    --#{$prefix}app-toolbar-minimize-bg-color,
+    $app-toolbar-minimize-bg-color-dark
+  );
   @include property(
     --#{$prefix}app-toolbar-minimize-box-shadow,
     $app-toolbar-minimize-box-shadow-dark
@@ -609,9 +750,18 @@
   );
 
   // Toolbar sticky
-  @include property(--#{$prefix}app-toolbar-sticky-bg-color, $app-toolbar-sticky-bg-color-dark);
-  @include property(--#{$prefix}app-toolbar-sticky-box-shadow, $app-toolbar-sticky-box-shadow-dark);
-  @include property(--#{$prefix}app-toolbar-sticky-border-top, $app-toolbar-sticky-border-top-dark);
+  @include property(
+    --#{$prefix}app-toolbar-sticky-bg-color,
+    $app-toolbar-sticky-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-toolbar-sticky-box-shadow,
+    $app-toolbar-sticky-box-shadow-dark
+  );
+  @include property(
+    --#{$prefix}app-toolbar-sticky-border-top,
+    $app-toolbar-sticky-border-top-dark
+  );
   @include property(
     --#{$prefix}app-toolbar-sticky-border-bottom,
     $app-toolbar-sticky-border-bottom-dark
@@ -621,25 +771,52 @@
   @include property(--#{$prefix}app-hero-bg-color, $app-hero-bg-color-dark);
   @include property(--#{$prefix}app-hero-box-shadow, $app-hero-box-shadow-dark);
   @include property(--#{$prefix}app-hero-border-top, $app-hero-border-top-dark);
-  @include property(--#{$prefix}app-hero-border-bottom, $app-hero-border-bottom-dark);
+  @include property(
+    --#{$prefix}app-hero-border-bottom,
+    $app-hero-border-bottom-dark
+  );
 
   // Sidebar base
-  @include property(--#{$prefix}app-sidebar-base-bg-color, $app-sidebar-base-bg-color-dark);
-  @include property(--#{$prefix}app-sidebar-base-box-shadow, $app-sidebar-base-box-shadow-dark);
-  @include property(--#{$prefix}app-sidebar-base-border-start, $app-sidebar-base-border-start-dark);
-  @include property(--#{$prefix}app-sidebar-base-border-end, $app-sidebar-base-border-end-dark);
+  @include property(
+    --#{$prefix}app-sidebar-base-bg-color,
+    $app-sidebar-base-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-box-shadow,
+    $app-sidebar-base-box-shadow-dark
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-border-start,
+    $app-sidebar-base-border-start-dark
+  );
+  @include property(
+    --#{$prefix}app-sidebar-base-border-end,
+    $app-sidebar-base-border-end-dark
+  );
 
   // Sidebar sticky
-  @include property(--#{$prefix}app-sidebar-sticky-bg-color, $app-sidebar-sticky-bg-color-dark);
-  @include property(--#{$prefix}app-sidebar-sticky-box-shadow, $app-sidebar-sticky-box-shadow-dark);
+  @include property(
+    --#{$prefix}app-sidebar-sticky-bg-color,
+    $app-sidebar-sticky-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-sidebar-sticky-box-shadow,
+    $app-sidebar-sticky-box-shadow-dark
+  );
   @include property(
     --#{$prefix}app-sidebar-sticky-border-start,
     $app-sidebar-sticky-border-start-dark
   );
-  @include property(--#{$prefix}app-sidebar-sticky-border-end, $app-sidebar-sticky-border-end-dark);
+  @include property(
+    --#{$prefix}app-sidebar-sticky-border-end,
+    $app-sidebar-sticky-border-end-dark
+  );
 
   // Sidebar minimize
-  @include property(--#{$prefix}app-sidebar-minimize-bg-color, $app-sidebar-minimize-bg-color-dark);
+  @include property(
+    --#{$prefix}app-sidebar-minimize-bg-color,
+    $app-sidebar-minimize-bg-color-dark
+  );
   @include property(
     --#{$prefix}app-sidebar-minimize-box-shadow,
     $app-sidebar-minimize-box-shadow-dark
@@ -794,15 +971,30 @@
   );
 
   // Aside base
-  @include property(--#{$prefix}app-aside-base-bg-color, $app-aside-base-bg-color-dark);
-  @include property(--#{$prefix}app-aside-base-box-shadow, $app-aside-base-box-shadow-dark);
+  @include property(
+    --#{$prefix}app-aside-base-bg-color,
+    $app-aside-base-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-aside-base-box-shadow,
+    $app-aside-base-box-shadow-dark
+  );
 
   // Aside sticky
-  @include property(--#{$prefix}app-aside-sticky-bg-color, $app-aside-sticky-bg-color-dark);
+  @include property(
+    --#{$prefix}app-aside-sticky-bg-color,
+    $app-aside-sticky-bg-color-dark
+  );
 
   // Aside minimize
-  @include property(--#{$prefix}app-aside-minimize-bg-color, $app-aside-minimize-bg-color-dark);
-  @include property(--#{$prefix}app-aside-minimize-box-shadow, $app-aside-minimize-box-shadow-dark);
+  @include property(
+    --#{$prefix}app-aside-minimize-bg-color,
+    $app-aside-minimize-bg-color-dark
+  );
+  @include property(
+    --#{$prefix}app-aside-minimize-box-shadow,
+    $app-aside-minimize-box-shadow-dark
+  );
   @include property(
     --#{$prefix}app-aside-minimize-hover-box-shadow,
     $app-aside-minimize-hover-box-shadow-dark
@@ -812,10 +1004,19 @@
   @include property(--#{$prefix}app-page-bg-color, $app-page-bg-color-dark);
 
   // Wrapper
-  @include property(--#{$prefix}app-wrapper-bg-color, $app-wrapper-bg-color-dark);
+  @include property(
+    --#{$prefix}app-wrapper-bg-color,
+    $app-wrapper-bg-color-dark
+  );
 
   // Footer
   @include property(--#{$prefix}app-footer-bg-color, $app-footer-bg-color-dark);
-  @include property(--#{$prefix}app-footer-box-shadow, $app-footer-box-shadow-dark);
-  @include property(--#{$prefix}app-footer-border-top, $app-footer-border-top-dark);
+  @include property(
+    --#{$prefix}app-footer-box-shadow,
+    $app-footer-box-shadow-dark
+  );
+  @include property(
+    --#{$prefix}app-footer-border-top,
+    $app-footer-border-top-dark
+  );
 }

@@ -349,7 +349,7 @@ $select2-input-padding-y-lg: $input-padding-y-lg - $select2-tag-padding-y-lg * 2
           transform: translateY(-50%);
           height: 0.75rem;
           width: 0.75rem;
-          content: '';
+          content: "";
           @include svg-bg-icon(check, var(--#{$prefix}component-hover-color));
           mask-position: center;
           -webkit-mask-position: center;

@@ -11,8 +11,18 @@
   --#{$prefix}app-blank-bg: #{$app-blank-bg-color};
 
   // Header
-  --#{$prefix}header-desktop-fixed-bg-color: #{get($header-config, desktop, fixed, bg-color)};
-  --#{$prefix}header-desktop-fixed-box-shadow: #{get($header-config, desktop, fixed, box-shadow)};
+  --#{$prefix}header-desktop-fixed-bg-color: #{get(
+      $header-config,
+      desktop,
+      fixed,
+      bg-color
+    )};
+  --#{$prefix}header-desktop-fixed-box-shadow: #{get(
+      $header-config,
+      desktop,
+      fixed,
+      box-shadow
+    )};
 
   --#{$prefix}header-tablet-and-mobile-fixed-bg-color: #{get(
       $header-config,
@@ -28,8 +38,18 @@
     )};
 
   // Footer
-  --#{$prefix}footer-desktop-fixed-bg-color: #{get($footer-config, desktop, fixed, bg-color)};
-  --#{$prefix}footer-desktop-fixed-box-shadow: #{get($footer-config, desktop, fixed, box-shadow)};
+  --#{$prefix}footer-desktop-fixed-bg-color: #{get(
+      $footer-config,
+      desktop,
+      fixed,
+      bg-color
+    )};
+  --#{$prefix}footer-desktop-fixed-box-shadow: #{get(
+      $footer-config,
+      desktop,
+      fixed,
+      box-shadow
+    )};
 
   --#{$prefix}footer-tablet-and-mobile-fixed-bg-color: #{get(
       $footer-config,
@@ -58,7 +78,12 @@
   --#{$prefix}app-blank-bg: #{$app-blank-bg-color-dark};
 
   // Header
-  --#{$prefix}header-desktop-fixed-bg-color: #{get($header-config, desktop, fixed, bg-color-dark)};
+  --#{$prefix}header-desktop-fixed-bg-color: #{get(
+      $header-config,
+      desktop,
+      fixed,
+      bg-color-dark
+    )};
   --#{$prefix}header-desktop-fixed-box-shadow: #{get(
       $header-config,
       desktop,
@@ -80,7 +105,12 @@
     )};
 
   // Footer
-  --#{$prefix}footer-desktop-fixed-bg-color: #{get($footer-config, desktop, fixed, bg-color-dark)};
+  --#{$prefix}footer-desktop-fixed-bg-color: #{get(
+      $footer-config,
+      desktop,
+      fixed,
+      bg-color-dark
+    )};
   --#{$prefix}footer-desktop-fixed-box-shadow: #{get(
       $footer-config,
       desktop,

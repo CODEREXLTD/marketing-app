@@ -79,7 +79,7 @@ body.swal2-height-auto {
     border-color: var(--#{$prefix}danger);
     color: var(--#{$prefix}danger);
 
-    [class^='swal2-x-mark-line'] {
+    [class^="swal2-x-mark-line"] {
       background-color: rgba(var(--#{$prefix}danger-rgb), 0.75);
     }
   }
@@ -89,7 +89,7 @@ body.swal2-height-auto {
     border-color: var(--#{$prefix}success);
     color: var(--#{$prefix}success);
 
-    [class^='swal2-success-line'] {
+    [class^="swal2-success-line"] {
       background-color: var(--#{$prefix}success);
     }
 

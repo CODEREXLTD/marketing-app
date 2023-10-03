@@ -1,4 +1,4 @@
-import { DefaultLayoutConfig } from './DefaultLayoutConfig'
+import { DefaultLayoutConfig } from "./DefaultLayoutConfig";
 import {
   IAside,
   IContent,
@@ -9,28 +9,29 @@ import {
   ILayoutCSSVariables,
   ILayoutHTMLAttributes,
   IPageTitle,
-  IToolbar
-} from './LayoutModels'
+  IToolbar,
+} from "./LayoutModels";
 
-const LAYOUT_CONFIG_KEY = process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig'
+const LAYOUT_CONFIG_KEY =
+  process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || "LayoutConfig";
 
 export function getLayout(): ILayout {
-  const ls = localStorage.getItem(LAYOUT_CONFIG_KEY)
+  const ls = localStorage.getItem(LAYOUT_CONFIG_KEY);
   if (ls) {
     try {
-      return JSON.parse(ls) as ILayout
+      return JSON.parse(ls) as ILayout;
     } catch (er) {
-      console.error(er)
+      console.error(er);
     }
   }
-  return DefaultLayoutConfig
+  return DefaultLayoutConfig;
 }
 
 function setLayout(config: ILayout): void {
   try {
-    localStorage.setItem(LAYOUT_CONFIG_KEY, JSON.stringify(config))
+    localStorage.setItem(LAYOUT_CONFIG_KEY, JSON.stringify(config));
   } catch (er) {
-    console.error(er)
+    console.error(er);
   }
 }
 
@@ -50,7 +51,7 @@ export function getEmptyCssClasses() {
     footerContainer: [],
     sidebar: [],
     pageTitle: [],
-  }
+  };
 }
 
 export function getEmptyHTMLAttributes() {
@@ -60,52 +61,52 @@ export function getEmptyHTMLAttributes() {
     headerMenu: new Map(),
     headerContainer: new Map(),
     pageTitle: new Map(),
-  }
+  };
 }
 
 export function getEmptyCSSVariables() {
   return {
     body: new Map(),
-  }
+  };
 }
 
 export class LayoutSetup {
-  public static isLoaded: boolean = false
-  public static config: ILayout = getLayout()
-  public static classes: ILayoutCSSClasses = getEmptyCssClasses()
-  public static attributes: ILayoutHTMLAttributes = getEmptyHTMLAttributes()
-  public static cssVariables: ILayoutCSSVariables = getEmptyCSSVariables()
+  public static isLoaded: boolean = false;
+  public static config: ILayout = getLayout();
+  public static classes: ILayoutCSSClasses = getEmptyCssClasses();
+  public static attributes: ILayoutHTMLAttributes = getEmptyHTMLAttributes();
+  public static cssVariables: ILayoutCSSVariables = getEmptyCSSVariables();
 
   private static initCSSClasses(): void {
-    LayoutSetup.classes = getEmptyCssClasses()
+    LayoutSetup.classes = getEmptyCssClasses();
   }
 
   private static initHTMLAttributes(): void {
-    LayoutSetup.attributes = Object.assign({}, getEmptyHTMLAttributes())
+    LayoutSetup.attributes = Object.assign({}, getEmptyHTMLAttributes());
   }
 
   private static initCSSVariables(): void {
-    LayoutSetup.cssVariables = getEmptyCSSVariables()
+    LayoutSetup.cssVariables = getEmptyCSSVariables();
   }
 
   private static initLayout(config: ILayout): void {
     if (config.main?.body?.backgroundImage) {
-      document.body.style.backgroundImage = `url(${config.main.body.backgroundImage})`
+      document.body.style.backgroundImage = `url(${config.main.body.backgroundImage})`;
     }
   }
 
   private static initHeader(config: IHeader): void {
-    config.width = 'fluid';    
+    config.width = "fluid";
     LayoutSetup.classes.headerContainer.push(
-      config.width === 'fluid' ? 'container-fluid' : 'container-xxl'
-    )
+      config.width === "fluid" ? "container-fluid" : "container-xxl"
+    );
 
     if (config.fixed.desktop) {
-      document.body.classList.add('header-fixed')
+      document.body.classList.add("header-fixed");
     }
 
     if (config.fixed.tabletAndMobile) {
-      document.body.classList.add('header-tablet-and-mobile-fixed')
+      document.body.classList.add("header-tablet-and-mobile-fixed");
     }
   }
 
@@ -113,99 +114,99 @@ export class LayoutSetup {
 
   private static initPageTitle(config: IPageTitle): void {
     if (!config.display) {
-      return
+      return;
     }
 
     if (config.responsive) {
-      LayoutSetup.classes.pageTitle.push('mb-5 mb-lg-0')
-      LayoutSetup.attributes.pageTitle.set('data-kt-swapper', 'true')
-      LayoutSetup.attributes.pageTitle.set('data-kt-swapper-mode', 'prepend')
+      LayoutSetup.classes.pageTitle.push("mb-5 mb-lg-0");
+      LayoutSetup.attributes.pageTitle.set("data-kt-swapper", "true");
+      LayoutSetup.attributes.pageTitle.set("data-kt-swapper-mode", "prepend");
       LayoutSetup.attributes.pageTitle.set(
-        'data-kt-swapper-parent',
+        "data-kt-swapper-parent",
         `{default: '#kt_content_container', '${config.responsiveBreakpoint}: ${config.responsiveTarget}'`
-      )
+      );
     }
   }
 
   private static initContent(config: IContent): void {
-    config.width = 'fluid';
+    config.width = "fluid";
     LayoutSetup.classes.contentContainer.push(
-      config.width === 'fluid' ? 'container-fluid' : 'container-xxl'
-    )
+      config.width === "fluid" ? "container-fluid" : "container-xxl"
+    );
   }
 
   private static initAside(config: IAside): void {
     if (!config.display) {
-      return
+      return;
     }
 
     // Fixed aside
     if (config.fixed) {
-      document.body.classList.add('aside-fixed')
+      document.body.classList.add("aside-fixed");
     }
 
     // Default minimized
     if (config.minimized) {
-      document.body.setAttribute('data-kt-aside-minimize', 'on')
-      this.classes.asideToggle.push('active')
+      document.body.setAttribute("data-kt-aside-minimize", "on");
+      this.classes.asideToggle.push("active");
     }
 
     // Aside secondary
     if (config.secondaryDisplay) {
-      document.body.classList.add('aside-secondary-enabled')
+      document.body.classList.add("aside-secondary-enabled");
     } else {
-      document.body.classList.add('aside-secondary-disabled')
+      document.body.classList.add("aside-secondary-disabled");
     }
   }
 
   private static initAsideMenu(config: IAside): void {}
 
   private static initFooter(config: IFooter): void {
-    config.width = 'fluid';
+    config.width = "fluid";
     LayoutSetup.classes.footerContainer.push(
-      `container-${config.width === 'fluid' ? 'fluid' : 'xxl'}`
-    )
+      `container-${config.width === "fluid" ? "fluid" : "xxl"}`
+    );
   }
 
-  private static initConfig(config: ILayout): void {    
+  private static initConfig(config: ILayout): void {
     if (config.main?.darkSkinEnabled) {
-      document.body.classList.add('dark-skin')
+      document.body.classList.add("dark-skin");
     }
 
     // Init layout
-    LayoutSetup.initLayout(config)
-    if (config.main?.type !== 'default') {
-      return
+    LayoutSetup.initLayout(config);
+    if (config.main?.type !== "default") {
+      return;
     }
 
-    LayoutSetup.initHeader(config.header)
-    LayoutSetup.initPageTitle(config.pageTitle as IPageTitle)
-    LayoutSetup.initToolbar(config.toolbar)
-    LayoutSetup.initContent(config.content)
-    LayoutSetup.initAside(config.aside)
-    LayoutSetup.initFooter(config.footer)
-    LayoutSetup.initAsideMenu(config.aside)
+    LayoutSetup.initHeader(config.header);
+    LayoutSetup.initPageTitle(config.pageTitle as IPageTitle);
+    LayoutSetup.initToolbar(config.toolbar);
+    LayoutSetup.initContent(config.content);
+    LayoutSetup.initAside(config.aside);
+    LayoutSetup.initFooter(config.footer);
+    LayoutSetup.initAsideMenu(config.aside);
   }
 
   public static updatePartialConfig(fieldsToUpdate: Partial<ILayout>): ILayout {
-    const config = LayoutSetup.config
-    const updatedConfig = {...config, ...fieldsToUpdate}
-    document.body.className = ''
-    LayoutSetup.initCSSClasses()
-    LayoutSetup.initCSSVariables()
-    LayoutSetup.initHTMLAttributes()
-    LayoutSetup.isLoaded = false
-    LayoutSetup.config = updatedConfig
-    LayoutSetup.initConfig(Object.assign({}, updatedConfig))
-    LayoutSetup.isLoaded = true // remove loading there
-    return updatedConfig
+    const config = LayoutSetup.config;
+    const updatedConfig = { ...config, ...fieldsToUpdate };
+    document.body.className = "";
+    LayoutSetup.initCSSClasses();
+    LayoutSetup.initCSSVariables();
+    LayoutSetup.initHTMLAttributes();
+    LayoutSetup.isLoaded = false;
+    LayoutSetup.config = updatedConfig;
+    LayoutSetup.initConfig(Object.assign({}, updatedConfig));
+    LayoutSetup.isLoaded = true; // remove loading there
+    return updatedConfig;
   }
 
   public static setConfig(config: ILayout): void {
-    setLayout(config)
+    setLayout(config);
   }
 
   public static bootstrap = (() => {
-    LayoutSetup.updatePartialConfig(LayoutSetup.config)
-  })()
+    LayoutSetup.updatePartialConfig(LayoutSetup.config);
+  })();
 }

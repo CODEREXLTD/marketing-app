@@ -124,12 +124,12 @@
 // Icons
 i {
   &.bi,
-  &[class^='fonticon-'],
-  &[class*=' fonticon-'],
-  &[class^='fa-'],
-  &[class*=' fa-'],
-  &[class^='la-'],
-  &[class*=' la-'] {
+  &[class^="fonticon-"],
+  &[class*=" fonticon-"],
+  &[class^="fa-"],
+  &[class*=" fa-"],
+  &[class^="la-"],
+  &[class*=" la-"] {
     line-height: 1;
     font-size: 1rem;
     color: var(--#{$prefix}text-muted);
