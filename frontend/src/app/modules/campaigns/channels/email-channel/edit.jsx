@@ -60,12 +60,12 @@ export default function Edit(){
                                             </div>
                                         </div>
                                     </div>
-                                <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" id="kt_inbox_reply_attachments_select" data-kt-inbox-form="dropzone_upload">
+                                {/* <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" id="kt_inbox_reply_attachments_select" data-kt-inbox-form="dropzone_upload">
                                     <i className="ki-outline ki-paper-clip fs-2 m-0"></i>
                                 </span>
                                 <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary">
                                     <i className="ki-outline ki-geolocation fs-2 m-0"></i>
-                                </span>
+                                </span> */}
                             </div>
                             <div className="d-flex align-items-center">
                                 <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" data-toggle="tooltip" title="More actions">

@@ -18,6 +18,7 @@ const CampaignDetails: FC = () => {
     const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0]);
     const [initValues] = useState<ICreateAccount>(inits);
     const [isSubmitButton, setSubmitButton] = useState(true);
+    const [successMessage, setSuccessMessage] = useState('');
     const getStepSequence = useSelector(getStepsSequence);
     const campaign = useSelector(getCampaign);
     
@@ -58,7 +59,7 @@ const CampaignDetails: FC = () => {
         }
 
         const response = saveCampaignSequence( getStepSequence, campaign, auth?.token );
-
+        setSuccessMessage('Campaign has been saved successfully.');
         if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
             goToStep(stepper.current.currentStepIndex + 1);
         } else {
@@ -131,7 +132,8 @@ const CampaignDetails: FC = () => {
                     </button>
                   </div>
 
-                  <div>
+                  <div style={{'display': 'flex'}}>
+                    <p style={{ marginTop: '20px', marginRight: '10px' }} >{successMessage}</p>
                     <button
                       type="submit"
                       className="btn btn-lg btn-primary me-3"
