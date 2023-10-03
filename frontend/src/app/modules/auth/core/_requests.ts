@@ -23,6 +23,8 @@ export function login(email: string, password: string): Promise<any> {
   return axios.post<AuthModel>(LOGIN_URL, {
     email,
     password,
+  }, {
+    timeout: 5000,
   });
 }
 
