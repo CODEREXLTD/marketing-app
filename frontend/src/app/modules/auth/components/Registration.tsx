@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 import { PasswordMeterComponent } from '../../../../_metronic/assets/ts/components'
 import { useAuth } from '../core/Auth'
-import { getUserByToken, refreshAuthToken, register } from '../core/_requests'
+import { getUserByToken, register } from '../core/_requests'
 
 const initialValues = {
     firstName: '',
@@ -70,28 +70,6 @@ export function Registration() {
             }
         },
     })
-
-    const refreshToken = async () => {
-        const data = await refreshAuthToken(JSON.stringify({refresh:auth?.refreshToken}));        
-        saveAuth(data)
-        const {data: user} = await getUserByToken(data?.token)
-        setCurrentUser(user)
-        if(loading){
-            setLoading(false)
-        }
-    }
-
-    useEffect(()=>{        
-        const REFRESH_INTERVAL = 1000 * 60 * 19;
-        const interval = setInterval(()=>{
-            if(auth){
-                refreshToken()
-            }
-        }, REFRESH_INTERVAL)
-        return () => clearInterval(interval)
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[auth])
 
     useEffect(() => {
         PasswordMeterComponent.bootstrap()

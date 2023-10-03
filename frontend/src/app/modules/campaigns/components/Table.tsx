@@ -8,17 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setCampaign } from '../../../../redux/actions';
 import { getAllCampaign } from '../../../../redux/selectors';
+import { useAuth } from '../../auth';
 import { deleteCampaign, fetchAllCampaigns } from '../core/_requests';
 type Props = { className: string }
 const CampaignTable: React.FC<Props> = ({className}) => {
     const campaigns = useSelector(getAllCampaign);
     const dispatch = useDispatch();
     const [isLoad, setLoad] = useState(false);
-    
+    const {currentUser, auth} = useAuth();
+
     const fetchCampaign = async () => {
         try {
             setLoad(true);
-            const getData = await fetchAllCampaigns();
+            const getData = await fetchAllCampaigns(currentUser?.id, auth?.token);
             dispatch(setCampaign(getData));
         } catch (error) {
             // Handle errors here
@@ -30,7 +32,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     const handleCampaignDelete = async (campaignId: any) => {
         const response = await deleteCampaign( campaignId );
         setLoad(true);
-        const getData = await fetchAllCampaigns();
+        const getData = await fetchAllCampaigns(currentUser?.id, auth?.token);
         dispatch(setCampaign(getData));
     }
 
@@ -95,7 +97,6 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                 </th>
                 <th className='min-w-150px'>Title</th>
                 <th className='min-w-140px'>Status</th>
-                <th className='min-w-120px'>Progress</th>
                 <th className='min-w-100px text-end'>Actions</th>
               </tr>
             </thead>
@@ -128,20 +129,6 @@ const CampaignTable: React.FC<Props> = ({className}) => {
                   <span className='text-muted fw-semibold text-muted d-block fs-7'>
                    {timeDifference(campaign.updated_at)}
                   </span>
-                </td>
-                <td className='text-end'>
-                  <div className='d-flex flex-column w-100 me-2'>
-                    <div className='d-flex flex-stack mb-2'>
-                      <span className='text-muted me-2 fs-7 fw-semibold'>50%</span>
-                    </div>
-                    <div className='progress h-6px w-100'>
-                      <div
-                        className='progress-bar bg-primary'
-                        role='progressbar'
-                        style={{width: '50%'}}
-                      ></div>
-                    </div>
-                  </div>
                 </td>
                 <td>
                   <div className='d-flex justify-content-end flex-shrink-0'>

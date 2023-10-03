@@ -1,21 +1,17 @@
-import React, {useEffect} from "react";
-import Dropzone from 'dropzone';
-import Quill from 'quill';
-import {useDispatch, useSelector} from "react-redux";
-import {getSelectedStep, getSelectedStepType, getStepIndex} from "../../../../../redux/selectors";
-import {updateEmailContent} from "../../../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { updateEmailContent } from "../../../../../redux/actions";
+import { getSelectedStep, getSelectedStepType, getStepIndex } from "../../../../../redux/selectors";
 
 export default function Edit(){
-         const dispatch = useDispatch();
-        const selectedStep = useSelector(getSelectedStep);
-        const selectedStepType = useSelector(getSelectedStepType);
-        const selectedStepIndex = useSelector(getStepIndex);
-        const inputChangeHandle = (data) =>{
-            if (selectedStep && selectedStep.channel) {
-                 dispatch(updateEmailContent(selectedStep,data,selectedStepIndex));
-            }
+    const dispatch = useDispatch();
+    const selectedStep = useSelector(getSelectedStep);
+    const selectedStepType = useSelector(getSelectedStepType);
+    const selectedStepIndex = useSelector(getStepIndex);
+    const inputChangeHandle = (data) =>{
+        if (selectedStep && selectedStep.channel) {
+                dispatch(updateEmailContent(selectedStep,data,selectedStepIndex));
         }
-        // console.log(selectedStep)
+    }
       return (
           <>
               <div className="flex-lg-row-fluid ms-lg-7 ms-xl-10">
@@ -52,43 +48,38 @@ export default function Edit(){
                                             <span className="indicator-progress">Please wait...
                                             <span className="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </span>
-                                        <span className="btn btn-primary btn-icon fs-bold w-30px pe-0" role="button">
-                                            <span className="lh-0" data-kt-menu-trigger="click" data-kt-menu-placement="top-start">
-                                                <i className="ki-outline ki-down fs-4 m-0"></i>
-                                            </span>
-                                            <div className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">
-                                                <div className="menu-item px-3">
-                                                    <a href="#" className="menu-link px-3">Schedule send</a>
-                                                </div>
-                                                <div className="menu-item px-3">
-                                                    <a href="#" className="menu-link px-3">Save & archive</a>
-                                                </div>
-                                                <div className="menu-item px-3">
-                                                    <a href="#" className="menu-link px-3">Cancel</a>
-                                                </div>
+                                        <div className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">
+                                            <div className="menu-item px-3">
+                                                <a href="#" className="menu-link px-3">Schedule send</a>
                                             </div>
-                                        </span>
+                                            <div className="menu-item px-3">
+                                                <a href="#" className="menu-link px-3">Save & archive</a>
+                                            </div>
+                                            <div className="menu-item px-3">
+                                                <a href="#" className="menu-link px-3">Cancel</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" id="kt_inbox_reply_attachments_select" data-kt-inbox-form="dropzone_upload">
-                                        <i className="ki-outline ki-paper-clip fs-2 m-0"></i>
-                                    </span>
-                                    <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary">
-                                        <i className="ki-outline ki-geolocation fs-2 m-0"></i>
-                                    </span>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                    <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" data-toggle="tooltip" title="More actions">
-                                        <i className="ki-outline ki-setting-2 fs-2"></i>
-                                    </span>
-                                    <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary" data-inbox="dismiss" data-toggle="tooltip" title="Dismiss reply">
-                                        <i className="ki-outline ki-trash fs-2"></i>
-                                    </span>
-                                </div>
+                                <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" id="kt_inbox_reply_attachments_select" data-kt-inbox-form="dropzone_upload">
+                                    <i className="ki-outline ki-paper-clip fs-2 m-0"></i>
+                                </span>
+                                <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary">
+                                    <i className="ki-outline ki-geolocation fs-2 m-0"></i>
+                                </span>
+                            </div>
+                            <div className="d-flex align-items-center">
+                                <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary me-2" data-toggle="tooltip" title="More actions">
+                                    <i className="ki-outline ki-setting-2 fs-2"></i>
+                                </span>
+                                <span className="btn btn-icon btn-sm btn-clean btn-active-light-primary" data-inbox="dismiss" data-toggle="tooltip" title="Dismiss reply">
+                                    <i className="ki-outline ki-trash fs-2"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          </>
-      )
+            </div>
+        </>
+    )
 }

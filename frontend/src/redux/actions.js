@@ -9,12 +9,28 @@ export const decrement = () => {
     type: 'DECREMENT'
   };
 };
+
 export const setCampaign = (campaigns) => {
     return {
         type : 'SET_CAMPAIGN',
         payload : campaigns
     };
 };
+
+export const setSequence = (sequence) => {
+    return {
+        type : 'SET_SEQUENCE',
+        payload : sequence
+    };
+};
+
+export const setSingleCampaign = (campaign) => {
+    return {
+        type : 'SET_SINGLE_CAMPAIGN',
+        payload : campaign[0]
+    };
+};
+
 export const addCampaign = (campaigns) => {
     return {
         type : 'ADD_CAMPAIGN',
