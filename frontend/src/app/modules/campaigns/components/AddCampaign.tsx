@@ -29,7 +29,7 @@ const AddCampaign: FC = () => {
         const payload = JSON.stringify({
             "name": name,
             "description": "hello",
-            "status": "draft",
+            "status": "running",
             "isActive": true,
             "scheduled_at": null,
             "user": currentUser?.id
@@ -43,7 +43,6 @@ const AddCampaign: FC = () => {
 
         // Send the POST request
         const response = await createCampaign(payload);
-        console.log(response);
                 
         dispatch( addCampaign(response?.data));
         navigate(`/campaign/${response?.data?.id}`);
