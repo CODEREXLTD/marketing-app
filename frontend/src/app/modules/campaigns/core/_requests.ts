@@ -64,7 +64,7 @@ export async function deleteCampaign( campaignID: ID ): Promise<any> {
  *                        or rejects with an error if the request fails.
  */
 export async function saveCampaignSequence( getStepSequence: object, { id, name, description, status, isActive, scheduled_at, user }: any, token: string | undefined ): Promise<any> {
-    const response = await axios.put(`http://127.0.0.1:8000/api/campaigns/${id}/`, {
+    const response = await axios.put(`${CAMPAIGN_URL}${id}/`, {
             sequences: getStepSequence,
             name,
             description,
