@@ -15,12 +15,12 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     const campaigns = useSelector(getAllCampaign);
     const dispatch = useDispatch();
     const [isLoad, setLoad] = useState(false);
-    const {currentUser} = useAuth();
+    const {currentUser, auth} = useAuth();
 
     const fetchCampaign = async () => {
         try {
             setLoad(true);
-            const getData = await fetchAllCampaigns(currentUser?.id);
+            const getData = await fetchAllCampaigns(currentUser?.id, auth?.token);
             dispatch(setCampaign(getData));
         } catch (error) {
             // Handle errors here
@@ -32,7 +32,7 @@ const CampaignTable: React.FC<Props> = ({className}) => {
     const handleCampaignDelete = async (campaignId: any) => {
         const response = await deleteCampaign( campaignId );
         setLoad(true);
-        const getData = await fetchAllCampaigns(currentUser?.id);
+        const getData = await fetchAllCampaigns(currentUser?.id, auth?.token);
         dispatch(setCampaign(getData));
     }
 

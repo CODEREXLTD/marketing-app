@@ -27,10 +27,11 @@ export async function createCampaign( payload: any ): Promise<any> {
  * @returns {Promise<any>} A Promise that resolves with the campaign data when the request is successful,
  *                        or rejects with an error if the request fails.
  */
-export async function fetchAllCampaigns( userID ): Promise<any> {              
+export async function fetchAllCampaigns( userID, token ): Promise<any> {                  
     const response = await axios.get(`${CAMPAIGN_URL}user/${userID}/`, {
         headers: {
             'Content-Type': 'application/json',
+            'Authorization':'Bearer ' + String(token)
         },
     });
 
