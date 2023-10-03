@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 *.egg-info/
 dist/
-build/
+# build/
 *.sqlite3
 *.db
 
