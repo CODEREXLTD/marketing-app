@@ -34,6 +34,27 @@ export function Login() {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       setLoading(true);
       try {
+
+        // var formdata = new FormData();
+        //   formdata.append("email", "sadi@coderex.co");
+        //   formdata.append("password", "sadi2011");
+
+        //   var requestOptions = {
+        //     method: 'POST',
+        //     body: formdata,
+        //     redirect: 'follow'
+        //   };
+
+        //   fetch("http://65.2.99.147:8000/api/user/login/", {
+        //     method: 'POST',
+        //     body: formdata,
+        //     redirect: 'follow'
+        //   })
+        //     .then(response => response.text())
+        //     .then(result => console.log(result))
+        //     .catch(error => console.log('error', error));
+
+
         const { data: auth } = await login(values.email, values.password);
         saveAuth(auth);
         const { data: user } = await getUserByToken(auth?.token);
