@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-bxxg5&l)w==trm@=&7+i$x3kd(f(mjmw3hib%#z@#$@5-6bxkp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.200.122.234', '13.235.100.142', '127.0.0.1']
+ALLOWED_HOSTS = ['13.200.122.234', '13.235.100.142', '127.0.0.1', '35.154.64.90']
 
 
 # Application definition
@@ -180,6 +180,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://13.200.122.234:3000',
     'http://13.235.100.142:8000',
     'http://13.235.100.142:3000',
+    'https://inquisitive-custard-37eded.netlify.app',
 ]
 
 
@@ -205,3 +206,23 @@ EMAIL_HOST_PASSWORD = "2be4a79bb86231"
 CORS_ALLOW_ALL_ORIGINS = True
 
 
+# Optional: You can further customize CORS settings as needed.
+# For example, you can allow specific HTTP methods and headers.
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
