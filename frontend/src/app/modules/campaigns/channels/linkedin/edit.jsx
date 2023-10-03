@@ -1,6 +1,3 @@
-export default function Edit(){
-
-    return (
-        <>Heelo form Linkdin</>
-    )
+export default function Edit() {
+  return <>Heelo form Linkdin</>;
 }

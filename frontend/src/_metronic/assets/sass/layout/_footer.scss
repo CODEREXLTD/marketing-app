@@ -22,7 +22,8 @@
     }
 
     // Aside secondary enabled, aside fixed modes and aside minimize modes
-    .footer-fixed.aside-secondary-enabled.aside-fixed[data-kt-aside-minimize='on'] & {
+    .footer-fixed.aside-secondary-enabled.aside-fixed[data-kt-aside-minimize="on"]
+      & {
       transition: padding-left get($aside-config, transition-speed) ease;
       left: get($aside-config, primary-width, desktop);
     }
@@ -45,7 +46,9 @@
       bottom: 0;
       min-height: get($footer-config, tablet-and-mobile, fixed, height);
       z-index: get($footer-config, tablet-and-mobile, fixed, z-index);
-      background-color: var(--#{$prefix}footer-tablet-and-mobile-fixed-bg-color);
+      background-color: var(
+        --#{$prefix}footer-tablet-and-mobile-fixed-bg-color
+      );
       box-shadow: var(--#{$prefix}footer-tablet-and-mobile-fixed-box-shadow);
     }
   }

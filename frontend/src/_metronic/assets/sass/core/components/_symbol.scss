@@ -74,7 +74,7 @@
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       @each $name, $value in $symbol-sizes {
-        @if ($name != 'default') {
+        @if ($name != "default") {
           &.symbol#{$infix}-#{$name} {
             @include symbol-size($value);
           }
@@ -112,7 +112,7 @@
 
     &:after {
       display: block;
-      content: ' ';
+      content: " ";
       border-radius: inherit;
       position: absolute;
       top: 0;

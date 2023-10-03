@@ -29,26 +29,28 @@ const CampaignDetails: FC = () => {
         stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
     };
 
-    const goToStep = (stepIndex: number) => {
-        if (!stepper.current) {
-            return;
-        }
+  const goToStep = (stepIndex: number) => {
+    if (!stepper.current) {
+      return;
+    }
 
-        stepper.current.goto(stepIndex);
-        setCurrentSchema(createAccountSchemas[stepIndex - 1]);
-        setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber);
-    };
+    stepper.current.goto(stepIndex);
+    setCurrentSchema(createAccountSchemas[stepIndex - 1]);
+    setSubmitButton(
+      stepper.current.currentStepIndex === stepper.current.totalStepsNumber
+    );
+  };
 
     const prevStep = () => {
         if (!stepper.current) {
             return;
         }        
 
-        const currentStepIndex = stepper.current.currentStepIndex;
-        if (currentStepIndex > 1) {
-            goToStep(currentStepIndex - 1);
-        }
-    };
+    const currentStepIndex = stepper.current.currentStepIndex;
+    if (currentStepIndex > 1) {
+      goToStep(currentStepIndex - 1);
+    }
+  };
 
     const submitStep = (values: ICreateAccount, actions: FormikValues) => {
         if (!stepper.current) {
@@ -87,18 +89,32 @@ const CampaignDetails: FC = () => {
   return (
     <div className="card">
       <div className="card-body">
-        <div ref={stepperRef} className="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper">
+        <div
+          ref={stepperRef}
+          className="stepper stepper-links d-flex flex-column pt-15"
+          id="kt_create_account_stepper"
+        >
           <div className="stepper-nav mb-5">
-            <div className="stepper-item" data-kt-stepper-element="nav" onClick={() => goToStep(1)}>
+            <div
+              className="stepper-item"
+              data-kt-stepper-element="nav"
+              onClick={() => goToStep(1)}
+            >
               <h3 className="stepper-title">Sequences</h3>
             </div>
           </div>
 
-          <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
+          <Formik
+            validationSchema={currentSchema}
+            initialValues={initValues}
+            onSubmit={submitStep}
+          >
             {() => (
-              <Form className="mx-auto w-100 pt-15 pb-10" id="kt_create_account_form">
-                
-                <div className='current' data-kt-stepper-element="content">
+              <Form
+                className="mx-auto w-100 pt-15 pb-10"
+                id="kt_create_account_form"
+              >
+                <div className="current" data-kt-stepper-element="content">
                   <EmailChannel />
                 </div>
 
@@ -116,11 +132,17 @@ const CampaignDetails: FC = () => {
                   </div>
 
                   <div>
-                    <button type="submit" className="btn btn-lg btn-primary me-3">
+                    <button
+                      type="submit"
+                      className="btn btn-lg btn-primary me-3"
+                    >
                       <span className="indicator-label">
-                        {!isSubmitButton && 'Continue'}
-                        {isSubmitButton && 'Submit'}
-                        <KTIcon iconName="arrow-right" className="fs-3 ms-2 me-0" />
+                        {!isSubmitButton && "Continue"}
+                        {isSubmitButton && "Submit"}
+                        <KTIcon
+                          iconName="arrow-right"
+                          className="fs-3 ms-2 me-0"
+                        />
                       </span>
                     </button>
                   </div>
@@ -129,9 +151,9 @@ const CampaignDetails: FC = () => {
             )}
           </Formik>
         </div>
-        </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export { CampaignDetails };

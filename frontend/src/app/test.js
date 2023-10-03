@@ -1,7 +1,7 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../redux/actions';
-import { selectCounter } from '../redux/selectors';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../redux/actions";
+import { selectCounter } from "../redux/selectors";
 
 const CounterComponent = () => {
   const counter = useSelector(selectCounter);

@@ -7,7 +7,7 @@
   // Input
   &:not(.form-switch) {
     .form-check-input {
-      &[type='checkbox'] {
+      &[type="checkbox"] {
         background-size: $form-check-input-bg-size;
       }
     }
@@ -43,7 +43,7 @@
         background-color: $form-check-input-bg-solid;
       }
 
-      &[type='checkbox']:indeterminate {
+      &[type="checkbox"]:indeterminate {
         background-color: $form-check-input-checked-bg-color;
       }
     }

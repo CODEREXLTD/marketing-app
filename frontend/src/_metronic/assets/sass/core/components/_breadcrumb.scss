@@ -22,7 +22,7 @@
 
     &:after {
       padding-left: $breadcrumb-item-padding-x;
-      content: '/';
+      content: "/";
     }
 
     &:before {
@@ -45,7 +45,7 @@
 .breadcrumb-line {
   .breadcrumb-item {
     &:after {
-      content: '-';
+      content: "-";
     }
   }
 }
@@ -54,7 +54,7 @@
 .breadcrumb-dot {
   .breadcrumb-item {
     &:after {
-      content: '\2022';
+      content: "\2022";
     }
   }
 }

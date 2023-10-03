@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 *.egg-info/
 dist/
-build/
+# build/
 *.sqlite3
 *.db
 
@@ -28,9 +28,10 @@ yarn-debug.log
 .DS_Store
 
 # Frontend build artifacts
-frontend/build/
+# frontend/build/
 frontend/node_modules/
 
+backend/celerybeat-schedule
 
 # IDE-specific ignores (adjust to your preference)
 .vscode/

@@ -84,12 +84,18 @@
       }
 
       .previous {
-        @include svg-bg-icon(arrow-start, var(--#{$prefix}pagination-focus-color));
+        @include svg-bg-icon(
+          arrow-start,
+          var(--#{$prefix}pagination-focus-color)
+        );
       }
 
       /*rtl:options:{"autoRename":false}*/
       .next {
-        @include svg-bg-icon(arrow-end, var(--#{$prefix}pagination-focus-color));
+        @include svg-bg-icon(
+          arrow-end,
+          var(--#{$prefix}pagination-focus-color)
+        );
       }
     }
   }
@@ -108,12 +114,18 @@
       }
 
       .previous {
-        @include svg-bg-icon(arrow-start, var(--#{$prefix}pagination-hover-color));
+        @include svg-bg-icon(
+          arrow-start,
+          var(--#{$prefix}pagination-hover-color)
+        );
       }
 
       /*rtl:options:{"autoRename":false}*/
       .next {
-        @include svg-bg-icon(arrow-end, var(--#{$prefix}pagination-hover-color));
+        @include svg-bg-icon(
+          arrow-end,
+          var(--#{$prefix}pagination-hover-color)
+        );
       }
     }
   }
@@ -132,12 +144,18 @@
       }
 
       .previous {
-        @include svg-bg-icon(arrow-start, var(--#{$prefix}pagination-active-color));
+        @include svg-bg-icon(
+          arrow-start,
+          var(--#{$prefix}pagination-active-color)
+        );
       }
 
       /*rtl:options:{"autoRename":false}*/
       .next {
-        @include svg-bg-icon(arrow-end, var(--#{$prefix}pagination-active-color));
+        @include svg-bg-icon(
+          arrow-end,
+          var(--#{$prefix}pagination-active-color)
+        );
       }
     }
   }
@@ -152,12 +170,18 @@
       }
 
       .previous {
-        @include svg-bg-icon(arrow-start, var(--#{$prefix}pagination-disabled-color));
+        @include svg-bg-icon(
+          arrow-start,
+          var(--#{$prefix}pagination-disabled-color)
+        );
       }
 
       /*rtl:options:{"autoRename":false}*/
       .next {
-        @include svg-bg-icon(arrow-end, var(--#{$prefix}pagination-disabled-color));
+        @include svg-bg-icon(
+          arrow-end,
+          var(--#{$prefix}pagination-disabled-color)
+        );
       }
     }
   }

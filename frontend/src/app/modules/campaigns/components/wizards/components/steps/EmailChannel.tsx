@@ -2,9 +2,9 @@ import { FC, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSequence, removeSequence, selectStep, setSequence } from "../../../../../../../redux/actions";
 import {
-    getCampaign,
-    getStepIndex, getSteps,
-    getStepsSequence
+  getCampaign,
+  getStepIndex, getSteps,
+  getStepsSequence
 } from "../../../../../../../redux/selectors";
 import { StepContent } from "../../../../channels/content";
 
@@ -58,14 +58,14 @@ const EmailChannel: FC = () => {
 
   /**
    * Active the current step
-   * 
-   * 
-   * @param step 
-   * @param key 
+   *
+   *
+   * @param step
+   * @param key
    */
-  const handleStep =(step, key) =>{
-      dispatch(selectStep(step, key));
-  }
+  const handleStep = (step, key) => {
+    dispatch(selectStep(step, key));
+  };
 
   useEffect(() => {
     if (getStepSequence.length > 0) {
@@ -73,7 +73,7 @@ const EmailChannel: FC = () => {
       dispatch(selectStep(lastIndex, getStepSequence.length - 1));
     } else {
       let lastIndex = getStepSequence[0];
-      if(lastIndex){
+      if (lastIndex) {
         dispatch(selectStep(lastIndex, 0));
       }
     }

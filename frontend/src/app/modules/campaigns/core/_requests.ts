@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ID } from "../../../../_metronic/helpers";
 
-const API_URL = process.env.REACT_APP_API_URL
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const CAMPAIGN_URL = `${API_URL}/campaigns/`;
 
@@ -13,12 +13,12 @@ export const CAMPAIGN_URL = `${API_URL}/campaigns/`;
  * @returns {Promise} A Promise that resolves with the response data when the request is successful,
  *                    or rejects with an error if the request fails.
  */
-export async function createCampaign( payload: any ): Promise<any> {  
-    return await axios.post(CAMPAIGN_URL, payload, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    });
+export async function createCampaign(payload: any): Promise<any> {
+  return await axios.post(CAMPAIGN_URL, payload, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
 
 /**
@@ -35,7 +35,7 @@ export async function fetchAllCampaigns( userID, token ): Promise<any> {
         },
     });
 
-    return response?.data;
+  return response?.data;
 }
 
 /**

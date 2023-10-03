@@ -167,4 +167,3 @@ const CampaignTable: React.FC<Props> = ({className}) => {
 }
 
 export { CampaignTable };
-

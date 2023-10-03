@@ -160,7 +160,10 @@
   .bg-state-opacity-#{$name} {
     .active,
     &:hover {
-      background-color: rgba(var(--#{$prefix}bg-rgb-color), #{$value}) !important;
+      background-color: rgba(
+        var(--#{$prefix}bg-rgb-color),
+        #{$value}
+      ) !important;
     }
   }
 }

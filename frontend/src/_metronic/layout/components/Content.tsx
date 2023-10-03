@@ -35,11 +35,14 @@ const Content: FC<WithChildren> = ({children}) => {
     },[auth])
 
   return (
-    <div id='kt_content_container' className={clsx(classes.contentContainer.join(' '))}>
+    <div
+      id="kt_content_container"
+      className={clsx(classes.contentContainer.join(" "))}
+    >
       {children}
     </div>
-  )
-}
+  );
+};
 
 export { Content }
 

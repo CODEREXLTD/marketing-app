@@ -41,8 +41,8 @@
 .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
   right: 0;
 
-  [direction='rtl'] &,
-  [dir='rtl'] & {
+  [direction="rtl"] &,
+  [dir="rtl"] & {
     left: 0;
     right: auto;
   }
@@ -124,7 +124,7 @@
     box-shadow: var(--#{$prefix}dropdown-box-shadow);
     @include border-radius($border-radius);
 
-    input[type='text'] {
+    input[type="text"] {
       @include input-reset();
       border: 1px solid var(--#{$prefix}border-color);
       color: $input-plaintext-color;

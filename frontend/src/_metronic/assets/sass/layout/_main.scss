@@ -36,7 +36,7 @@ body {
     }
 
     // Aside secondary enabled, aside fixed modes and aside minimize modes
-    .aside-secondary-enabled.aside-fixed[data-kt-aside-minimize='on'] & {
+    .aside-secondary-enabled.aside-fixed[data-kt-aside-minimize="on"] & {
       transition: padding-left get($aside-config, transition-speed) ease;
       padding-left: get($aside-config, primary-width, desktop);
     }
@@ -48,7 +48,7 @@ body {
     }
 
     // Fixed header mode
-    .header-fixed[data-kt-sticky-header='on'] & {
+    .header-fixed[data-kt-sticky-header="on"] & {
       padding-top: get($header-config, desktop, default, height);
     }
   }
@@ -67,7 +67,7 @@ body {
   // Wrapper
   .wrapper {
     // Fixed header mode
-    .header-tablet-and-mobile-fixed[data-kt-sticky-header='on'] & {
+    .header-tablet-and-mobile-fixed[data-kt-sticky-header="on"] & {
       padding-top: get($header-config, tablet-and-mobile, fixed, height);
     }
   }

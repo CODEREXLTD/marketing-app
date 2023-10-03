@@ -3,8 +3,8 @@ import { step as Email } from "../app/modules/campaigns/channels/email-channel";
 const initialState = {
   counter: 0,
   campaignStep: [
-      Email,
-      // Linkedin
+    Email,
+    // Linkedin
   ],
   sequence: [],
 };
@@ -86,24 +86,24 @@ const rootReducer = (state = initialState, action) => {
         selectedStep: action.value,
         selectedStepIndex: action.index,
       };
-      case 'UPDATE_EMAIL_STEP':
-         let inputData = action.data;
-         let iname = inputData.target.name;
-          let selectedStep = action.selectedStep;
-          let selectedStepIndex = action.selectedStepIndex; // Assuming action.index holds the correct index
-          let allSeqStep = [...state.sequence]; // Create a shallow copy of the sequence array
-          if (selectedStep && selectedStep.channel ) {
-              selectedStep.channel[iname] = inputData.target.value; // Assuming inputData.subject holds the value you want to set
-          }
-          if( selectedStepIndex !== undefined){
-              allSeqStep[selectedStepIndex] = selectedStep;
-          }
-          return {
-              ...state,
-              selectedStep: selectedStep,
-              selectedStepIndex: selectedStepIndex, // Update selectedStepIndex with the correct value
-              sequence: allSeqStep,
-          };
+    case "UPDATE_EMAIL_STEP":
+      let inputData = action.data;
+      let iname = inputData.target.name;
+      let selectedStep = action.selectedStep;
+      let selectedStepIndex = action.selectedStepIndex; // Assuming action.index holds the correct index
+      let allSeqStep = [...state.sequence]; // Create a shallow copy of the sequence array
+      if (selectedStep && selectedStep.channel) {
+        selectedStep.channel[iname] = inputData.target.value; // Assuming inputData.subject holds the value you want to set
+      }
+      if (selectedStepIndex !== undefined) {
+        allSeqStep[selectedStepIndex] = selectedStep;
+      }
+      return {
+        ...state,
+        selectedStep: selectedStep,
+        selectedStepIndex: selectedStepIndex, // Update selectedStepIndex with the correct value
+        sequence: allSeqStep,
+      };
     // Add more cases for other actions if needed
     default:
       return state;

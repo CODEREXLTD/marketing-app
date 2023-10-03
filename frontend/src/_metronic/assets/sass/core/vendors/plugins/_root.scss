@@ -3,7 +3,7 @@
 //
 
 :root,
-[data-bs-theme='light'] {
+[data-bs-theme="light"] {
   // Select2
 
   // Prismjs
@@ -20,7 +20,7 @@
   --#{$prefix}prismjs-scrollbar-color-hover: #{$prismjs-scrollbar-color-hover};
 }
 
-[data-bs-theme='dark'] {
+[data-bs-theme="dark"] {
   // Prismjs
   --#{$prefix}prismjs-bg: #{$prismjs-bg-dark};
 

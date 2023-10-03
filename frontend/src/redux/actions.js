@@ -1,20 +1,20 @@
 export const increment = () => {
   return {
-    type: 'INCREMENT'
+    type: "INCREMENT",
   };
 };
 
 export const decrement = () => {
   return {
-    type: 'DECREMENT'
+    type: "DECREMENT",
   };
 };
 
 export const setCampaign = (campaigns) => {
-    return {
-        type : 'SET_CAMPAIGN',
-        payload : campaigns
-    };
+  return {
+    type: "SET_CAMPAIGN",
+    payload: campaigns,
+  };
 };
 
 export const setSequence = (sequence) => {
@@ -32,52 +32,52 @@ export const setSingleCampaign = (campaign) => {
 };
 
 export const addCampaign = (campaigns) => {
-    return {
-        type : 'ADD_CAMPAIGN',
-        payload : campaigns
-    };
+  return {
+    type: "ADD_CAMPAIGN",
+    payload: campaigns,
+  };
 };
 export function registerStepType(stepType) {
-    return {
-        type: "REGISTER_STEP_TYPE",
-        stepType,
-    };
+  return {
+    type: "REGISTER_STEP_TYPE",
+    stepType,
+  };
 }
 export function addSequence(step) {
-    return {
-        type: "ADD_SEQUENCE",
-        payload: step,
-    };
+  return {
+    type: "ADD_SEQUENCE",
+    payload: step,
+  };
 }
 
 export function removeSequence(index) {
-    return {
-        type: "REMOVE_SEQUENCE",
-        payload: index,
-    };
+  return {
+    type: "REMOVE_SEQUENCE",
+    payload: index,
+  };
 }
 
-export function selectStep(value,index) {
-    return {
-        type: "SET_SELECTED_STEP",
-        value,
-        index
-    };
+export function selectStep(value, index) {
+  return {
+    type: "SET_SELECTED_STEP",
+    value,
+    index,
+  };
 }
 
-export function updateEmailContent(selectedStep,data,selectedStepIndex) {
-    return {
-        type: "UPDATE_EMAIL_STEP",
-        selectedStep,
-        selectedStepIndex,
-        data
-    };
+export function updateEmailContent(selectedStep, data, selectedStepIndex) {
+  return {
+    type: "UPDATE_EMAIL_STEP",
+    selectedStep,
+    selectedStepIndex,
+    data,
+  };
 }
-export function updateEmailContentBody(selectedStep,data,selectedStepIndex) {
-    return {
-        type: "UPDATE_EMAIL_BODY_STEP",
-        selectedStep,
-        selectedStepIndex,
-        data
-    };
+export function updateEmailContentBody(selectedStep, data, selectedStepIndex) {
+  return {
+    type: "UPDATE_EMAIL_BODY_STEP",
+    selectedStep,
+    selectedStepIndex,
+    data,
+  };
 }

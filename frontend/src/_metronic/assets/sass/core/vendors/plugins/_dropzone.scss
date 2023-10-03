@@ -72,7 +72,7 @@
       bottom: 0;
       right: 0;
       display: block;
-      content: '';
+      content: "";
       mask-size: 40%;
       -webkit-mask-size: 40%;
       @include svg-bg-icon(close, var(--#{$prefix}gray-600));
