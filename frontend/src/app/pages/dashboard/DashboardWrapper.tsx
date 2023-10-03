@@ -24,6 +24,7 @@ const DashboardPage = () => {
     <>
       {/* begin::Row */}
       <div className="row gy-5 g-xl-8">
+        <h1>Welcome to Closez</h1>
         {/* begin::Col */}
         {/* <div className="col-xxl-4">
           <MixedWidget3
