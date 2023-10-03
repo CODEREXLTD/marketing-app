@@ -13,10 +13,11 @@ export const CAMPAIGN_URL = `${API_URL}/campaigns/`;
  * @returns {Promise} A Promise that resolves with the response data when the request is successful,
  *                    or rejects with an error if the request fails.
  */
-export async function createCampaign(payload: any): Promise<any> {
+export async function createCampaign(payload: any, token): Promise<any> {
   return await axios.post(CAMPAIGN_URL, payload, {
     headers: {
       "Content-Type": "application/json",
+      'Authorization':'Bearer ' + String(token)
     },
   });
 }

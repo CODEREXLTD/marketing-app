@@ -11,7 +11,7 @@ const AddCampaign: FC = () => {
 
     let navigate = useNavigate();
     const dispatch = useDispatch();
-    const {currentUser} = useAuth();
+    const {currentUser, auth} = useAuth();
     const campaigns = useSelector(getAllCampaign);
     const [name , setName] = useState('')
     const [isLoad, setLoad] = useState(false);
@@ -42,7 +42,7 @@ const AddCampaign: FC = () => {
         }
 
         // Send the POST request
-        const response = await createCampaign(payload);
+        const response = await createCampaign(payload, auth?.token);
                 
         dispatch( addCampaign(response?.data));
         navigate(`/campaign/${response?.data?.id}`);
